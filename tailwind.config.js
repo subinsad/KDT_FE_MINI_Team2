@@ -10,7 +10,7 @@ export default {
                 },
                 gray: {
                     DEFAULT: '#FFFFFF',
-                    1: 'E5E5E5',
+                    1: 'F7F7F7',
                     2: '#AEB0B4',
                 },
             },
