@@ -1,27 +1,28 @@
-import Badge from '../components/Common/Badge';
-import PriceBlock from '../components/PriceBlock';
-import StayItem from '../components/StayItem';
+import CityList from '../components/MainComponents/CityList';
+import StayList1 from '../components/MainComponents/StayList1';
+import StayList2 from '../components/MainComponents/StayList2';
+import StayList3 from '../components/MainComponents/StayList3';
+import SearchBar from '../components/SearchBar';
 
 export default function Main() {
     return (
-        <div className="flex flex-col gap-3 w-fit">
-            <img
-                src="../img/Frame4.png"
-                alt="숙소이미지"
-                className=" w-72 h-40 bg-slate-300 rounded"
-            />
-
-            <StayItem
-                category="숙소 종류"
-                star="10.0"
-                stayTitle="숙소 이름"
-                position="위치"
-            />
-            <PriceBlock
-                text="-50%"
-                fixedPrice="2,000,000원"
-                discountPrice="1,000,000원"
-            />
-        </div>
+        <>
+            <div>
+                <img
+                    src="../img/city1.png"
+                    alt="배너이미지"
+                    className=" w-full h-44 bg-slate-300 rounded"
+                />
+            </div>
+            <div className="max-w-mw mx-auto mb-32 mt-24">
+                <SearchBar />
+                <div className="flex flex-col gap-32">
+                    <CityList />
+                    <StayList1 />
+                    <StayList2 />
+                    <StayList3 />
+                </div>
+            </div>
+        </>
     );
 }
