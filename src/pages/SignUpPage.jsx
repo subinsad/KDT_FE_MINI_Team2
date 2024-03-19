@@ -7,11 +7,7 @@ export default function SignUpPage() {
     return (
         <div className="w-4/12 mx-auto">
             <div className="flex flex-col items-center gap-16 ">
-                <TItle
-                    tag="h2"
-                    className="font-bold text-2xl w-full"
-                    text="이메일로 회원가입"
-                />
+                <TItle tag="h2" className=" w-full" text="이메일로 회원가입" />
 
                 <form onSubmit="" className="flex flex-col w-full">
                     <Input
