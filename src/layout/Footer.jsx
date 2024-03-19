@@ -2,8 +2,8 @@ import Button from "../components/Common/Button";
 
 export default function Footer() {
   return (
-    <div className="flex justify-center my-10 border-t-2 border-gray-200 border-solid">
-      <footer>
+    <footer className="my-10 border-t-2 border-gray-200 border-solid">
+      <div className="max-w-mw mx-auto">
         <div className="flex my-10">
           <ul>
             <li className="text-gray-500 font-bold mb-3">고객센터</li>
@@ -37,7 +37,7 @@ export default function Footer() {
         <div className="text-sm mt-4 text-gray-400">
           <p>Copyright. All rights reserved.</p>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 }

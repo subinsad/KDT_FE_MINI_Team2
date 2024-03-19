@@ -3,11 +3,9 @@ import DetailInfo from "../components/DetailInfo";
 
 export default function DetailPage() {
   return (
-    <div className="flex justify-center bg-black">
-      <div className="flex w-[1200px] bg-white">
-        <DetailInfo />
-        <DetailEvent />
-      </div>
+    <div className="flex justify-center max-w-mw mx-auto border-gray-200 border-solid border-2">
+      <DetailInfo />
+      <DetailEvent />
     </div>
   );
 }

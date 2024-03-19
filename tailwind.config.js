@@ -3,6 +3,10 @@ export default {
     content: ['./src/**/*.{js,jsx}'],
     theme: {
         extend: {
+            maxWidth: {
+                mw: '1200px',
+                //minWidth: ???
+            },
             colors: {
                 primary: {
                     DEFAULT: '#7F43F5',
@@ -10,7 +14,7 @@ export default {
                 },
                 gray: {
                     DEFAULT: '#FFFFFF',
-                    1: 'F7F7F7',
+                    1: '#F7F7F7',
                     2: '#AEB0B4',
                 },
             },
