@@ -31,7 +31,7 @@ export default function SignUpPage() {
 
                 <div className="flex flex-col items-center w-full ">
                     <Button
-                        className="bg-gray-900 mb-4 w-full"
+                        className="bg-gray-900 text-white mb-4 w-full"
                         text="회원가입"
                     />
                 </div>

@@ -23,7 +23,10 @@ export default function SignInPage() {
                 </form>
 
                 <div className="flex flex-col items-center w-full ">
-                    <Button className="bg-gray-900 mb-4 w-full" text="로그인" />
+                    <Button
+                        className="bg-gray-900 text-white mb-4 w-full"
+                        text="로그인"
+                    />
                     <div className="flex gap-4 font-light">
                         <p>계정이 없으신가요?</p>
                         <Link> 이메일로 회원가입</Link>
