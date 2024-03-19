@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Button from '../components/Common/Button.jsx';
 import TItle from '../components/Common/Title';
-import Input from '../components/Common/Input';
+import Input from '../components/Form/Input';
 
 export default function SignInPage() {
     return (

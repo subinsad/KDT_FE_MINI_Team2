@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from '../components/Common/Button';
-import Input from '../components/Common/Input';
+import Input from '../components/Form/Input';
 import TItle from '../components/Common/Title';
 
 export default function SignUpPage() {
