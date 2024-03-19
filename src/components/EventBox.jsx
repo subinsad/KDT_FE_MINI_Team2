@@ -1,4 +1,4 @@
-export default function DetailEvent() {
+export default function EventBox() {
   return (
     <div className="w-80 p-4 rounded-xl border-gray-200 border-solid border-2 flex flex-col items-center">
       <div className="w-full h-36 rounded-xl border-gray-200 border-solid border-2">
