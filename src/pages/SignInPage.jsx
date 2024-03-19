@@ -12,8 +12,7 @@ export default function SignInPage() {
                     className="font-bold text-2xl w-full"
                     text="이메일로 시작하기"
                 />
-
-                <div className="flex flex-col w-full">
+                <form onSubmit="" className="flex flex-col w-full">
                     <Input
                         type="email"
                         text="아이디"
@@ -25,7 +24,7 @@ export default function SignInPage() {
                         text="비밀번호"
                         placeholder="비밀번호 입력"
                     />
-                </div>
+                </form>
 
                 <div className="flex flex-col items-center w-full ">
                     <Button className="bg-gray-900 mb-4 w-full" text="로그인" />
