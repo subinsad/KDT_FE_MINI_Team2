@@ -1,7 +1,6 @@
-module.exports = {
-    content: ['./src/**/*.{js,jsx,ts,tsx}', './index.html'],
-    theme: {
-        extend: {},
+export default {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
     },
-    plugins: [],
-};
+  }

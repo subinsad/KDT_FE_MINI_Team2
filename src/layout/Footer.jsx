@@ -5,7 +5,7 @@ export default function Footer() {
     <div className="flex justify-center my-10 border-t-2 border-gray-200 border-solid">
       <footer>
         <div className="flex my-10">
-          <ul className="w-1/2">
+          <ul>
             <li className="text-gray-500 font-bold mb-3">고객센터</li>
             <p className="text-gray-500 text-sm mb-3">
               오전 9시 ~ 새벽 3시 운영
