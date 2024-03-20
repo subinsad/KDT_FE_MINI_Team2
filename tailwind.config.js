@@ -9,7 +9,7 @@ export default {
             },
             colors: {
                 primary: {
-                    DEFAULT: '#7F43F5',
+                    DEFAULT: '#2393D2',
                     1: '#E5E5E5',
                 },
                 gray: {

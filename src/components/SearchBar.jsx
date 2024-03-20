@@ -20,7 +20,7 @@ function SearchBar() {
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
             />
-            <Button text="검색" className="text-white bg-black" />
+            <Button text="검색" className="text-white bg-black " />
         </div>
     );
 }
