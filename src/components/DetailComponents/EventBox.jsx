@@ -1,6 +1,6 @@
 export default function EventBox() {
   return (
-    <div className="w-72 sticky top-28 h-[608px] p-4 rounded-xl border-gray-200 border-solid border-2 flex flex-col items-center">
+    <div className="w-72 sticky top-32 h-[608px] p-4 rounded-xl border-gray-200 border-solid border-2 flex flex-col items-center">
       <div className="w-full h-36 rounded-xl border-gray-200 border-solid border-2">
         {/* 이 부분에는 이벤트 이미지가 들어갈 것입니다. */}
       </div>
