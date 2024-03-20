@@ -1,24 +1,26 @@
-import EventBox from "../components/EventBox";
-import DetailInfo from "../components/DetailInfo";
-import DetailList from "../components/DetailList";
-import DetailMap from "../components/DetailMap";
-import ProductName from "../components/ProductName";
-import DetailImage from "../components/DetailImage";
+import DetailImage from "../components/DetailComponents/DetailImage";
+import DetailInfo from "../components/DetailComponents/DetailInfo";
+import DetailList from "../components/DetailComponents/DetailList";
+import DetailMap from "../components/DetailComponents/DetailMap";
+import EventBox from "../components/DetailComponents/EventBox";
+import MapNavi from "../components/DetailComponents/MapNavi";
+import ProductName from "../components/DetailComponents/ProductName";
+
 export default function DetailPage() {
   return (
-    <div className="flex flex-col max-w-mw mx-auto">
+    <div className="max-w-mw mx-auto">
       <DetailImage />
       <ProductName />
-      <div className="flex">
-        <div className="flex-grow">
-          <DetailList />
-        </div>
+      <MapNavi />
+      <div className="flex justify-between">
         <div>
+          <DetailList />
+          <DetailInfo />
+        </div>
+        <div className="py-5">
           <EventBox />
         </div>
       </div>
-
-      <DetailInfo />
       <DetailMap />
     </div>
   );

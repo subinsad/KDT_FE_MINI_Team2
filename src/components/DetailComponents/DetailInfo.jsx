@@ -1,8 +1,8 @@
 export default function DetailInfo() {
   return (
-    <div className="border-gray-200 border-solid border-2">
-      <div className="leading-6 my-6">
-        <h2 className="py-5 font-semibold text-2xl">숙소 이용 정보</h2>
+    <div className="w-[880px]">
+      <div className="leading-6 my-8">
+        <h2 className="pb-5 font-semibold text-2xl">숙소 이용 정보</h2>
 
         <h3 className="pb-3 font-semibold text-lg">기본 정보</h3>
         <li>체크인 14:00 | 체크아웃 11:00</li>
