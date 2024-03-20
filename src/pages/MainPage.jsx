@@ -1,3 +1,4 @@
+import Banner from '../components/MainComponents/Banner';
 import CityList from '../components/MainComponents/CityList';
 import StayList1 from '../components/MainComponents/StayList1';
 import StayList2 from '../components/MainComponents/StayList2';
@@ -7,15 +8,11 @@ import SearchBar from '../components/SearchBar';
 export default function Main() {
     return (
         <>
-            <div>
-                <img
-                    src="../img/city1.png"
-                    alt="배너이미지"
-                    className=" w-full h-44 bg-slate-300 rounded"
-                />
+            <div className="mb-24">
+                <Banner />
             </div>
-            <div className="max-w-mw mx-auto mb-32 mt-24">
-                <SearchBar />
+            <div className="max-w-mw mx-auto mb-32">
+                <SearchBar className="absolute top-[24rem] z-10" />
                 <div className="flex flex-col gap-32">
                     <CityList />
                     <StayList1 />
