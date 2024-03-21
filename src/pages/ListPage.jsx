@@ -14,7 +14,6 @@ export default function ListPage() {
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
   };
-
   console.log(filters.selectedType);
   console.log(filters.selectedLocation);
   return (
