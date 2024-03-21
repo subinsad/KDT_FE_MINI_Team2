@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RadioButton from "../Common/RadioButton";
 import Button from "../Common/Button";
+import RangeSlider from "../Common/RangeSlider";
 
 function Filter({ onFilterChange }) {
   const [selectedType, setSelectedType] = useState("allType");
@@ -57,6 +58,7 @@ function Filter({ onFilterChange }) {
       <hr />
       <div>
         <p className="text-lg font-semibold mb-3">가격</p>
+        <RangeSlider />
       </div>
       <hr />
       <Button text="적용" className="w-full" />
