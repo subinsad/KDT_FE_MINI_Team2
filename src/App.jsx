@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import * as React from "react";
 import { Reset } from "styled-reset";
 import Gnb from "./layout/Gnb";
@@ -10,9 +10,18 @@ function App() {
       <Reset />
       <Gnb />
       <Outlet />
-      <Footer />
+      <CustomFooter />
     </>
   );
+}
+
+function CustomFooter() {
+  const location = useLocation();
+
+  if (location.pathname === "/signin" || location.pathname === "/signup") {
+    return null;
+  }
+  return <Footer />;
 }
 
 export default App;

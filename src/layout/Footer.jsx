@@ -1,9 +1,6 @@
 import Button from "../components/Common/Button";
 
 export default function Footer() {
-  if (window.location.pathname === "/signin") return null;
-  if (window.location.pathname === "/signup") return null;
-
   return (
     <footer className="py-10 border-t-2 border-gray-200 border-solid">
       <div className="max-w-mw mx-auto">
