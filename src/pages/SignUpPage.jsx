@@ -22,7 +22,7 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="w-[520px] h-[900px] pt-28 mx-auto">
+    <div className="w-[520px] pt-28 mx-auto">
       <div className="flex flex-col items-center gap-16 ">
         <TItle tag="h2" className=" w-full" text="이메일로 회원가입" />
 

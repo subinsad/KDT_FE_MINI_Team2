@@ -39,7 +39,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="w-[520px] mx-auto h-[900px] pt-28">
+    <div className="w-[520px] mx-auto pt-28">
       <div className="flex flex-col gap-16">
         <TItle tag="h2" className="w-full" text="이메일로 시작하기" />
 
