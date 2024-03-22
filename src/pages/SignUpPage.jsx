@@ -12,11 +12,11 @@ export default function SignUpPage() {
     error: "",
   });
 
-  // 이메일 정규식
-  const emailReg =
-    /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
-  // 패스워드 정규식
-  const passwordReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+  // // 이메일 정규식
+  // const emailReg =
+  //   /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
+  // // 패스워드 정규식
+  // const passwordReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 
   // const emailCheck = (email) => {
   //   if (email.match(emailReg) === null) {
@@ -64,9 +64,9 @@ export default function SignUpPage() {
             onChange={(e) => {
               setValues({ ...values, email: e.target.value });
             }}
-            onBlur={(e) => {
-              emailCheck(e.target.value);
-            }}
+            // onBlur={(e) => {
+            //   emailCheck(e.target.value);
+            // }}
             type="email"
             text="이메일"
             placeholder="이메일 입력"
@@ -77,9 +77,9 @@ export default function SignUpPage() {
             onChange={(e) => {
               setValues({ ...values, password: e.target.value });
             }}
-            onBlur={(e) => {
-              passwordCheck(e.target.value, values.password);
-            }}
+            // onBlur={(e) => {
+            //   passwordCheck(e.target.value, values.password);
+            // }}
             type="password"
             text="비밀번호"
             placeholder="비밀번호 입력"
@@ -90,9 +90,9 @@ export default function SignUpPage() {
             onChange={(e) => {
               setValues({ ...values, passwordConfirm: e.target.value });
             }}
-            onBlur={(e) => {
-              passwordDoubleCheck(e.target.value, values.password);
-            }}
+            // onBlur={(e) => {
+            //   passwordDoubleCheck(e.target.value, values.password);
+            // }}
             type="password"
             text="비밀번호 확인"
             placeholder="비밀번호 확인"
