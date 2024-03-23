@@ -21,6 +21,7 @@ export default function SignInPage() {
         "/public-api/v1/member/login",
         loginForm
       );
+      console.log(response);
       const secretKey = response.data.data.secretKey;
 
       localStorage.setItem("secretKey", secretKey);
