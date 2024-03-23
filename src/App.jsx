@@ -15,6 +15,7 @@ function App() {
   );
 }
 
+//푸터제거
 function CustomFooter() {
   const location = useLocation();
 

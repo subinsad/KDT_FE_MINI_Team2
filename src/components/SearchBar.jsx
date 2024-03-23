@@ -1,37 +1,37 @@
-import Input from './Form/Input';
+import Input from "./Form/Input";
 
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
 
-import 'react-datepicker/dist/react-datepicker.css';
-import Button from './Common/Button';
+import "react-datepicker/dist/react-datepicker.css";
+import Button from "./Common/Button";
 
 function SearchBar({ className }) {
-    const [startDate, setStartDate] = useState(new Date()); //시작날짜
-    const [endDate, setEndDate] = useState(new Date()); //끝나는날짜
+  const [startDate, setStartDate] = useState(new Date()); //시작날짜
+  const [endDate, setEndDate] = useState(new Date()); //끝나는날짜
 
-    //함수작성
-    const onChange = (dates) => {
-        const [start, end] = dates;
-    };
-    return (
-        <div className={`flex  gap-5  p-6 bg-white rounded-2xl ${className}`}>
-            <Input placeholder="지역명 입력" className="w-80" />
-            <DatePicker
-                selectsRange={true} // 범위설정
-                selected={startDate}
-                onChange={(dates) => onChange(dates)}
-                startDate={startDate}
-                endDate={endDate}
-                minDate={new Date()} //지난날짜 비활성화
-                className="w-80 h-8 p-6 rounded bg-gray-1"
-            />
+  //함수작성
+  const onChange = (dates) => {
+    const [start, end] = dates;
+  };
+  return (
+    <div className={`flex  gap-5  p-6 bg-white rounded-2xl ${className}`}>
+      <Input placeholder="지역명 입력" className="w-80" />
+      <DatePicker
+        selectsRange={true} // 범위설정
+        selected={startDate}
+        onChange={(dates) => onChange(dates)}
+        startDate={startDate}
+        endDate={endDate}
+        minDate={new Date()} //지난날짜 비활성화
+        className="w-80 h-8 p-6 rounded bg-gray-1"
+      />
 
-            <Input placeholder="인원 입력" className="w-80 bg-gray-1" />
+      <Input placeholder="인원 입력" className="w-80 bg-gray-1" />
 
-            <Button text="검색" className="" />
-        </div>
-    );
+      <Button text="검색" className="" />
+    </div>
+  );
 }
 
 export default SearchBar;

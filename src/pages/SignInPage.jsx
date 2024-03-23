@@ -1,47 +1,42 @@
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Common/Button.jsx";
-import TItle from "../components/Common/Title";
+import Title from "../components/Common/Title";
 import Input from "../components/Form/Input";
 import { useState } from "react";
+import axios from "axios";
 
 export default function SignInPage() {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
-    error: "",
   });
-  const navigate = useNavigate;
+  const [message, setMessage] = useState("");
 
-  /// 로그인함수
-  const login = async (email, password) => {
-    const result = await axios.post("", { email, password });
-    return result.data;
-  };
+  const navigate = useNavigate();
 
-  /// handleSubmit
-  const handleSubmit = async () => {
+  const loginHandler = async (e) => {
+    e.preventDefault();
     try {
-      const result = await login(loginForm.email, loginForm.password);
-      if (result && result.accessToken) {
-        console.log(result);
-        localStorage.setItem("accessToken", result.accessToken);
-        navigate("/");
-      } else {
-        // 로그인 실패 처리
-        console.error("로그인 실패: 토큰을 받지 못했습니다.");
-      }
+      const response = await axios.post(
+        "/public-api/v1/member/login",
+        loginForm
+      );
+      const secretKey = response.data.data.secretKey;
+
+      localStorage.setItem("secretKey", secretKey);
+
+      navigate("/");
     } catch (error) {
-      // 에러 핸들링
-      console.error("로그인 에러:", error);
+      setMessage("아이디 또는 비밀번호가 틀렸습니다.");
     }
   };
 
   return (
     <div className="w-[520px] mx-auto mt-28">
       <div className="flex flex-col gap-16">
-        <TItle tag="h2" className="w-full" text="이메일로 시작하기" />
+        <Title tag="h2" className="w-full" text="이메일로 시작하기" />
 
-        <form onSubmit={handleSubmit} className="flex flex-col w-full">
+        <form onSubmit={loginHandler} className="flex flex-col w-full">
           <Input
             value={loginForm.email}
             onChange={(e) =>
@@ -51,7 +46,7 @@ export default function SignInPage() {
             text="이메일"
             name="email"
             placeholder="이메일 입력"
-            className="mb-6 "
+            className="mb-6"
             required
           />
           <Input
@@ -63,9 +58,9 @@ export default function SignInPage() {
             text="비밀번호"
             name="password"
             placeholder="비밀번호 입력"
-            minLength="6"
             required
           />
+          {message && <p className="text-red-500 mt-3">{message}</p>}
           <div className="flex flex-col items-center w-full ">
             <Button
               className="bg-gray-900 text-white mt-16 mb-4 w-full"
@@ -73,7 +68,6 @@ export default function SignInPage() {
             />
             <div className="flex items-center gap-2 font-light">
               <p>계정이 없으신가요?</p>
-
               <Link to="/signup">
                 <p className="underline text-lg font-semibold">
                   이메일로 회원가입
