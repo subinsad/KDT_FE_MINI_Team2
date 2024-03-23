@@ -15,8 +15,7 @@ function Banner() {
             navigation={true}
             autoplay={{ delay: 3000 }}
             pagination={{ clickable: true }} // 페이지네이션 설정
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}>
+        >
             <SwiperSlide>Slide 1</SwiperSlide>
             <SwiperSlide>Slide 2</SwiperSlide>
             <SwiperSlide>Slide 3</SwiperSlide>
