@@ -1,7 +1,7 @@
 import Button from "../components/Common/Button";
 import Input from "../components/Form/Input";
 import Title from "../components/Common/Title";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BiShow, BiHide } from "react-icons/bi";
@@ -22,12 +22,12 @@ export default function SignUpPage() {
     phoneNumber: "",
   });
   const [showPswd, setShowPswd] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const navigate = useNavigate();
 
   const toggleShowPswd = () => {
     setShowPswd(!showPswd);
   };
-  const navigate = useNavigate();
-
   // 이메일 정규식
   const emailReg =
     /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
@@ -42,14 +42,12 @@ export default function SignUpPage() {
     let errorMsg = "";
     switch (field) {
       case "email":
-        errorMsg = emailReg.test(value)
-          ? ""
-          : "이메일 형식이 올바르지 않습니다.";
+        errorMsg = emailReg.test(value) ? "" : "올바른 이메일을 입력해주세요.";
         break;
       case "password":
         errorMsg = passwordReg.test(value)
           ? ""
-          : "비밀번호 형식이 올바르지 않습니다.";
+          : "영문,숫자,특수문자 포함 8자 이상 입력해주세요.";
         break;
       case "passwordConfirm":
         errorMsg =
@@ -69,8 +67,25 @@ export default function SignUpPage() {
     setMessage((prev) => ({ ...prev, [field]: errorMsg }));
   };
 
+  useEffect(() => {
+    // 모든 입력 값이 채워져 있는지 확인
+    const areAllValuesProvided = Object.values(values).every(
+      (value) => value.trim() !== ""
+    );
+    // 모든 메시지가 비어있는지 확인하여 폼의 유효성 상태를 설정
+    const isEveryMessageEmpty = Object.values(message).every(
+      (msg) => msg === ""
+    );
+    // 입력 값이 모두 제공되었고, 모든 유효성 검사 메시지가 비어있다면 폼이 활성화됨
+    setIsFormValid(areAllValuesProvided && isEveryMessageEmpty);
+  }, [values, message]);
+
   const signUpHandler = async (e) => {
     e.preventDefault();
+
+    if (!isFormValid) {
+      return;
+    }
     try {
       const response = await axios.post("/public-api/v1/member/join", {
         email: values.email,
@@ -79,6 +94,7 @@ export default function SignUpPage() {
         phoneNumber: values.phoneNumber,
       });
       navigate("/");
+      console.log(response);
       return response;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -104,8 +120,6 @@ export default function SignUpPage() {
               value={values.email}
               onChange={(e) => {
                 setValues({ ...values, email: e.target.value });
-              }}
-              onBlur={(e) => {
                 handleValidation("email", e.target.value);
               }}
               type="email"
@@ -123,8 +137,6 @@ export default function SignUpPage() {
                 value={values.password}
                 onChange={(e) => {
                   setValues({ ...values, password: e.target.value });
-                }}
-                onBlur={(e) => {
                   handleValidation("password", e.target.value);
                 }}
                 type={showPswd ? "text" : "password"}
@@ -139,7 +151,6 @@ export default function SignUpPage() {
                 {showPswd ? <BiShow /> : <BiHide />}
               </button>
             </div>
-
             {message.password && (
               <p className="text-red-500 mt-3">{message.password}</p>
             )}
@@ -151,8 +162,6 @@ export default function SignUpPage() {
                 value={values.passwordConfirm}
                 onChange={(e) => {
                   setValues({ ...values, passwordConfirm: e.target.value });
-                }}
-                onBlur={(e) => {
                   handleValidation("passwordConfirm", e.target.value);
                 }}
                 type={showPswd ? "text" : "password"}
@@ -177,8 +186,6 @@ export default function SignUpPage() {
               value={values.name}
               onChange={(e) => {
                 setValues({ ...values, name: e.target.value });
-              }}
-              onBlur={(e) => {
                 handleValidation("name", e.target.value);
               }}
               type="name"
@@ -195,8 +202,6 @@ export default function SignUpPage() {
               value={values.phoneNumber}
               onChange={(e) => {
                 setValues({ ...values, phoneNumber: e.target.value });
-              }}
-              onBlur={(e) => {
                 handleValidation("phoneNumber", e.target.value);
               }}
               type="phoneNumber"
@@ -209,8 +214,12 @@ export default function SignUpPage() {
           </div>
 
           <Button
-            className="bg-gray-900 text-white mt-10 w-full"
+            className={`bg-gray-900 text-white mt-10 w-full ${
+              !isFormValid && "opacity-50 cursor-not-allowed"
+            }`}
             text="회원가입"
+            onClick={signUpHandler}
+            disabled={!isFormValid} // isFormValid가 false일 때 버튼을 비활성화
           />
         </form>
       </div>
