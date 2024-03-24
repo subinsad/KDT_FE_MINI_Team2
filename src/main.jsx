@@ -10,9 +10,6 @@ import SignInPage from "./pages/SignInPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import Reservation from "./pages/Reservation.jsx";
 import ReservationComplete from "./pages/ReservationComplete.jsx";
-import Modal from "react-modal";
-
-Modal.setAppElement("#root");
 
 import "./index.css";
 
