@@ -25,7 +25,8 @@
             "accomodation_name": "호텔이름",
             "cartegory": "호텔",
             "price": "1000000",
-            "accomodation_image": {}
+            "accomodation_image": {},
+            "star": "4.90"
         },
         {
             "accomodation_id": "상품2",
@@ -51,7 +52,8 @@
             "accomodation_name": "제주호텔",
             "cartegory": "호텔",
             "price": "1000000",
-            "accomodation_image": {}
+            "accomodation_image": {},
+            "star": "3.00"
         },
         {
             "accomodation_id": "상품3",
@@ -77,7 +79,62 @@
             "accomodation_name": "리조트이름",
             "cartegory": "리조트",
             "price": "1000000",
-            "accomodation_image": {}
+            "accomodation_image": {},
+            "star": "4.00"
+        },
+        {
+            "accomodation_id": "상품3",
+            "room_id": {
+                "room": {
+                    "accomodation_id": {},
+                    "room_info": {},
+                    "room_name": {},
+                    "room_count": {},
+                    "fixed_number": {},
+                    "maxed_number": {}
+                }
+            },
+            "location_id": {
+                "location_name": "인천"
+            },
+            "rate_id": {
+                "accomodation_id": {},
+                "member_id": {},
+                "rate": {}
+            },
+            "introduction": {},
+            "accomodation_name": "리조트이름",
+            "cartegory": "리조트",
+            "price": "1000000",
+            "accomodation_image": {},
+            "star": "5.00"
+        },
+        {
+            "accomodation_id": "상품3",
+            "room_id": {
+                "room": {
+                    "accomodation_id": {},
+                    "room_info": {},
+                    "room_name": {},
+                    "room_count": {},
+                    "fixed_number": {},
+                    "maxed_number": {}
+                }
+            },
+            "location_id": {
+                "location_name": "인천"
+            },
+            "rate_id": {
+                "accomodation_id": {},
+                "member_id": {},
+                "rate": {}
+            },
+            "introduction": {},
+            "accomodation_name": "리조트이름",
+            "cartegory": "리조트",
+            "price": "1000000",
+            "accomodation_image": {},
+            "star": "3.50"
         }
     ]
 }
