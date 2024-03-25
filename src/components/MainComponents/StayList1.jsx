@@ -12,7 +12,7 @@ function StayList1() {
     const { accomodation, ajax } = useStore(); // accomodation 상태와 ajax 함수 가져오기
     const [filterItem, setFilterItem] = useState([]); // 초기값은 빈배열
 
-    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [isActive, setIsActive] = useState('all');
 
     useEffect(() => {
         // 페이지가 로드될 때 데이터 가져오기
@@ -26,7 +26,6 @@ function StayList1() {
     const btnItem = [...new Set(accomodation?.map((item) => item.cartegory))]; //버튼 카테고리
 
     const handleBtn = (category) => {
-        setSelectedCategory(category);
         if (category === 'all') {
             setFilterItem(accomodation);
         } else {
@@ -35,6 +34,7 @@ function StayList1() {
             );
             setFilterItem(filteredItems);
         }
+        setIsActive(category);
     };
 
     return (
@@ -46,6 +46,7 @@ function StayList1() {
                     text="전체"
                     value="all"
                     onClick={() => handleBtn('all')}
+                    isActive={isActive === 'all'}
                 />
                 {btnItem.map((category, index) => (
                     <Category
@@ -53,7 +54,7 @@ function StayList1() {
                         text={category}
                         value={category}
                         onClick={() => handleBtn(category)}
-                        isSelected={selectedCategory === category}
+                        isActive={isActive === category}
                     />
                 ))}
             </div>
