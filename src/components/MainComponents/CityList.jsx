@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TItle from '../Common/Title';
 
 import useStore from '../../store/accomodation';
@@ -12,7 +12,6 @@ import city6 from '../../img/city6.png';
 
 function CityList() {
     const { accomodation, ajax } = useStore(); // accomodation 상태와 ajax 함수 가져오기
-    const { accomodation_id } = useParams(); //
 
     const jejuItem = accomodation.find(
         (item) => item.location_id.location_name === '제주'
@@ -54,7 +53,7 @@ function CityList() {
 
             <div className="flex justify-between">
                 <Link
-                    to={`/list/${accomodation_id}`}
+                    to={`/list/${accomodation.location_id?.location_name}`}
                     className="flex flex-col gap-2">
                     <img
                         src={city1}
