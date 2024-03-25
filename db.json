@@ -1,82 +1,1304 @@
 {
-    "accomodation": [
-        {
-            "accomodation_id": "상품1",
-            "room_id": {
-                "room": {
-                    "accomodation_id": {},
-                    "room_info": {},
-                    "room_name": {},
-                    "room_count": {},
-                    "fixed_number": {},
-                    "maxed_number": {}
-                }
-            },
-            "location_id": {
-                "location_name": "제주"
-            },
-            "rate_id": {
-                "accomodation_id": {},
-                "member_id": {},
-                "rate": {}
-            },
-            "introduction": {},
-            "accomodation_name": "호텔이름",
-            "cartegory": "호텔",
-            "price": "1000000",
-            "accomodation_image": {}
-        },
-        {
-            "accomodation_id": "상품1",
-            "room_id": {
-                "room": {
-                    "accomodation_id": {},
-                    "room_info": {},
-                    "room_name": {},
-                    "room_count": {},
-                    "fixed_number": {},
-                    "maxed_number": {}
-                }
-            },
-            "location_id": {
-                "location_name": "제주"
-            },
-            "rate_id": {
-                "accomodation_id": {},
-                "member_id": {},
-                "rate": {}
-            },
-            "introduction": {},
-            "accomodation_name": "제주호텔",
-            "cartegory": "호텔",
-            "price": "1000000",
-            "accomodation_image": {}
-        },
-        {
-            "accomodation_id": "상품2",
-            "room_id": {
-                "room": {
-                    "accomodation_id": {},
-                    "room_info": {},
-                    "room_name": {},
-                    "room_count": {},
-                    "fixed_number": {},
-                    "maxed_number": {}
-                }
-            },
-            "location_id": {
-                "location_name": "인천"
-            },
-            "rate_id": {
-                "accomodation_id": {},
-                "member_id": {},
-                "rate": {}
-            },
-            "introduction": {},
-            "accomodation_name": "리조트이름",
-            "cartegory": "리조트",
-            "price": "1000000",
-            "accomodation_image": {}
+  "accomodation": [
+    {
+      "accomodation_id": "상품1",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
         }
-    ]
+      },
+      "location_id": {
+        "location_name": "제주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "해변휴식 호텔",
+      "category": "호텔",
+      "price": "1000000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품2",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "서울"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "도시풍경 리조트",
+      "category": "호텔",
+      "price": "1000000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품3",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "인천"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "해안산책 캠핑장",
+      "category": "리조트",
+      "price": "1000000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품4",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "부산"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "해변휴식 펜션",
+      "category": "펜션",
+      "price": "1000000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품5",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "제주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "자연경관 리조트",
+      "category": "리조트",
+      "price": "1000000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품6",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "강릉"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "해변휴식 모텔",
+      "category": "모텔",
+      "price": "300000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품7",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "경주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "역사적인 캠핑장",
+      "category": "캠핑",
+      "price": "200000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품8",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "서울"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "도심 서울 게스트하우스",
+      "category": "게스트하우스",
+      "price": "150000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품9",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "강릉"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "해맞이 강릉 리조트",
+      "category": "리조트",
+      "price": "250000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품10",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "경주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "역사적 경주 모텔",
+      "category": "모텔",
+      "price": "200000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품11",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "서울"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "도심 서울 캠핑장",
+      "category": "캠핑",
+      "price": "350000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품12",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "제주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "산바람 제주 펜션",
+      "category": "펜션",
+      "price": "150000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품13",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "부산"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "바다가는 부산 게스트하우스",
+      "category": "게스트하우스",
+      "price": "200000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품14",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "인천"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "자유로운 인천 캠핑장",
+      "category": "캠핑",
+      "price": "300000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품15",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "강릉"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "동화같은 강릉 게스트하우스",
+      "category": "게스트하우스",
+      "price": "180000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품16",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "경주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "역사의 경주 리조트",
+      "category": "리조트",
+      "price": "400000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품17",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "서울"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "서울산책로 리조트",
+      "category": "리조트",
+      "price": "450000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품18",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "제주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "제주자연 펜션",
+      "category": "펜션",
+      "price": "320000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품19",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "서울"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "도심 서울 게스트하우스",
+      "category": "게스트하우스",
+      "price": "180000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품20",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "부산"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "해변 부산 모텔",
+      "category": "모텔",
+      "price": "270000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품21",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "강릉"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "푸른바다 강릉 캠핑장",
+      "category": "캠핑",
+      "price": "230000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품22",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "제주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "풀빛 제주 펜션",
+      "category": "펜션",
+      "price": "320000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품23",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "서울"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "서울 한강 리조트",
+      "category": "리조트",
+      "price": "480000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품24",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "인천"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "인천 도심 펜션",
+      "category": "펜션",
+      "price": "390000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품25",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "부산"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "여행자를 위한 부산 게스트하우스",
+      "category": "게스트하우스",
+      "price": "250000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품26",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "강릉"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "강릉 해변 리조트",
+      "category": "리조트",
+      "price": "430000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품27",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "제주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "제주 해변 모텔",
+      "category": "모텔",
+      "price": "360000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품28",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "서울"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "도심 속 서울 모텔",
+      "category": "모텔",
+      "price": "280000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품29",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "강릉"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "동해바다 캠핑장",
+      "category": "캠핑",
+      "price": "270000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품30",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "부산"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "부산 해운대 리조트",
+      "category": "리조트",
+      "price": "400000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품31",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "서울"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "서울 타워 모텔",
+      "category": "모텔",
+      "price": "280000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품32",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "인천"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "인천 바다 펜션",
+      "category": "펜션",
+      "price": "390000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품33",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "제주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "제주 하이킹 펜션",
+      "category": "펜션",
+      "price": "360000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품34",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "강릉"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "강릉 푸른 바다 리조트",
+      "category": "리조트",
+      "price": "430000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품35",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "제주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "제주 자연 풍경 모텔",
+      "category": "모텔",
+      "price": "350000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품36",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "서울"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "도심 서울 리조트",
+      "category": "리조트",
+      "price": "480000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품37",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "강릉"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "강릉해변 캠핑장",
+      "category": "캠핑",
+      "price": "280000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품38",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "제주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "제주 해안 리조트",
+      "category": "리조트",
+      "price": "420000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품39",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "서울"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "도심 서울 펜션",
+      "category": "펜션",
+      "price": "350000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품40",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "인천"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "인천 항구 모텔",
+      "category": "모텔",
+      "price": "320000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품41",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "부산"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "해운대 게스트하우스",
+      "category": "게스트하우스",
+      "price": "280000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품42",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "강릉"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "동해 바다 리조트",
+      "category": "리조트",
+      "price": "400000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품43",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "제주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "제주 동굴 펜션",
+      "category": "펜션",
+      "price": "380000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품44",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "서울"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "강남 스타일 게스트하우스",
+      "category": "게스트하우스",
+      "price": "310000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품45",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "인천"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "송도 해수욕장 리조트",
+      "category": "리조트",
+      "price": "420000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품46",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "gangwon"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "계곡물소리 리조트",
+      "category": "리조트",
+      "price": "380000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품47",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "jeonju"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "한옥체험 펜션",
+      "category": "펜션",
+      "price": "290000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품48",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "ulsan"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "해변가 휴양펜션",
+      "category": "펜션",
+      "price": "350000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품49",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "daegu"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "동성로 캠핑장",
+      "category": "캠핑",
+      "price": "210000",
+      "accomodation_image": {}
+    },
+    {
+      "accomodation_id": "상품50",
+      "room_id": {
+        "room": {
+          "accomodation_id": {},
+          "room_info": {},
+          "room_name": {},
+          "room_count": {},
+          "fixed_number": {},
+          "maxed_number": {}
+        }
+      },
+      "location_id": {
+        "location_name": "제주"
+      },
+      "rate_id": {
+        "accomodation_id": {},
+        "member_id": {},
+        "rate": {}
+      },
+      "introduction": {},
+      "accomodation_name": "별이 빛나는 펜션",
+      "category": "펜션",
+      "price": "420000",
+      "accomodation_image": {}
+    }
+  ]
 }
