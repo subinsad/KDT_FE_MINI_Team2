@@ -1,36 +1,82 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Common/Button.jsx";
-import TItle from "../components/Common/Title";
+import Title from "../components/Common/Title";
 import Input from "../components/Form/Input";
+import { useState } from "react";
+import axios from "axios";
 
 export default function SignInPage() {
+  const [loginForm, setLoginForm] = useState({
+    email: "",
+    password: "",
+  });
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "/public-api/v1/member/login",
+        loginForm
+      );
+      console.log(response);
+      const secretKey = response.data.data.secretKey;
+
+      localStorage.setItem("secretKey", secretKey);
+
+      navigate("/");
+    } catch (error) {
+      setMessage("아이디 또는 비밀번호가 틀렸습니다.");
+    }
+  };
+
   return (
-    <div className="w-4/12 mx-auto">
-      <div className="flex flex-col items-center gap-16 ">
-        <TItle tag="h2" className=" w-full" text="이메일로 시작하기" />
-        <form onSubmit="" className="flex flex-col w-full">
+    <div className="w-[520px] mx-auto mt-28">
+      <div className="flex flex-col gap-16">
+        <Title tag="h2" className="w-full" text="이메일로 시작하기" />
+
+        <form onSubmit={loginHandler} className="flex flex-col w-full">
           <Input
+            value={loginForm.email}
+            onChange={(e) =>
+              setLoginForm({ ...loginForm, email: e.target.value })
+            }
             type="email"
-            text="아이디"
-            placeholder="아이디 입력"
-            className="mb-6 "
+            text="이메일"
+            name="email"
+            placeholder="이메일 입력"
+            className="mb-6"
+            required
           />
-          <Input type="password" text="비밀번호" placeholder="비밀번호 입력" />
-        </form>
-
-        <div className="flex flex-col items-center w-full ">
-          <Button
-            className="bg-gray-900 text-white mb-4 w-full"
-            text="로그인"
+          <Input
+            value={loginForm.password}
+            onChange={(e) =>
+              setLoginForm({ ...loginForm, password: e.target.value })
+            }
+            type="password"
+            text="비밀번호"
+            name="password"
+            placeholder="비밀번호 입력"
+            required
           />
-          <div className="flex gap-4 font-light">
-            <p>계정이 없으신가요?</p>
-
-            <Link to="/signup">
-              <p className="underline font-semibold">이메일로 회원가입</p>
-            </Link>
+          {message && <p className="text-red-500 mt-3">{message}</p>}
+          <div className="flex flex-col items-center w-full ">
+            <Button
+              className="bg-gray-900 text-white mt-16 mb-4 w-full"
+              text="로그인"
+            />
+            <div className="flex items-center gap-2 font-light">
+              <p>계정이 없으신가요?</p>
+              <Link to="/signup">
+                <p className="underline text-lg font-semibold">
+                  이메일로 회원가입
+                </p>
+              </Link>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
