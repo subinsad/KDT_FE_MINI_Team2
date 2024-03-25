@@ -40,7 +40,8 @@ export default function ListPage() {
           filters.selectedLocation.toLowerCase();
       const priceCondition =
         parseInt(item.price) >= filters.minPrice &&
-        parseInt(item.price) <= filters.maxPrice;
+        (parseInt(item.price) <= filters.maxPrice ||
+          filters.maxPrice === 500000);
 
       return typeCondition && locationCondition && priceCondition;
     });
@@ -48,7 +49,6 @@ export default function ListPage() {
     setFilteredAccomodation(filteredList.slice(0, page * 10));
     setTotalResults(filteredList.length);
   }, [accomodation, filters, page]);
-
   useEffect(() => {
     function handleScroll() {
       if (
@@ -80,7 +80,7 @@ export default function ListPage() {
 
   return (
     <>
-      <div className="flex justify-center border-b-2 border-gray-200 border-solid sticky top-[106px] bg-white">
+      <div className="flex justify-center border-b-2 border-gray-200 border-solid sticky top-[82px] bg-white">
         <SearchBar onSearch={handleLocationSearch} />
       </div>
       <div className="container flex gap-10 max-w-mw mx-auto mb-32 mt-24">
