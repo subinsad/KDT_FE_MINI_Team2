@@ -2,9 +2,9 @@ import Button from "../components/Common/Button";
 
 export default function Footer() {
   return (
-    <footer className="my-10 border-t-2 border-gray-200 border-solid">
+    <footer className="py-10 border-t-2 border-gray-200 border-solid">
       <div className="max-w-mw mx-auto">
-        <div className="flex my-10">
+        <div className="flex">
           <ul>
             <li className="text-gray-500 font-bold mb-3">고객센터</li>
             <p className="text-gray-500 text-sm mb-3">
