@@ -26,7 +26,9 @@ export default function RangeSlider({ minValue, maxValue, onApplyFilter }) {
       <div className="font-semibold text-gray-600">
         <div>
           <span>{minValue}원 ~ </span>
-          <span>{maxValue}원</span>
+          <span>
+            {maxValue >= 500000 ? `${maxValue}원 이상` : `${maxValue}원`}
+          </span>
         </div>
       </div>
     </>
