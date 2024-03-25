@@ -86,7 +86,7 @@
             "star": "4.00"
         },
         {
-            "accomodation_id": "상품3",
+            "accomodation_id": "상품4",
             "room_id": {
                 "room": {
                     "accomodation_id": {},
@@ -114,7 +114,7 @@
             "star": "5.00"
         },
         {
-            "accomodation_id": "상품3",
+            "accomodation_id": "상품5",
             "room_id": {
                 "room": {
                     "accomodation_id": {},

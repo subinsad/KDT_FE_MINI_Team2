@@ -4,6 +4,7 @@ import StayItem from '../StayItem';
 import PriceBlock from '../PriceBlock';
 
 import useStore from '../../store/accomodation';
+import { Link } from 'react-router-dom';
 
 function StayList3() {
     const { accomodation } = useStore();
@@ -16,7 +17,9 @@ function StayList3() {
             <ul className="flex gap-4 ">
                 <div className="flex gap-3 w-fit">
                     {pickItem.slice(0, 4).map((item, index) => (
-                        <li key={index}>
+                        <Link
+                            to={`/detail/${item.accomodation_id}`}
+                            key={index}>
                             <img
                                 src="../img/Frame4.png"
                                 alt="숙소이미지"
@@ -34,7 +37,7 @@ function StayList3() {
                                 fixedPrice={item.price}
                                 discountRate={item.sale}
                             />
-                        </li>
+                        </Link>
                     ))}
                 </div>
             </ul>

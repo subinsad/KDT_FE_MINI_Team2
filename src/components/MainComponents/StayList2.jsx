@@ -4,6 +4,7 @@ import StayItem from '../StayItem';
 import PriceBlock from '../PriceBlock';
 
 import useStore from '../../store/accomodation';
+import { Link } from 'react-router-dom';
 
 function StayList2() {
     const { accomodation } = useStore();
@@ -17,7 +18,9 @@ function StayList2() {
                         ?.sort((a, b) => b.sale - a.sale)
                         .slice(0, 4)
                         .map((item, index) => (
-                            <li key={index}>
+                            <Link
+                                to={`/detail/${item.accomodation_id}`}
+                                key={index}>
                                 <img
                                     src="../img/Frame4.png"
                                     alt="숙소이미지"
@@ -35,7 +38,7 @@ function StayList2() {
                                     fixedPrice={item.price}
                                     discountRate={item.sale}
                                 />
-                            </li>
+                            </Link>
                         ))}
                 </div>
             </ul>

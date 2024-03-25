@@ -6,6 +6,7 @@ import PriceBlock from '../PriceBlock';
 import useStore from '../../store/accomodation';
 import { useState } from 'react';
 import Category from '../Common/Category';
+import { Link } from 'react-router-dom';
 
 function StayList1() {
     const { accomodation, ajax } = useStore(); // accomodation 상태와 ajax 함수 가져오기
@@ -47,15 +48,17 @@ function StayList1() {
                     onClick={() => handleBtn('all')}
                     isActive={isActive === 'all'}
                 />
-                {btnItem.map((category, index) => (
-                    <Category
-                        key={index}
-                        text={category}
-                        value={category}
-                        onClick={() => handleBtn(category)}
-                        isActive={isActive === category}
-                    />
-                ))}
+                {btnItem
+                    ?.sort((a, b) => a.localeCompare(b))
+                    .map((category, index) => (
+                        <Category
+                            key={index}
+                            text={category}
+                            value={category}
+                            onClick={() => handleBtn(category)}
+                            isActive={isActive === category}
+                        />
+                    ))}
             </div>
 
             <ul className="flex gap-4">
@@ -64,7 +67,10 @@ function StayList1() {
                         ?.sort((a, b) => b.star - a.star)
                         .slice(0, 4)
                         .map((item, index) => (
-                            <li key={index} value={item.cartegory}>
+                            <Link
+                                to={`/detail/${item.accomodation_id}`}
+                                key={index}
+                                value={item.cartegory}>
                                 <img
                                     src="../img/Frame4.png"
                                     alt="숙소이미지"
@@ -81,7 +87,7 @@ function StayList1() {
                                     fixedPrice={item.price}
                                     discountRate={item.sale}
                                 />
-                            </li>
+                            </Link>
                         ))}
                 </div>
             </ul>
