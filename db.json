@@ -15,6 +15,7 @@
             "location_id": {
                 "location_name": "제주"
             },
+
             "rate_id": {
                 "accomodation_id": {},
                 "member_id": {},
@@ -27,7 +28,7 @@
             "accomodation_image": {}
         },
         {
-            "accomodation_id": "상품1",
+            "accomodation_id": "상품2",
             "room_id": {
                 "room": {
                     "accomodation_id": {},
@@ -53,7 +54,7 @@
             "accomodation_image": {}
         },
         {
-            "accomodation_id": "상품2",
+            "accomodation_id": "상품3",
             "room_id": {
                 "room": {
                     "accomodation_id": {},
