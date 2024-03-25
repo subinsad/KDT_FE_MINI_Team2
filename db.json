@@ -24,7 +24,8 @@
             "introduction": {},
             "accomodation_name": "호텔이름",
             "cartegory": "호텔",
-            "price": "1000000",
+            "price": "650000",
+            "sale": "20",
             "accomodation_image": {},
             "star": "4.90"
         },
@@ -51,7 +52,8 @@
             "introduction": {},
             "accomodation_name": "제주호텔",
             "cartegory": "호텔",
-            "price": "1000000",
+            "price": "450000",
+            "sale": "40",
             "accomodation_image": {},
             "star": "3.00"
         },
@@ -78,7 +80,8 @@
             "introduction": {},
             "accomodation_name": "리조트이름",
             "cartegory": "리조트",
-            "price": "1000000",
+            "price": "6000000",
+            "sale": "30",
             "accomodation_image": {},
             "star": "4.00"
         },
@@ -103,9 +106,10 @@
                 "rate": {}
             },
             "introduction": {},
-            "accomodation_name": "리조트이름",
+            "accomodation_name": "인천리조트",
             "cartegory": "리조트",
-            "price": "1000000",
+            "price": "56047",
+            "sale": "15",
             "accomodation_image": {},
             "star": "5.00"
         },
@@ -132,7 +136,8 @@
             "introduction": {},
             "accomodation_name": "리조트이름",
             "cartegory": "리조트",
-            "price": "1000000",
+            "price": "523432",
+            "sale": "50",
             "accomodation_image": {},
             "star": "3.50"
         }

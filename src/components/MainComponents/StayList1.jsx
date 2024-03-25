@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import TItle from '../Common/Title';
 import StayItem from '../StayItem';
 import PriceBlock from '../PriceBlock';
-import StayCategory from './StayCategory';
 
 import useStore from '../../store/accomodation';
 import { useState } from 'react';
@@ -78,9 +77,9 @@ function StayList1() {
                                     position={item.location_id.location_name}
                                 />
                                 <PriceBlock
-                                    text="-50%"
+                                    text={`-${item.sale}%`}
                                     fixedPrice={item.price}
-                                    discountPrice="1,000,000원"
+                                    discountRate={item.sale}
                                 />
                             </li>
                         ))}
