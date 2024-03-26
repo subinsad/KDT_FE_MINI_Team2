@@ -17,6 +17,12 @@ export default function DetailPage() {
         (item) => item.accomodation_id === accomodation_id
     );
 
+    //해당하는 상세페이지, 숙소
+    const roomItem = accomodation.find(
+        (item) => item.accomodation_id === detailItem.accomodation_id
+    );
+    const roomItems = roomItem.room_id.room;
+
     return (
         <div className="max-w-mw mx-auto">
             <DetailImage />
@@ -24,7 +30,7 @@ export default function DetailPage() {
             <MapNavi />
             <div className="flex justify-between">
                 <div>
-                    <DetailList />
+                    <DetailList roomItems={roomItems} />
                     <DetailInfo />
                 </div>
                 <div className="py-5">
