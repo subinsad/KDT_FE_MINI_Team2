@@ -4,6 +4,8 @@ import Title from "../components/Common/Title";
 import Input from "../components/Form/Input";
 import { useState } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
+import { useUser } from "../store/user.js";
 
 export default function SignInPage() {
   const [loginForm, setLoginForm] = useState({
@@ -11,6 +13,8 @@ export default function SignInPage() {
     password: "",
   });
   const [message, setMessage] = useState("");
+  const [cookies, setCookie] = useCookies(["secretKey"]);
+  const { setLoginUser } = useUser();
 
   const navigate = useNavigate();
 
@@ -21,10 +25,10 @@ export default function SignInPage() {
         "/public-api/v1/member/login",
         loginForm
       );
-      const secretKey = response.data.data.secretKey;
-
-      localStorage.setItem("secretKey", secretKey);
-
+      const { secretKey } = response.data.data;
+      setCookie("secretKey", secretKey, { path: "/" });
+      setLoginUser({ secretKey });
+      cookies["secretKey"];
       navigate("/");
     } catch (error) {
       setMessage("아이디 또는 비밀번호가 틀렸습니다.");
