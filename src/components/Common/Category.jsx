@@ -1,10 +1,13 @@
-import React from 'react';
+function Category({ className, text, value, onClick, isActive, ...props }) {
+    const activeStyles = {
+        backgroundColor: isActive ? '#2d3748' : 'white',
+        color: isActive ? 'white' : '#4a5568',
+    };
 
-function Category({ className, text, value, onClick, ...props }) {
     return (
         <button
-            className={`py-2 px-4 rounded border active:bg-gray-800 active:text-neutral-50
-                border-gray-600 text-gray-800 bg-white ${className}`}
+            style={activeStyles}
+            className="py-2 px-4 rounded border border-gray-600 text-gray-800 bg-white"
             value={value}
             onClick={onClick}
             {...props}>

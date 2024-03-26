@@ -3,12 +3,18 @@ import { Link } from 'react-router-dom';
 import TItle from '../Common/Title';
 
 import useStore from '../../store/accomodation';
+import city1 from '../../img/city1.png';
+import city2 from '../../img/city2.png';
+import city3 from '../../img/city3.png';
+import city4 from '../../img/city4.png';
+import city5 from '../../img/city5.png';
+import city6 from '../../img/city6.png';
 
 function CityList() {
     const { accomodation, ajax } = useStore(); // accomodation 상태와 ajax 함수 가져오기
-    // 인천일경우 가져옴,
-    const IncheonItem = accomodation.filter(
-        (item) => item.location_id.location_name === '인천'
+
+    const jejuItem = accomodation.find(
+        (item) => item.location_id.location_name === '제주'
     );
 
     // accomodation.forEach((item) => {
@@ -46,18 +52,20 @@ function CityList() {
             <TItle tag="h2" text="인기 여행지" className="mb-4" />
 
             <div className="flex justify-between">
-                <Link to="" className="flex flex-col gap-2">
+                <Link
+                    to={`/list/${accomodation.location_id?.location_name}`}
+                    className="flex flex-col gap-2">
                     <img
-                        src="../img/city1.png"
+                        src={city1}
                         alt="이미지"
                         className=" w-44 h-44 bg-slate-300 rounded"
                     />
-                    <span className="text-sm text-gray-800 "> 제주</span>
+                    <span className="text-sm text-gray-800 ">제주</span>
                 </Link>
 
                 <Link to="" className="flex flex-col gap-2">
                     <img
-                        src="../img/city1.png"
+                        src={city2}
                         alt="이미지"
                         className=" w-44 h-44 bg-slate-300 rounded"
                     />
@@ -66,7 +74,7 @@ function CityList() {
 
                 <Link to="" className="flex flex-col gap-2">
                     <img
-                        src="../img/city1.png"
+                        src={city3}
                         alt="이미지"
                         className=" w-44 h-44 bg-slate-300 rounded"
                     />
@@ -75,7 +83,7 @@ function CityList() {
 
                 <Link to="" className="flex flex-col gap-2">
                     <img
-                        src="../img/city1.png"
+                        src={city4}
                         alt="이미지"
                         className=" w-44 h-44 bg-slate-300 rounded"
                     />
@@ -84,19 +92,16 @@ function CityList() {
 
                 <Link to="" className="flex flex-col gap-2">
                     <img
-                        src="../img/city1.png"
+                        src={city5}
                         alt="이미지"
                         className=" w-44 h-44 bg-slate-300 rounded"
                     />
-                    <span className="text-sm text-gray-800 ">
-                        {' '}
-                        {IncheonItem.accomodation_name} 인천
-                    </span>
+                    <span className="text-sm text-gray-800 ">인천</span>
                 </Link>
 
                 <Link to="" className="flex flex-col gap-2">
                     <img
-                        src="../img/city1.png"
+                        src={city6}
                         alt="이미지"
                         className=" w-44 h-44 bg-slate-300 rounded"
                     />
