@@ -4,15 +4,8 @@ import StayList1 from "../components/MainComponents/StayList1";
 import StayList2 from "../components/MainComponents/StayList2";
 import StayList3 from "../components/MainComponents/StayList3";
 import SearchBar from "../components/SearchBar";
-import { useUser } from "../store/user";
 
 export default function Main() {
-  const { loginUser } = useUser((state) => ({
-    loginUser: state.loginUser,
-  }));
-  if (!loginUser) {
-    return <div>Please log in to see your profile.</div>;
-  }
   return (
     <>
       <div className="mb-24">
