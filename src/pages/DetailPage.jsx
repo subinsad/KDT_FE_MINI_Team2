@@ -42,7 +42,7 @@ export default function DetailPage() {
                     <EventBox />
                 </div>
             </div>
-            <DetailMap />
+            <DetailMap roomItem={roomItem} />
         </div>
     );
 }

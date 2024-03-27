@@ -1157,7 +1157,8 @@
                 ]
             },
             "location_id": {
-                "location_name": "서울"
+                "location_name": "서울",
+                "location_address": "경기도 부천시 원미구 상동 408-1"
             },
             "rate_id": {
                 "accomodation_id": {},
