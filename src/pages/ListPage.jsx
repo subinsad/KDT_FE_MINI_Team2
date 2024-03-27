@@ -16,8 +16,8 @@ export default function ListPage() {
 
   const [filteredAccomodation, setFilteredAccomodation] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [endOfData, setEndOfData] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1); // Total number of pages
   const [totalResults, setTotalResults] = useState(0);
   const { ajax, accomodation } = useStore();
 
@@ -46,36 +46,47 @@ export default function ListPage() {
       return typeCondition && locationCondition && priceCondition;
     });
 
-    setFilteredAccomodation(filteredList.slice(0, page * 10));
     setTotalResults(filteredList.length);
-  }, [accomodation, filters, page]);
-  useEffect(() => {
-    function handleScroll() {
-      if (
-        window.innerHeight + document.documentElement.scrollTop !==
-          document.documentElement.offsetHeight ||
-        loading ||
-        endOfData
-      ) {
-        return;
-      }
-      setPage((prevPage) => prevPage + 1);
-    }
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [loading, endOfData]);
+    setTotalPages(Math.ceil(filteredList.length / 10)); // Calculate total pages
+    setCurrentPage(1);
+    setFilteredAccomodation(filteredList.slice(0, 10));
+  }, [accomodation, filters]);
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
-    setPage(1);
-    setEndOfData(false);
   };
 
   const handleLocationSearch = (location) => {
     setFilters({ ...filters, selectedLocation: location });
-    setPage(1);
-    setEndOfData(false);
+  };
+
+  const goToPage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    const startIndex = (pageNumber - 1) * 10;
+    setFilteredAccomodation(
+      accomodation
+        .filter((item) => {
+          if (!item || !item.location_id || !item.location_id.location_name)
+            return false;
+
+          const typeCondition =
+            filters.selectedType === "전체유형" ||
+            (item.category &&
+              item.category.toLowerCase() ===
+                filters.selectedType.toLowerCase());
+          const locationCondition =
+            filters.selectedLocation === "전체지역" ||
+            item.location_id.location_name.toLowerCase() ===
+              filters.selectedLocation.toLowerCase();
+          const priceCondition =
+            parseInt(item.price) >= filters.minPrice &&
+            (parseInt(item.price) <= filters.maxPrice ||
+              filters.maxPrice === 500000);
+
+          return typeCondition && locationCondition && priceCondition;
+        })
+        .slice(startIndex, startIndex + 10)
+    );
   };
 
   return (
@@ -90,9 +101,20 @@ export default function ListPage() {
             className="searchResult"
             tag="h2"
             text={`'${filters.selectedLocation}' 지역의 숙소 ${totalResults}개`}
-          />{" "}
+          />
           <SearchedStayList accomodation={filteredAccomodation} />
           {loading && <Spinner />}
+          <div className="pagination">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index}
+                className={index + 1 === currentPage ? "active" : ""}
+                onClick={() => goToPage(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </>
