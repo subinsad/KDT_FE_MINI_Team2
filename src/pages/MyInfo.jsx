@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import TItle from "../components/Common/Title";
 import ReservationItem from "../components/ReservationComponents/ReservationItem";
-import Button from "../components/Common/Button";
 
 export default function MyInfo() {
   const [activeTab, setActiveTab] = useState("personalInfo");
@@ -18,18 +17,26 @@ export default function MyInfo() {
     <div className="container flex gap-10 max-w-2xl mx-auto mb-32 mt-24">
       <div className="content flex flex-col gap-6 grow">
         <TItle className="searchResult" tag="h2" text={"마이 페이지"} />
-        <ul className="flex">
+        <ul className="flex border-b-[1px] border-solid  border-gray-300 font-bold text-xl cursor-pointer">
           <li
-            className={activeTab === "personalInfo" ? "active" : ""}
+            className={`${
+              activeTab === "personalInfo"
+                ? " border-b-[1px] border-solid  border-gray-500"
+                : "text-gray-300 "
+            } p-2`}
             onClick={handleTab1}
           >
             내 정보
           </li>
           <li
-            className={activeTab === "reservationHistory" ? "active" : ""}
+            className={`${
+              activeTab === "reservationHistory"
+                ? " border-b-[1px] border-solid  border-gray-500"
+                : "text-gray-300 "
+            } p-2`}
             onClick={handleTab2}
           >
-            예약내역
+            예약내역{" "}
           </li>
         </ul>
 
@@ -59,7 +66,6 @@ export default function MyInfo() {
             </div>
           ) : (
             <div className="flex flex-col gap-4">
-              <hr />
               <ReservationItem />
               <hr />
               <ReservationItem />
