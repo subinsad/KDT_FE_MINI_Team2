@@ -1,12 +1,17 @@
 import PriceBlock from "../PriceBlock";
 import CheckInOut from "./CheckInOut";
 import Button from "../Common/Button";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import useStore from "../../store/accomodation";
 export default function DetailList({ roomItems }) {
-  if (!roomItems) {
-    return null; // 또는 로딩 상태를 나타내는 JSX 반환
-  }
+  const { room_info } = roomItems;
+  const { accomodation_id } = useParams(); // useParams로 ID 가져오기
+  const { accomodation } = useStore(); // useStore로 전체 숙소 리스트 가져오기
 
+  // 해당 ID와 일치하는 숙소 정보 찾기
+  const detailItem = accomodation.find(
+    (item) => item.accomodation_id === accomodation_id
+  );
   return (
     <div className="w-[880px]">
       {roomItems.map((item, index) => (
@@ -34,7 +39,10 @@ export default function DetailList({ roomItems }) {
               discountRate="30"
             />
 
-            <Link to="/reservation">
+            <Link
+              to={`/reservation/${accomodation_id}/${detailItem.accomodation_name}/${item.room_info}`}
+              key={room_info}
+            >
               <Button className="absolute right-0 bottom-5" text="객실 예약" />
             </Link>
           </div>

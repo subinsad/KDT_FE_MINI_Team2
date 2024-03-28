@@ -20,13 +20,14 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Main /> },
-      { path: "/detail", element: <DetailPage /> },
       { path: "/detail/:accomodation_id", element: <DetailPage /> },
-      { path: "/list", element: <ListPage /> },
       { path: "/list/:accomodation_id", element: <ListPage /> },
       { path: "/signin", element: <SignInPage /> },
       { path: "/signup", element: <SignUpPage /> },
-      { path: "/reservation", element: <Reservation /> },
+      {
+        path: "/reservation/:accomodation_id/:accomodation_name/:room_info",
+        element: <Reservation />,
+      },
       { path: "/reservationcomplete", element: <ReservationComplete /> },
     ],
   },
