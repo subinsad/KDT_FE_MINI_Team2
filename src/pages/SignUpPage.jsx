@@ -94,7 +94,6 @@ export default function SignUpPage() {
         phoneNumber: values.phoneNumber,
       });
       navigate("/");
-      console.log(response);
       return response;
     } catch (error) {
       if (axios.isAxiosError(error)) {

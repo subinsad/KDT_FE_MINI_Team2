@@ -1,9 +1,8 @@
-import create from 'zustand';
+import {create} from 'zustand';
 
 // set 함수를 통해서만 상태를 변경할 수 있다
 const useStore = create((set) => ({
     accomodation: [],
-
     async ajax() {
         try {
             const response = await fetch('../db.json');
