@@ -3,6 +3,7 @@ import * as React from "react";
 import { Reset } from "styled-reset";
 import Gnb from "./layout/Gnb";
 import Footer from "./layout/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Reset />
       <Gnb />
       <Outlet />
+      <ScrollToTop />
       <CustomFooter />
     </>
   );

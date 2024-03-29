@@ -4,6 +4,7 @@ import StayList1 from "../components/MainComponents/StayList1";
 import StayList2 from "../components/MainComponents/StayList2";
 import StayList3 from "../components/MainComponents/StayList3";
 import SearchBar from "../components/SearchBar";
+import ScrollButton from "../components/ScrollButton";
 
 export default function Main() {
   return (
@@ -19,6 +20,7 @@ export default function Main() {
           <StayList2 />
           <StayList3 />
         </div>
+        <ScrollButton />
       </div>
     </>
   );
