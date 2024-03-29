@@ -10,9 +10,10 @@ import SignInPage from "./pages/SignInPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import Reservation from "./pages/Reservation.jsx";
 import ReservationComplete from "./pages/ReservationComplete.jsx";
+import { CookiesProvider } from "react-cookie";
+import MyInfo from "./pages/MyInfo.jsx";
 
 import "./index.css";
-import MyInfo from "./pages/MyInfo.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,13 +21,14 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Main /> },
-      { path: "/detail", element: <DetailPage /> },
       { path: "/detail/:accomodation_id", element: <DetailPage /> },
-      { path: "/list", element: <ListPage /> },
       { path: "/list/:accomodation_id", element: <ListPage /> },
       { path: "/signin", element: <SignInPage /> },
       { path: "/signup", element: <SignUpPage /> },
-      { path: "/reservation", element: <Reservation /> },
+      {
+        path: "/reservation/:accomodation_id/:accomodation_name/:room_info",
+        element: <Reservation />,
+      },
       { path: "/reservationcomplete", element: <ReservationComplete /> },
       { path: "/myinfo", element: <MyInfo /> },
     ],
@@ -35,6 +37,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <CookiesProvider>
+      <RouterProvider router={router} />
+    </CookiesProvider>
   </React.StrictMode>
 );

@@ -35,9 +35,6 @@ export default function Reservation() {
     setSelectedAllOptions(options);
   };
 
-  console.log(selectedessEntialOptions);
-  console.log(selectedOptionalOptions);
-  console.log(selectedAllOptions);
   return (
     <div className="container flex gap-10 max-w-2xl mx-auto mb-32 mt-24">
       <div className="content flex flex-col gap-16 grow">

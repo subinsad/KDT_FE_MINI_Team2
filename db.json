@@ -1121,14 +1121,40 @@
         {
             "accomodation_id": "상품44",
             "room_id": {
-                "room": {
-                    "accomodation_id": {},
-                    "room_info": {},
-                    "room_name": {},
-                    "room_count": {},
-                    "fixed_number": {},
-                    "maxed_number": {}
-                }
+                "room": [
+                    {
+                        "accomodation_id": "상품44",
+                        "room_info": "상품44객실1",
+                        "room_name": "일반룸",
+                        "room_count": "1000000",
+                        "fixed_number": "2",
+                        "maxed_number": "4"
+                    },
+                    {
+                        "accomodation_id": "상품44",
+                        "room_info": "상품44객실2",
+                        "room_name": "일반룸22",
+                        "room_count": "2452212",
+                        "fixed_number": "2",
+                        "maxed_number": "4"
+                    },
+                    {
+                        "accomodation_id": "상품44",
+                        "room_info": "상품44객실3",
+                        "room_name": "일반룸33",
+                        "room_count": "24521025",
+                        "fixed_number": "2",
+                        "maxed_number": "4"
+                    },
+                    {
+                        "accomodation_id": "상품44",
+                        "room_info": "상품44객실4",
+                        "room_name": "일반룸444",
+                        "room_count": "27635322",
+                        "fixed_number": "2",
+                        "maxed_number": "4"
+                    }
+                ]
             },
             "location_id": {
                 "location_name": "서울"
@@ -1141,8 +1167,10 @@
             "introduction": {},
             "accomodation_name": "강남 스타일 게스트하우스",
             "category": "게스트하우스",
-            "price": "310000",
-            "accomodation_image": {}
+            "price": "9310000",
+            "sale": "80",
+            "accomodation_image": {},
+            "star": "5.00"
         },
         {
             "accomodation_id": "상품45",
