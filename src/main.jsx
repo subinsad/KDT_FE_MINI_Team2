@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
-import Main from "./pages/MainPage";
+import MainPage from "./pages/MainPage";
 import DetailPage from "./pages/DetailPage.jsx";
 import ListPage from "./pages/ListPage.jsx";
 import SignInPage from "./pages/SignInPage.jsx";
@@ -20,9 +20,9 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <Main /> },
-      { path: "/detail/:accomodation_id", element: <DetailPage /> },
-      { path: "/list/:accomodation_id", element: <ListPage /> },
+      { index: true, element: <MainPage /> },
+      { path: "/detail/:id", element: <DetailPage /> },
+      { path: "/list/:id", element: <ListPage /> },
       { path: "/signin", element: <SignInPage /> },
       { path: "/signup", element: <SignUpPage /> },
       {

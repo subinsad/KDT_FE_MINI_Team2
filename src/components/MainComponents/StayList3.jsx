@@ -7,9 +7,9 @@ import useStore from '../../store/accomodation';
 import { Link } from 'react-router-dom';
 
 function StayList3() {
-    const { accomodation } = useStore();
+    const { data } = useStore();
 
-    const pickItem = accomodation.sort(() => Math.random() - 0.5);
+    const pickItem = data.sort(() => Math.random() - 0.5);
 
     return (
         <div>
@@ -17,9 +17,7 @@ function StayList3() {
             <ul className="flex gap-4 ">
                 <div className="flex gap-3 w-fit">
                     {pickItem.slice(0, 4).map((item, index) => (
-                        <Link
-                            to={`/detail/${item.accomodation_id}`}
-                            key={index}>
+                        <Link to={`/detail/${item.id}`} key={index}>
                             <img
                                 src="../img/Frame4.png"
                                 alt="숙소이미지"
@@ -27,15 +25,15 @@ function StayList3() {
                             />
 
                             <StayItem
-                                category={item.cartegory}
-                                star={item.star}
-                                stayTitle={item.accomodation_name}
-                                position={item.location_id.location_name}
+                                category={item.accommodationType}
+                                // star={item.star}
+                                stayTitle={item.accommodationName}
+                                position={item.locationType}
                             />
                             <PriceBlock
-                                text={`-${item.sale}%`}
+                                // text={`-${item.sale}%`}
                                 fixedPrice={item.price}
-                                discountRate={item.sale}
+                                // discountRate={item.sale}
                             />
                         </Link>
                     ))}

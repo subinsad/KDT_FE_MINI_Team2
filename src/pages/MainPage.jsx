@@ -4,9 +4,8 @@ import StayList1 from "../components/MainComponents/StayList1";
 import StayList2 from "../components/MainComponents/StayList2";
 import StayList3 from "../components/MainComponents/StayList3";
 import SearchBar from "../components/SearchBar";
-import ScrollButton from "../components/ScrollButton";
 
-export default function Main() {
+export default function MainPage() {
   return (
     <>
       <div className="mb-24">
@@ -20,7 +19,6 @@ export default function Main() {
           <StayList2 />
           <StayList3 />
         </div>
-        <ScrollButton />
       </div>
     </>
   );

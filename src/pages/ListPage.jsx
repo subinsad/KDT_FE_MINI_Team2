@@ -5,7 +5,6 @@ import SearchedStayList from "../components/ListComponents/SearchedStayList";
 import useStore from "../store/accomodation";
 import SearchBar from "../components/SearchBar";
 import Spinner from "../components/Common/Spinner";
-import ScrollButton from "../components/ScrollButton";
 
 export default function ListPage() {
   const [filters, setFilters] = useState({
@@ -117,7 +116,6 @@ export default function ListPage() {
             ))}
           </div>
         </div>
-        <ScrollButton />
       </div>
     </>
   );
