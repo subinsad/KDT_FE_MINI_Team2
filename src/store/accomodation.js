@@ -1,18 +1,17 @@
 import create from 'zustand';
 import axios from 'axios';
 
-// set 함수를 통해서만 상태를 변경할 수 있다
 const useStore = create((set) => ({
-    accomodation: [],
+    data: [], // 초기값은 빈 배열
     async ajax() {
         try {
-            const response = await axios.get('../db.json');
-            // const response = await axios.get('/public-api/v1/accommodation');
-            // const data = await response.data;
-            const data = await response.data;
-            // 가져온 데이터를 상태에 업데이트
-            set({ accomodation: data.accomodation });
-            console.log(data);
+            const response = await axios.get('/public-api/v1/accommodation');
+            const responseData = await response.data;
+
+            // 가져온 데이터에서 숙소 정보만 추출하여 상태에 업데이트
+            const accommodations = responseData.data || []; // 숙소 정보 배열
+            set({ data: accommodations });
+            console.log(accommodations);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
