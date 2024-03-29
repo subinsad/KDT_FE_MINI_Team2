@@ -24,7 +24,6 @@ function StayList1() {
         if (Array.isArray(data) && data.length > 0) {
             setFilterItem(data);
         }
-        console.log(data);
     }, [data]);
     const itemsToDisplay = filterItem || data || []; //둘중하나를 사용
 

@@ -7,7 +7,7 @@ import MapNavi from '../components/DetailComponents/MapNavi';
 import ProductName from '../components/DetailComponents/ProductName';
 import { useParams } from 'react-router-dom';
 import useStore from '../store/accomodation';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function DetailPage() {
     const { id } = useParams(); // useParams로 ID 가져오기
@@ -19,20 +19,29 @@ export default function DetailPage() {
 
     //해당하는 상세페이지, 숙소
     const roomItem = data.find((item) => item.id === detailItem.id);
-    //const roomItems = roomItem.room_id.room;
+
+    const roomItems = roomItem.room;
+    console.log(roomItems);
 
     useEffect(() => {
         ajax();
     }, []);
 
+    const topRef = useRef([]);
+    const moveBtn = () => {
+        if (topRef.current) {
+            topRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
-        <div className="max-w-mw mx-auto">
+        <div className="max-w-mw mx-auto" ref={topRef}>
             <DetailImage />
             <ProductName detailItem={detailItem} />
-            <MapNavi />
+            <MapNavi moveBtn={moveBtn} />
             <div className="flex justify-between">
                 <div>
-                    {/* <DetailList roomItems={roomItems} /> */}
+                    <DetailList roomItems={roomItems} />
                     <DetailInfo />
                 </div>
                 <div className="py-5">
