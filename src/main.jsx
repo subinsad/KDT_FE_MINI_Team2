@@ -11,6 +11,7 @@ import SignUpPage from "./pages/SignUpPage.jsx";
 import Reservation from "./pages/Reservation.jsx";
 import ReservationComplete from "./pages/ReservationComplete.jsx";
 import { CookiesProvider } from "react-cookie";
+import MyInfo from "./pages/MyInfo.jsx";
 
 import "./index.css";
 
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
         element: <Reservation />,
       },
       { path: "/reservationcomplete", element: <ReservationComplete /> },
+      { path: "/myinfo", element: <MyInfo /> },
     ],
   },
 ]);
