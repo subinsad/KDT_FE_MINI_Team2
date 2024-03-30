@@ -1,56 +1,94 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import TItle from "../components/Common/Title";
 import Filter from "../components/ListComponents/Filter";
 import SearchedStayList from "../components/ListComponents/SearchedStayList";
-import useStore from "../store/accomodation";
 import SearchBar from "../components/SearchBar";
 import Spinner from "../components/Common/Spinner";
 
 export default function ListPage() {
+  const navigate = useNavigate();
+  const { type, location } = useParams();
+
+  let newtype, newlocation;
+
   const [filters, setFilters] = useState({
-    selectedType: "전체유형",
-    selectedLocation: "전체지역",
+    selectedType: type || "ALLTYPE",
+    selectedLocation: location || "ALLLOCATION",
     minPrice: 0,
     maxPrice: 500000,
   });
-
-  const [filteredAccomodation, setFilteredAccomodation] = useState([]);
+  const [filteredAccommodation, setFilteredAccommodation] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1); // Total number of pages
+  const [totalPages, setTotalPages] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
-  const { ajax, accomodation } = useStore();
 
   useEffect(() => {
-    ajax();
-  }, []);
+    const fetchData = async () => {
+      try {
+        let url = "http://15.164.19.60:8080/public-api/v1/accommodation";
+
+        if (type && location) {
+          newtype = type;
+          newlocation = location;
+          url += `/type/${newtype}/location/${newlocation}`;
+        } else if (location === undefined) {
+          if (
+            ![
+              "MOTEL",
+              "HOTEL",
+              "RESORT",
+              "PENSION",
+              "CAMPING",
+              "GUESTHOUSE",
+            ].includes(type)
+          ) {
+            newtype = "ALLTYPE";
+            newlocation = type;
+            url += `/location/${newlocation}`;
+            setFilters({
+              selectedType: "ALLTYPE",
+              selectedLocation: newlocation,
+            });
+          } else {
+            newtype = type;
+            newlocation = "ALLLOCATION";
+            url += `/type/${newtype}`;
+            setFilters({
+              selectedType: newtype,
+              selectedLocation: "ALLLOCATION",
+            });
+          }
+        } else {
+          newtype = "ALLTYPE";
+          newlocation = location;
+          url += `/type/${newtype}/location/${newlocation}`;
+          setFilters({ selectedType: newtype, selectedLocation: newlocation });
+        }
+
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await response.json();
+        setFilteredAccommodation(data.data);
+        setTotalResults(data.data.length);
+        setTotalPages(Math.ceil(data.data.length / 10));
+        setCurrentPage(1);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [type, location]);
 
   useEffect(() => {
-    const filteredList = accomodation.filter((item) => {
-      if (!item || !item.location_id || !item.location_id.location_name)
-        return false;
-
-      const typeCondition =
-        filters.selectedType === "전체유형" ||
-        (item.category &&
-          item.category.toLowerCase() === filters.selectedType.toLowerCase());
-      const locationCondition =
-        filters.selectedLocation === "전체지역" ||
-        item.location_id.location_name.toLowerCase() ===
-          filters.selectedLocation.toLowerCase();
-      const priceCondition =
-        parseInt(item.price) >= filters.minPrice &&
-        (parseInt(item.price) <= filters.maxPrice ||
-          filters.maxPrice === 500000);
-
-      return typeCondition && locationCondition && priceCondition;
-    });
-
-    setTotalResults(filteredList.length);
-    setTotalPages(Math.ceil(filteredList.length / 10)); // Calculate total pages
-    setCurrentPage(1);
-    setFilteredAccomodation(filteredList.slice(0, 10));
-  }, [accomodation, filters]);
+    console.log("Filters:", filters);
+  }, [filters]);
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
@@ -62,31 +100,6 @@ export default function ListPage() {
 
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
-    const startIndex = (pageNumber - 1) * 10;
-    setFilteredAccomodation(
-      accomodation
-        .filter((item) => {
-          if (!item || !item.location_id || !item.location_id.location_name)
-            return false;
-
-          const typeCondition =
-            filters.selectedType === "전체유형" ||
-            (item.category &&
-              item.category.toLowerCase() ===
-                filters.selectedType.toLowerCase());
-          const locationCondition =
-            filters.selectedLocation === "전체지역" ||
-            item.location_id.location_name.toLowerCase() ===
-              filters.selectedLocation.toLowerCase();
-          const priceCondition =
-            parseInt(item.price) >= filters.minPrice &&
-            (parseInt(item.price) <= filters.maxPrice ||
-              filters.maxPrice === 500000);
-
-          return typeCondition && locationCondition && priceCondition;
-        })
-        .slice(startIndex, startIndex + 10)
-    );
   };
 
   return (
@@ -95,14 +108,18 @@ export default function ListPage() {
         <SearchBar onSearch={handleLocationSearch} />
       </div>
       <div className="container flex gap-10 max-w-mw mx-auto mb-32 mt-24">
-        <Filter onApplyFilter={handleFilterChange} />
+        <Filter
+          type={filters.selectedType}
+          location={filters.selectedLocation}
+          onApplyFilter={handleFilterChange}
+        />
         <div className="content flex flex-col gap-6 grow">
           <TItle
             className="searchResult"
             tag="h2"
             text={`'${filters.selectedLocation}' 지역의 숙소 ${totalResults}개`}
           />
-          <SearchedStayList accomodation={filteredAccomodation} />
+          <SearchedStayList accomodation={filteredAccommodation} />
           {loading && <Spinner />}
           <div className="pagination">
             {Array.from({ length: totalPages }, (_, index) => (

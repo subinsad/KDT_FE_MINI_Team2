@@ -14,10 +14,10 @@ function SearchedStayList({ accomodation }) {
           />
           <div className="stayDetail flex flex-col gap-16 grow items-end">
             <StayItem
-              category={item.category}
-              star={item.star}
-              stayTitle={item.accomodation_name}
-              position={item.location_id.location_name}
+              category={item.accommodationType}
+              star={item.rate}
+              stayTitle={item.accommodationName}
+              position={item.locationType}
             />
             <PriceBlock
               text="-50%"
