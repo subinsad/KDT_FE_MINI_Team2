@@ -75,11 +75,23 @@ function StayList1() {
                                 to={`/detail/${item.id}`}
                                 key={index}
                                 value={item.accommodationType}>
-                                <img
-                                    src="../img/Frame4.png"
-                                    alt="숙소이미지"
-                                    className="w-72 h-40 bg-slate-300 rounded"
-                                />
+                                {item.accommodationImage &&
+                                item.accommodationImage.length > 0 ? (
+                                    <img
+                                        src={
+                                            item.accommodationImage[0].imagePath
+                                        }
+                                        alt="숙소이미지"
+                                        className="w-72 h-40 bg-slate-300 rounded"
+                                    />
+                                ) : (
+                                    // 기본 이미지 또는 이미지가 없는 경우에 대한 처리
+                                    <img
+                                        src="/path/to/default/image"
+                                        alt="기본 이미지"
+                                        className="w-72 h-40 bg-slate-300 rounded"
+                                    />
+                                )}
                                 <StayItem
                                     category={item.accommodationType}
                                     star={item.rate}
@@ -87,9 +99,9 @@ function StayList1() {
                                     position={item.locationType}
                                 />
                                 <PriceBlock
-                                    // text={`-${item.sale}%`}
+                                    text={`-${item.discount}%`}
                                     fixedPrice={item.price}
-                                    // discountRate={item.sale}
+                                    discountRate={item.discount}
                                 />
                             </Link>
                         ))}

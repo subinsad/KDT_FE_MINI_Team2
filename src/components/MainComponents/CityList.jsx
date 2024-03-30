@@ -43,8 +43,6 @@ function CityList() {
         GYEONGJU: city6,
     };
 
-    console.log(cityLinks);
-
     return (
         <div>
             <TItle tag="h2" text="인기 여행지" className="mb-4" />

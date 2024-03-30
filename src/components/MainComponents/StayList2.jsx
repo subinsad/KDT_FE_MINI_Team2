@@ -20,16 +20,30 @@ function StayList2() {
             <ul className="flex gap-4 ">
                 <div className="flex gap-3 w-fit">
                     {data
-                        ?.sort((a, b) => b.sale - a.sale)
+                        ?.sort((a, b) => b.discount - a.discount)
                         .slice(0, 4)
                         .map((item, index) => (
-                            <Link to={`/detail/${item.id}`} key={index}>
-                                <img
-                                    src="http://tong.visitkorea.or.kr/cms/resource/92/2626192_image2_1.jpg"
-                                    alt="숙소이미지"
-                                    className=" w-72 h-40 bg-slate-300 rounded"
-                                />
-
+                            <Link
+                                to={`/detail/${item.id}`}
+                                key={index}
+                                value={item.accommodationType}>
+                                {item.accommodationImage &&
+                                item.accommodationImage.length > 0 ? (
+                                    <img
+                                        src={
+                                            item.accommodationImage[0].imagePath
+                                        }
+                                        alt="숙소이미지"
+                                        className="w-72 h-40 bg-slate-300 rounded"
+                                    />
+                                ) : (
+                                    // 기본 이미지 또는 이미지가 없는 경우에 대한 처리
+                                    <img
+                                        src="/path/to/default/image"
+                                        alt="기본 이미지"
+                                        className="w-72 h-40 bg-slate-300 rounded"
+                                    />
+                                )}
                                 <StayItem
                                     category={item.accommodationType}
                                     star={item.rate}
@@ -37,9 +51,9 @@ function StayList2() {
                                     position={item.locationType}
                                 />
                                 <PriceBlock
-                                    // text={`-${item.sale}%`}
+                                    text={`-${item.discount}%`}
                                     fixedPrice={item.price}
-                                    // discountRate={item.sale}
+                                    discountRate={item.discount}
                                 />
                             </Link>
                         ))}
