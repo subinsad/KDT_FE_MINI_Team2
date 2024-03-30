@@ -11,50 +11,49 @@ import city5 from '../../img/city5.png';
 import city6 from '../../img/city6.png';
 
 function CityList() {
-    const { accomodation, ajax } = useStore(); // accomodation 상태와 ajax 함수 가져오기
-
-    const jejuItem = accomodation.find(
-        (item) => item.location_id.location_name === '제주'
-    );
-
-    // accomodation.forEach((item) => {
-    //     switch (item.location_id.location_name) {
-    //         case '제주':
-    //             console.log('제주에 해당하는 항목:', item);
-
-    //         case '서울':
-    //             console.log('서울에 해당하는 항목:', item);
-    //             break;
-    //         case '부산':
-    //             console.log('부산에 해당하는 항목:', item);
-    //             break;
-    //         case '강릉':
-    //             console.log('강릉에 해당하는 항목:', item);
-    //             break;
-    //         case '인천':
-    //             console.log('인천에 해당하는 항목:', item);
-    //             break;
-    //         case '경주':
-    //             console.log('경주에 해당하는 항목:', item);
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // });
+    const { data, ajax } = useStore(); // accomodation 상태와 ajax 함수 가져오기
 
     useEffect(() => {
         // 페이지가 로드될 때 데이터 가져오기
         ajax();
     }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 호출되도록 함
 
+    // 데이터가 로드되었는지 확인 후 jejuItem 찾기
+    const jejuItem = data && data.find((item) => item.locationType === 'JEJU');
+    // jejuItem이 존재하는 경우에만 jejuLink 설정
+    const jejuLink = jejuItem ? jejuItem.locationType : null;
+
+    //서울
+    const seoulItem =
+        data && data.find((item) => item.locationType === 'SEOUL');
+    const seoulLink = seoulItem ? seoulItem.locationType : null;
+
+    //부산
+    const busanItem =
+        data && data.find((item) => item.locationType === 'BUSAN');
+    const busanLink = busanItem ? busanItem.locationType : null;
+
+    //강릉
+    const gangneungItem =
+        data && data.find((item) => item.locationType === 'GANGNEUNG');
+    const gangneungLink = gangneungItem ? gangneungItem.locationType : null;
+
+    // 인천
+    const incheonItem =
+        data && data.find((item) => item.locationType === 'INCHEON');
+    const incheonLink = incheonItem ? incheonItem.locationType : null;
+
+    // 경주
+    const gyeongjuItem =
+        data && data.find((item) => item.locationType === 'GYEONGJU');
+    const gyeongjuLink = gyeongjuItem ? gyeongjuItem.locationType : null;
+
     return (
         <div>
             <TItle tag="h2" text="인기 여행지" className="mb-4" />
 
             <div className="flex justify-between">
-                <Link
-                    to={`/list/${accomodation.location_id?.location_name}`}
-                    className="flex flex-col gap-2">
+                <Link to={`/list/${jejuLink}`} className="flex flex-col gap-2">
                     <img
                         src={city1}
                         alt="이미지"
@@ -63,7 +62,7 @@ function CityList() {
                     <span className="text-sm text-gray-800 ">제주</span>
                 </Link>
 
-                <Link to="" className="flex flex-col gap-2">
+                <Link to={`/list/${seoulLink}`} className="flex flex-col gap-2">
                     <img
                         src={city2}
                         alt="이미지"
@@ -72,7 +71,7 @@ function CityList() {
                     <span className="text-sm text-gray-800 "> 서울</span>
                 </Link>
 
-                <Link to="" className="flex flex-col gap-2">
+                <Link to={`/list/${busanLink}`} className="flex flex-col gap-2">
                     <img
                         src={city3}
                         alt="이미지"
@@ -81,7 +80,9 @@ function CityList() {
                     <span className="text-sm text-gray-800 "> 부산</span>
                 </Link>
 
-                <Link to="" className="flex flex-col gap-2">
+                <Link
+                    to={`/list/${gangneungLink}`}
+                    className="flex flex-col gap-2">
                     <img
                         src={city4}
                         alt="이미지"
@@ -90,7 +91,9 @@ function CityList() {
                     <span className="text-sm text-gray-800 "> 강릉</span>
                 </Link>
 
-                <Link to="" className="flex flex-col gap-2">
+                <Link
+                    to={`/list/${incheonLink}`}
+                    className="flex flex-col gap-2">
                     <img
                         src={city5}
                         alt="이미지"
@@ -99,7 +102,9 @@ function CityList() {
                     <span className="text-sm text-gray-800 ">인천</span>
                 </Link>
 
-                <Link to="" className="flex flex-col gap-2">
+                <Link
+                    to={`/list/${gyeongjuLink}`}
+                    className="flex flex-col gap-2">
                     <img
                         src={city6}
                         alt="이미지"
