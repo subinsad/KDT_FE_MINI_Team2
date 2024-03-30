@@ -2,15 +2,15 @@ import { useEffect } from 'react';
 import useStore from '../../store/accomodation';
 
 export default function DetailMap({ roomItem }) {
-    const { accomodation, ajax } = useStore(); // useStore로 전체 숙소 리스트 가져오기
+    const { data, ajax } = useStore(); // useStore로 전체 숙소 리스트 가져오기
 
     useEffect(() => {
-        if (accomodation.length === 0) {
+        if (data.length === 0) {
             // 숙소 정보가 없을 경우, ajax를 통해 데이터를 가져옵니다.
             ajax();
         } else {
             // 숙소 정보가 있다면, 첫 번째 숙소의 주소를 이용하여 지도를 초기화합니다.
-            const address = roomItem.location_id.location_address; // 숙소의 주소를 가져옴.
+            const address = roomItem.address; // 숙소의 주소를 가져옴.
 
             const mapContainer = document.getElementById('map'); // 지도를 표시할 div
             const mapOption = {
@@ -51,7 +51,7 @@ export default function DetailMap({ roomItem }) {
                 }
             });
         }
-    }, [accomodation, ajax]); // accomodation과 ajax를 의존성 배열에 추가합니다.
+    }, [data, ajax]); // accomodation과 ajax를 의존성 배열에 추가합니다.
 
     return (
         <div>
