@@ -21,8 +21,9 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Main /> },
-      { path: "/detail/:accomodation_id", element: <DetailPage /> },
-      { path: "/list/:type?/:location?", element: <ListPage /> },
+      { path: "/detail/:id", element: <DetailPage /> },
+      { path: "/list/:id", element: <ListPage /> },
+      { path: "/list/:locationType", element: <ListPage /> },
       { path: "/signin", element: <SignInPage /> },
       { path: "/signup", element: <SignUpPage /> },
       {

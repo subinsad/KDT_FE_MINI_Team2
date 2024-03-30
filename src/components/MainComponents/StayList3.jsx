@@ -6,10 +6,12 @@ import PriceBlock from '../PriceBlock';
 import useStore from '../../store/accomodation';
 import { Link } from 'react-router-dom';
 
-function StayList3() {
-    const { accomodation } = useStore();
+import noImg from '../../img/noImg.png';
 
-    const pickItem = accomodation.sort(() => Math.random() - 0.5);
+function StayList3() {
+    const { data } = useStore();
+
+    const pickItem = data.sort(() => Math.random() - 0.5);
 
     return (
         <div>
@@ -18,24 +20,34 @@ function StayList3() {
                 <div className="flex gap-3 w-fit">
                     {pickItem.slice(0, 4).map((item, index) => (
                         <Link
-                            to={`/detail/${item.accomodation_id}`}
-                            key={index}>
-                            <img
-                                src="../img/Frame4.png"
-                                alt="숙소이미지"
-                                className=" w-72 h-40 bg-slate-300 rounded"
-                            />
-
+                            to={`/detail/${item.id}`}
+                            key={index}
+                            value={item.accommodationType}>
+                            {item.accommodationImage &&
+                            item.accommodationImage.length > 0 ? (
+                                <img
+                                    src={item.accommodationImage[0].imagePath}
+                                    alt="숙소이미지"
+                                    className="w-72 h-40 bg-slate-300 rounded"
+                                />
+                            ) : (
+                                // 기본 이미지 또는 이미지가 없는 경우에 대한 처리
+                                <img
+                                    src={noImg}
+                                    alt="기본 이미지"
+                                    className="w-72 h-40 bg-slate-300 rounded"
+                                />
+                            )}
                             <StayItem
-                                category={item.cartegory}
-                                star={item.star}
-                                stayTitle={item.accomodation_name}
-                                position={item.location_id.location_name}
+                                category={item.accommodationType}
+                                star={item.rate}
+                                stayTitle={item.accommodationName}
+                                position={item.locationType}
                             />
                             <PriceBlock
-                                text={`-${item.sale}%`}
+                                text={`-${item.discount}%`}
                                 fixedPrice={item.price}
-                                discountRate={item.sale}
+                                discountRate={item.discount}
                             />
                         </Link>
                     ))}

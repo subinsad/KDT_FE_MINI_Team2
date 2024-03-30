@@ -7,32 +7,38 @@ import MapNavi from '../components/DetailComponents/MapNavi';
 import ProductName from '../components/DetailComponents/ProductName';
 import { useParams } from 'react-router-dom';
 import useStore from '../store/accomodation';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function DetailPage() {
-    const { accomodation_id } = useParams(); // useParams로 ID 가져오기
-    const { accomodation, ajax } = useStore(); // useStore로 전체 숙소 리스트 가져오기
+    const { id } = useParams(); // useParams로 ID 가져오기
+    const { data, ajax } = useStore(); // useStore로 전체 숙소 리스트 가져오기
 
+    const detailItemId = parseInt(id); // 숫자로 변경
     // 해당 ID와 일치하는 숙소 정보 찾기
-    const detailItem = accomodation.find(
-        (item) => item.accomodation_id === accomodation_id
-    );
+    const detailItem = data.find((item) => item.id === detailItemId);
 
     //해당하는 상세페이지, 숙소
-    const roomItem = accomodation.find(
-        (item) => item.accomodation_id === detailItem.accomodation_id
-    );
-    const roomItems = roomItem.room_id.room;
+    const roomItem = data.find((item) => item.id === detailItem.id);
+
+    const roomItems = roomItem.room;
+    console.log(roomItem);
 
     useEffect(() => {
         ajax();
     }, []);
 
+    const topRef = useRef([]);
+    const moveBtn = () => {
+        if (topRef.current) {
+            topRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
-        <div className="max-w-mw mx-auto">
+        <div className="max-w-mw mx-auto" ref={topRef}>
             <DetailImage />
             <ProductName detailItem={detailItem} />
-            <MapNavi />
+            <MapNavi moveBtn={moveBtn} />
             <div className="flex justify-between">
                 <div>
                     <DetailList roomItems={roomItems} />
