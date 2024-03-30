@@ -21,7 +21,7 @@ export default function DetailPage() {
     const roomItem = data.find((item) => item.id === detailItem.id);
 
     const roomItems = roomItem.room;
-    console.log(roomItems);
+    console.log(roomItem);
 
     useEffect(() => {
         ajax();
@@ -48,7 +48,7 @@ export default function DetailPage() {
                     <EventBox />
                 </div>
             </div>
-            {/* <DetailMap roomItem={roomItem} /> */}
+            <DetailMap roomItem={roomItem} />
         </div>
     );
 }
