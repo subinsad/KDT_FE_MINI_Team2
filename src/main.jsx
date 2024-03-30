@@ -16,6 +16,7 @@ import MyInfo from "./pages/MyInfo.jsx";
 import "./index.css";
 
 const router = createBrowserRouter([
+<<<<<<< HEAD
   {
     path: "/",
     element: <App />,
@@ -33,6 +34,26 @@ const router = createBrowserRouter([
       { path: "/myinfo", element: <MyInfo /> },
     ],
   },
+=======
+    {
+        path: '/',
+        element: <App />,
+        children: [
+            { index: true, element: <Main /> },
+            { path: '/detail/:id', element: <DetailPage /> },
+            { path: '/list/:id', element: <ListPage /> },
+            { path: '/list/:locationType', element: <ListPage /> },
+            { path: '/signin', element: <SignInPage /> },
+            { path: '/signup', element: <SignUpPage /> },
+            {
+                path: '/reservation/:accomodation_id/:accomodation_name/:room_info',
+                element: <Reservation />,
+            },
+            { path: '/reservationcomplete', element: <ReservationComplete /> },
+            { path: '/myinfo', element: <MyInfo /> },
+        ],
+    },
+>>>>>>> develop
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

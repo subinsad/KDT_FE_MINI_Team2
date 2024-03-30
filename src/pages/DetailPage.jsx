@@ -21,7 +21,7 @@ export default function DetailPage() {
   const roomItem = data.find((item) => item.id === detailItem.id);
 
   const roomItems = roomItem.room;
-  console.log(roomItems);
+  console.log(roomItem);
 
   useEffect(() => {
     ajax();
@@ -35,20 +35,26 @@ export default function DetailPage() {
   };
 
   return (
-    <div className="max-w-mw mx-auto" ref={topRef}>
-      <DetailImage />
-      <ProductName detailItem={detailItem} />
-      <MapNavi moveBtn={moveBtn} />
-      <div className="flex justify-between">
-        <div>
-          <DetailList roomItems={roomItems} />
-          <DetailInfo />
+    <>
+      <div className="max-w-mw mx-auto" ref={topRef}>
+        <DetailImage />
+        <ProductName detailItem={detailItem} />
+        <MapNavi moveBtn={moveBtn} />
+        <div className="flex justify-between">
+          <div>
+            <DetailList roomItems={roomItems} />
+            <DetailInfo />
+          </div>
+          <div className="py-5">
+            <EventBox />
+          </div>
         </div>
-        <div className="py-5">
-          <EventBox />
-        </div>
+        <DetailMap roomItem={roomItem} />
+      </div>
+      <div className="py-5">
+        <EventBox />
       </div>
       {/* <DetailMap roomItem={roomItem} /> */}
-    </div>
+    </>
   );
 }

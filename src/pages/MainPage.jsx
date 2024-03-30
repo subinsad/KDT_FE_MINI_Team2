@@ -5,7 +5,7 @@ import StayList2 from "../components/MainComponents/StayList2";
 import StayList3 from "../components/MainComponents/StayList3";
 import SearchBar from "../components/SearchBar";
 
-export default function MainPage() {
+export default function Main() {
   return (
     <>
       <div className="mb-24">
