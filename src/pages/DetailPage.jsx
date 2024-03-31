@@ -19,6 +19,8 @@ export default function DetailPage() {
 
     //해당하는 상세페이지, 숙소
     const roomItem = data.find((item) => item.id === detailItem.id);
+    console.log(roomItem);
+    //해당하는 room
     const roomItems = detailItem?.room || [];
 
     useEffect(() => {
@@ -34,7 +36,7 @@ export default function DetailPage() {
 
     return (
         <div className="max-w-mw mx-auto" ref={topRef}>
-            <DetailImage />
+            <DetailImage roomItem={roomItem} />
             <ProductName detailItem={detailItem} />
             <MapNavi moveBtn={moveBtn} />
             <div className="flex justify-between">
