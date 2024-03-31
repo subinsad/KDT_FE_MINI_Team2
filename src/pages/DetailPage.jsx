@@ -18,6 +18,7 @@ export default function DetailPage() {
     const detailItem = data.find((item) => item.id === detailItemId);
 
     //해당하는 상세페이지, 숙소
+    const roomItem = data.find((item) => item.id === detailItem.id);
     const roomItems = detailItem?.room || [];
 
     useEffect(() => {
@@ -45,7 +46,7 @@ export default function DetailPage() {
                     <EventBox />
                 </div>
             </div>
-            {/* <DetailMap roomItems={roomItems} /> */}
+            <DetailMap roomItem={roomItem} />
         </div>
     );
 }
