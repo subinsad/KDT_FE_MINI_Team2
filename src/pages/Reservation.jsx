@@ -3,11 +3,26 @@ import TItle from "../components/Common/Title";
 import Checkbox from "../components/Common/CheckBox";
 import ReservationItem from "../components/ReservationComponents/ReservationItem";
 import Button from "../components/Common/Button";
-
+import useStore from "../store/accomodation";
+import { useParams } from "react-router-dom";
+import FixedPrice from "../components/ReservationComponents/FixedPrice";
 export default function Reservation() {
   const [selectedessEntialOptions, setSelectedessEntialOptions] = useState([]);
   const [selectedOptionalOptions, setSelectedOptionalOptions] = useState([]);
   const [selectedAllOptions, setSelectedAllOptions] = useState([]);
+
+  const { data } = useStore();
+
+  const { id, roomid } = useParams(); // useParams로 파라미터 가져오기
+
+  const detailItemId = parseInt(id); // 숫자로 변경
+  const roomItemId = parseInt(roomid);
+
+  // 해당 ID와 일치하는 숙소 정보 찾기
+  const detailItem = data.find((item) => item.id === detailItemId);
+  // 해당 ID와 일치하는 객실 정보 찾기
+  const roomItem = detailItem.room.find((item) => item.id === roomItemId);
+  console.log(roomItem);
 
   const essentialOptions = [
     { label: "[필수] 만 14세 이상 이용 동의", value: "14more" },
@@ -60,9 +75,10 @@ export default function Reservation() {
           />
         </div>
         <div>
-          <p className="text-2xl font-bold text-center mb-6">
-            총 결제 금액 : 1,000,000 원
-          </p>
+          <FixedPrice
+            fixedPrice={detailItem.price}
+            discountRate={detailItem.discount}
+          />
           <Button text="예약하기" className="w-full" />
         </div>
       </div>

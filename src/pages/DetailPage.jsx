@@ -51,10 +51,6 @@ export default function DetailPage() {
         </div>
         <DetailMap roomItem={roomItem} />
       </div>
-      <div className="py-5">
-        <EventBox />
-      </div>
-      {/* <DetailMap roomItem={roomItem} /> */}
     </>
   );
 }
