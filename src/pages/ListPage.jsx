@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import TItle from "../components/Common/Title";
+import { useParams, useNavigate } from "react-router-dom";
+import Title from "../components/Common/Title";
 import Filter from "../components/ListComponents/Filter";
 import SearchedStayList from "../components/ListComponents/SearchedStayList";
 import SearchBar from "../components/SearchBar";
@@ -10,11 +10,9 @@ export default function ListPage() {
   const navigate = useNavigate();
   const { type, location } = useParams();
 
-  let newtype, newlocation;
-
   const [filters, setFilters] = useState({
-    selectedType: type || "ALLTYPE",
-    selectedLocation: location || "ALLLOCATION",
+    selectedType: type,
+    selectedLocation: location,
     minPrice: 0,
     maxPrice: 500000,
   });
@@ -23,48 +21,45 @@ export default function ListPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
+  const [showSearchBar, setShowSearchBar] = useState(true);
+
+  useEffect(() => {
+    let prevScrollPos = window.pageYOffset;
+
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      setShowSearchBar(prevScrollPos > currentScrollPos); // 스크롤 방향에 따라 SearchBar 보이기/숨기기 결정
+      prevScrollPos = currentScrollPos;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         let url = "http://15.164.19.60:8080/public-api/v1/accommodation";
 
-        if (type && location) {
-          newtype = type;
-          newlocation = location;
-          url += `/type/${newtype}/location/${newlocation}`;
-        } else if (location === undefined) {
-          if (
-            ![
-              "MOTEL",
-              "HOTEL",
-              "RESORT",
-              "PENSION",
-              "CAMPING",
-              "GUESTHOUSE",
-            ].includes(type)
-          ) {
-            newtype = "ALLTYPE";
-            newlocation = type;
-            url += `/location/${newlocation}`;
-            setFilters({
-              selectedType: "ALLTYPE",
-              selectedLocation: newlocation,
-            });
-          } else {
-            newtype = type;
-            newlocation = "ALLLOCATION";
-            url += `/type/${newtype}`;
-            setFilters({
-              selectedType: newtype,
-              selectedLocation: "ALLLOCATION",
-            });
-          }
-        } else {
-          newtype = "ALLTYPE";
-          newlocation = location;
-          url += `/type/${newtype}/location/${newlocation}`;
-          setFilters({ selectedType: newtype, selectedLocation: newlocation });
+        if (
+          filters.selectedType !== "ALLTYPE" &&
+          filters.selectedLocation !== "ALLLOCATION"
+        ) {
+          url += `/type/${filters.selectedType}/location/${filters.selectedLocation}`;
+        } else if (
+          filters.selectedType === "ALLTYPE" &&
+          filters.selectedLocation !== "ALLLOCATION"
+        ) {
+          url += `/location/${filters.selectedLocation}`;
+        } else if (
+          filters.selectedType !== "ALLTYPE" &&
+          filters.selectedLocation === "ALLLOCATION"
+        ) {
+          url += `/type/${filters.selectedType}`;
         }
 
         const response = await fetch(url);
@@ -72,9 +67,17 @@ export default function ListPage() {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        setFilteredAccommodation(data.data);
-        setTotalResults(data.data.length);
-        setTotalPages(Math.ceil(data.data.length / 10));
+
+        // Filter accommodations based on price
+        const filteredData = data.data.filter(
+          (item) =>
+            item.price >= filters.minPrice &&
+            (item.price <= filters.maxPrice || filters.maxPrice === 500000) // If maxPrice is 500000, consider all prices
+        );
+
+        setFilteredAccommodation(filteredData);
+        setTotalResults(filteredData.length);
+        setTotalPages(Math.ceil(filteredData.length / 10));
         setCurrentPage(1);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -84,18 +87,17 @@ export default function ListPage() {
     };
 
     fetchData();
-  }, [type, location]);
-
-  useEffect(() => {
-    console.log("Filters:", filters);
   }, [filters]);
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
+    const { selectedType, selectedLocation } = newFilters;
+    navigate(`/list/${selectedType}/${selectedLocation}`);
   };
 
   const handleLocationSearch = (location) => {
     setFilters({ ...filters, selectedLocation: location });
+    navigate(`/list/${filters.selectedType}/${location}`);
   };
 
   const goToPage = (pageNumber) => {
@@ -104,7 +106,11 @@ export default function ListPage() {
 
   return (
     <>
-      <div className="flex justify-center border-b-2 border-gray-200 border-solid sticky top-[82px] bg-white">
+      <div
+        className={`flex justify-center border-b-2 border-gray-200 border-solid sticky top-[82px] bg-white transition-all duration-300 ${
+          showSearchBar ? "" : "transform -translate-y-full"
+        }`}
+      >
         <SearchBar onSearch={handleLocationSearch} />
       </div>
       <div className="container flex gap-10 max-w-mw mx-auto mb-32 mt-24">
@@ -114,7 +120,7 @@ export default function ListPage() {
           onApplyFilter={handleFilterChange}
         />
         <div className="content flex flex-col gap-6 grow">
-          <TItle
+          <Title
             className="searchResult"
             tag="h2"
             text={`'${filters.selectedLocation}' 지역의 숙소 ${totalResults}개`}

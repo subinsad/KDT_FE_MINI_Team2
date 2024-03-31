@@ -28,33 +28,15 @@ function Filter({ type, location, onApplyFilter }) {
     { label: "경주", value: "GYEONGJU" },
   ];
 
-  useEffect(() => {
-    // Type과 Location이 모두 있는 경우
-    if (type && location) {
-      setSelectedType(type);
-      setSelectedLocation(location);
-    }
-    // Location만 있는 경우
-    else if (!type && location) {
-      setSelectedType("ALLTYPE");
-      setSelectedLocation(location);
-    }
-    // Type만 있는 경우
-    else if (type && !location) {
-      setSelectedType(type);
-      setSelectedLocation("ALLLOCATION");
-    }
-  }, [type, location]);
-
-  const applyFilter = () => {
-    onApplyFilter({ selectedType, selectedLocation, minPrice, maxPrice });
-  };
-
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);
   };
   const handleLocationChange = (e) => {
     setSelectedLocation(e.target.value);
+  };
+
+  const applyFilter = () => {
+    onApplyFilter({ selectedType, selectedLocation, minPrice, maxPrice });
   };
 
   return (

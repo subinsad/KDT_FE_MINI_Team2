@@ -20,9 +20,9 @@ function SearchedStayList({ accomodation }) {
               position={item.locationType}
             />
             <PriceBlock
-              text="-50%"
+              text={`-${item.discount}%`}
               fixedPrice={item.price}
-              discountPrice="1,000,000원"
+              discountRate={item.discount}
             />
           </div>
         </div>
