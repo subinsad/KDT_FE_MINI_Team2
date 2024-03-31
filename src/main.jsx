@@ -12,6 +12,7 @@ import Reservation from "./pages/Reservation.jsx";
 import ReservationComplete from "./pages/ReservationComplete.jsx";
 import { CookiesProvider } from "react-cookie";
 import MyInfo from "./pages/MyInfo.jsx";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import "./index.css";
 
@@ -22,8 +23,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Main /> },
       { path: "/detail/:id", element: <DetailPage /> },
-      { path: "/list/:id", element: <ListPage /> },
-      { path: "/list/:locationType", element: <ListPage /> },
+      { path: "/list/:type?/:location?", element: <ListPage /> },
       { path: "/signin", element: <SignInPage /> },
       { path: "/signup", element: <SignUpPage /> },
       { path: "/reservation/:id/:roomid", element: <Reservation /> },
@@ -36,7 +36,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <CookiesProvider>
-      <RouterProvider router={router} />
+      <ChakraProvider>
+        <RouterProvider router={router} />
+      </ChakraProvider>
     </CookiesProvider>
   </React.StrictMode>
 );

@@ -6,6 +6,7 @@ import Button from "../components/Common/Button";
 import useStore from "../store/accomodation";
 import { useParams } from "react-router-dom";
 import FixedPrice from "../components/ReservationComponents/FixedPrice";
+import axios from "axios";
 export default function Reservation() {
   const [selectedessEntialOptions, setSelectedessEntialOptions] = useState([]);
   const [selectedOptionalOptions, setSelectedOptionalOptions] = useState([]);
@@ -50,6 +51,23 @@ export default function Reservation() {
     setSelectedAllOptions(options);
   };
 
+  const handleSubmitReservation = async () => {
+    try {
+      const response = await axios.post("/api/v1/reservation/insert", {
+        roomId: roomItem.id,
+        roomName: roomItem.roomName,
+        checkIn: "2024-03-31",
+        checkOut: "2024-03-32",
+        fixedMember: "2",
+        maxedMember: "2",
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error("예약 실패:", error);
+      alert("예약에 실패했습니다.");
+    }
+  };
+
   return (
     <div className="container flex gap-10 max-w-2xl mx-auto mb-32 mt-24">
       <div className="content flex flex-col gap-16 grow">
@@ -79,7 +97,11 @@ export default function Reservation() {
             fixedPrice={detailItem.price}
             discountRate={detailItem.discount}
           />
-          <Button text="예약하기" className="w-full" />
+          <Button
+            onClick={handleSubmitReservation}
+            text="예약하기"
+            className="w-full"
+          />
         </div>
       </div>
     </div>
