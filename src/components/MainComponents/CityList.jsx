@@ -43,7 +43,7 @@ function CityList() {
         {cities.map((city, index) => (
           <Link
             key={index}
-            to={`/list/${cityLinks[index]}`}
+            to={`/list/ALLTYPE/${cityLinks[index]}`}
             className="flex flex-col gap-2"
           >
             <img
