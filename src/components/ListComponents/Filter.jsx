@@ -28,13 +28,17 @@ function Filter({ type, location, onApplyFilter }) {
     { label: "경주", value: "GYEONGJU" },
   ];
 
+  // 숙소 유형 변경 핸들러
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);
   };
+
+  // 숙소 지역 변경 핸들러
   const handleLocationChange = (e) => {
     setSelectedLocation(e.target.value);
   };
 
+  // 필터 적용 함수
   const applyFilter = () => {
     onApplyFilter({ selectedType, selectedLocation, minPrice, maxPrice });
   };
@@ -71,7 +75,6 @@ function Filter({ type, location, onApplyFilter }) {
         />
       </div>
       <hr />
-      {/* 필터 적용 버튼을 클릭할 때마다 applyFilter 함수 호출 */}
       <Button text="적용" className="w-full" onClick={applyFilter} />
     </div>
   );

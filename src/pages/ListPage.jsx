@@ -24,16 +24,19 @@ export default function ListPage() {
   const [showSearchBar, setShowSearchBar] = useState(true);
 
   useEffect(() => {
-    let prevScrollPos = window.pageYOffset;
+    let prevScrollPos = window.pageYOffset; // 이전 스크롤 위치를 저장하기 위한 변수
 
+    // 스크롤 이벤트 핸들러 등록
     const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      setShowSearchBar(prevScrollPos > currentScrollPos); // 스크롤 방향에 따라 SearchBar 보이기/숨기기 결정
-      prevScrollPos = currentScrollPos;
+      const currentScrollPos = window.pageYOffset; // 현재 스크롤 위치
+      // 스크롤 방향에 따라 검색 바를 보여줄지 결정
+      setShowSearchBar(prevScrollPos > currentScrollPos);
+      prevScrollPos = currentScrollPos; // 이전 스크롤 위치를 현재 스크롤 위치로 업데이트
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll); // 스크롤 이벤트에 핸들러 등록
 
+    // 컴포넌트가 언마운트될 때 스크롤 이벤트 리스너 제거
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -45,6 +48,7 @@ export default function ListPage() {
       try {
         let url = "http://15.164.19.60:8080/public-api/v1/accommodation";
 
+        // 필터 조건에 따라 URL 생성
         if (
           filters.selectedType !== "ALLTYPE" &&
           filters.selectedLocation !== "ALLLOCATION"
@@ -62,25 +66,27 @@ export default function ListPage() {
           url += `/type/${filters.selectedType}`;
         }
 
+        // 데이터 가져오기
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
 
-        // Filter accommodations based on price
+        // 가격에 따라 숙소 필터링
         const filteredData = data.data.filter(
           (item) =>
             item.price >= filters.minPrice &&
-            (item.price <= filters.maxPrice || filters.maxPrice === 500000) // If maxPrice is 500000, consider all prices
+            (item.price <= filters.maxPrice || filters.maxPrice === 500000)
         );
 
+        // 필터된 숙소 목록 및 페이징 관련 상태 업데이트
         setFilteredAccommodation(filteredData);
         setTotalResults(filteredData.length);
         setTotalPages(Math.ceil(filteredData.length / 10));
         setCurrentPage(1);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("데이터를 불러오는 중 오류 발생:", error);
       } finally {
         setLoading(false);
       }
@@ -89,17 +95,20 @@ export default function ListPage() {
     fetchData();
   }, [filters]);
 
+  // 필터 변경 핸들러
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
     const { selectedType, selectedLocation } = newFilters;
     navigate(`/list/${selectedType}/${selectedLocation}`);
   };
 
+  // 위치 검색 핸들러
   const handleLocationSearch = (location) => {
     setFilters({ ...filters, selectedLocation: location });
     navigate(`/list/${filters.selectedType}/${location}`);
   };
 
+  // 페이지 이동 핸들러
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -113,6 +122,7 @@ export default function ListPage() {
       >
         <SearchBar onSearch={handleLocationSearch} />
       </div>
+
       <div className="container flex gap-10 max-w-mw mx-auto mb-32 mt-24">
         <Filter
           type={filters.selectedType}
