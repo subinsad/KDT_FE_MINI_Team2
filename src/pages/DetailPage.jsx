@@ -18,10 +18,7 @@ export default function DetailPage() {
     const detailItem = data.find((item) => item.id === detailItemId);
 
     //해당하는 상세페이지, 숙소
-    const roomItem = data.find((item) => item.id === detailItem.id);
-
-    const roomItems = roomItem.room;
-    console.log(roomItem);
+    const roomItems = detailItem?.room || [];
 
     useEffect(() => {
         ajax();
@@ -48,7 +45,7 @@ export default function DetailPage() {
                     <EventBox />
                 </div>
             </div>
-            <DetailMap roomItem={roomItem} />
+            {/* <DetailMap roomItems={roomItems} /> */}
         </div>
     );
 }
