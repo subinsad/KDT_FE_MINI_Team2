@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TItle from "../components/Common/Title";
 import Checkbox from "../components/Common/CheckBox";
 import ReservationItem from "../components/ReservationComponents/ReservationItem";
 import Button from "../components/Common/Button";
 import useStore from "../store/accomodation";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import FixedPrice from "../components/ReservationComponents/FixedPrice";
 import axios from "axios";
-import { useCookies } from "react-cookie";
 export default function Reservation() {
   const [selectedessEntialOptions, setSelectedessEntialOptions] = useState([]);
   const [selectedOptionalOptions, setSelectedOptionalOptions] = useState([]);
   const [selectedAllOptions, setSelectedAllOptions] = useState([]);
-  const [cookies] = useCookies(["secretKey"]); // 'secretKey'는 로그인 토큰을 저장하는 쿠키의 이름
-  const { data } = useStore();
-  const navigate = useNavigate();
+
+  const { data, ajax } = useStore();
 
   const { id, roomid } = useParams(); // useParams로 파라미터 가져오기
 
@@ -23,22 +21,22 @@ export default function Reservation() {
 
   // 해당 ID와 일치하는 숙소 정보 찾기
   const detailItem = data.find((item) => item.id === detailItemId);
-  // 해당 ID와 일치하는 객실 정보 찾기
-  const roomItem = detailItem.room.find((item) => item.id === roomItemId);
-  console.log(roomItem);
+
+  //해당하는 상세페이지, 숙소
+  const roomItem = data.find((item) => item.id === roomItemId);
+
+  // 새로고침이슈
+  const price = detailItem?.price || "";
+  const discount = detailItem?.discount || "";
+
+  useEffect(() => {
+    ajax();
+  }, []);
 
   const essentialOptions = [
     { label: "[필수] 만 14세 이상 이용 동의", value: "14more" },
     { label: "[필수] 개인정보 수집 및 이용", value: "privacyCollection" },
     { label: "[필수] 개인정보 제 3자 제공", value: "privacyThirdParties" },
-  ];
-
-  const optionalOptions = [
-    { label: "[선택] 이벤트, 혜택 정보 수신 동의", value: "eventInfo" },
-    {
-      label: "[선택] 이벤트, 혜택 정보 전송을 위한 개인정보 수집 및 이용 동의",
-      value: "eventInfoCollection",
-    },
   ];
 
   const allOptions = [{ label: "약관 전체 동의", value: "agreeToAll" }];
@@ -84,7 +82,7 @@ export default function Reservation() {
     <div className="container flex gap-10 max-w-2xl mx-auto mb-32 mt-24">
       <div className="content flex flex-col gap-16 grow">
         <TItle className="searchResult" tag="h2" text="예약하기"></TItle>
-        <ReservationItem />
+        <ReservationItem roomItem={roomItem} detailItem={detailItem} />
         <div className="flex flex-col gap-2 p-4 border border-solid border-gray-200 rounded">
           <Checkbox
             options={essentialOptions}
@@ -105,10 +103,7 @@ export default function Reservation() {
           />
         </div>
         <div>
-          <FixedPrice
-            fixedPrice={detailItem.price}
-            discountRate={detailItem.discount}
-          />
+          <FixedPrice fixedPrice={price} discountRate={discount} />
           <Button
             onClick={handleSubmitReservation}
             text="예약하기"
