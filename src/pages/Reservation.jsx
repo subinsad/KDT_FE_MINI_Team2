@@ -4,15 +4,17 @@ import Checkbox from "../components/Common/CheckBox";
 import ReservationItem from "../components/ReservationComponents/ReservationItem";
 import Button from "../components/Common/Button";
 import useStore from "../store/accomodation";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FixedPrice from "../components/ReservationComponents/FixedPrice";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 export default function Reservation() {
   const [selectedessEntialOptions, setSelectedessEntialOptions] = useState([]);
   const [selectedOptionalOptions, setSelectedOptionalOptions] = useState([]);
   const [selectedAllOptions, setSelectedAllOptions] = useState([]);
-
+  const [cookies] = useCookies(["secretKey"]); // 'secretKey'는 로그인 토큰을 저장하는 쿠키의 이름
   const { data } = useStore();
+  const navigate = useNavigate();
 
   const { id, roomid } = useParams(); // useParams로 파라미터 가져오기
 
@@ -53,15 +55,25 @@ export default function Reservation() {
 
   const handleSubmitReservation = async () => {
     try {
-      const response = await axios.post("/api/v1/reservation/insert", {
-        roomId: roomItem.id,
-        roomName: roomItem.roomName,
-        checkIn: "2024-03-31",
-        checkOut: "2024-03-31",
-        fixedMember: "2",
-        maxedMember: "2",
-      });
+      const response = await axios.post(
+        "/api/v1/reservation/insert",
+        {
+          roomId: roomItem.id,
+          roomName: roomItem.roomName,
+          checkIn: "2024-08-01",
+          checkOut: "2024-08-02",
+          fixedMember: 2,
+          maxedMember: 2,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.secretKey}`,
+          },
+        }
+      );
       console.log(response.data);
+      navigate("/reservationcomplete");
+      return response;
     } catch (error) {
       console.error("예약 실패:", error);
       alert("예약에 실패했습니다.");
