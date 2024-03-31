@@ -1,43 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import RadioButton from "../Common/RadioButton";
 import Button from "../Common/Button";
 import RangeSlider from "../Common/RangeSlider";
 
-function Filter({ onApplyFilter }) {
-  const [selectedType, setSelectedType] = useState("전체유형");
-  const [selectedLocation, setSelectedLocation] = useState("전체지역");
-
+function Filter({ type, location, onApplyFilter }) {
+  const [selectedType, setSelectedType] = useState(type);
+  const [selectedLocation, setSelectedLocation] = useState(location);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(500000);
 
-  const type = [
-    { label: "전체", value: "전체유형" },
-    { label: "모텔", value: "모텔" },
-    { label: "호텔", value: "호텔" },
-    { label: "리조트", value: "리조트" },
-    { label: "펜션", value: "펜션" },
-    { label: "캠핑", value: "캠핑" },
-    { label: "게스트하우스", value: "게스트하우스" },
+  const typeOptions = [
+    { label: "전체", value: "ALLTYPE" },
+    { label: "모텔", value: "MOTEL" },
+    { label: "호텔", value: "HOTEL" },
+    { label: "리조트", value: "RESORT" },
+    { label: "펜션", value: "PENSION" },
+    { label: "캠핑", value: "CAMPING" },
+    { label: "게스트하우스", value: "GUESTHOUSE" },
   ];
-  const location = [
-    { label: "전체", value: "전체지역" },
-    { label: "제주", value: "제주" },
-    { label: "서울", value: "서울" },
-    { label: "부산", value: "부산" },
-    { label: "강릉", value: "강릉" },
-    { label: "인천", value: "인천" },
-    { label: "경주", value: "경주" },
+  const locationOptions = [
+    { label: "전체", value: "ALLLOCATION" },
+    { label: "제주", value: "JEJU" },
+    { label: "서울", value: "SEOUL" },
+    { label: "부산", value: "BUSAN" },
+    { label: "강릉", value: "GANGNEUNG" },
+    { label: "인천", value: "INCHEON" },
+    { label: "경주", value: "GYEONGJU" },
   ];
 
-  const applyFilter = () => {
-    onApplyFilter({ selectedType, selectedLocation, minPrice, maxPrice });
-  };
-
+  // 숙소 유형 변경 핸들러
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);
   };
+
+  // 숙소 지역 변경 핸들러
   const handleLocationChange = (e) => {
     setSelectedLocation(e.target.value);
+  };
+
+  // 필터 적용 함수
+  const applyFilter = () => {
+    onApplyFilter({ selectedType, selectedLocation, minPrice, maxPrice });
   };
 
   return (
@@ -45,7 +48,7 @@ function Filter({ onApplyFilter }) {
       <div>
         <p className="text-lg font-semibold mb-3">유형</p>
         <RadioButton
-          options={type}
+          options={typeOptions}
           selectedOption={selectedType}
           onChange={handleTypeChange}
         />
@@ -54,7 +57,7 @@ function Filter({ onApplyFilter }) {
       <div>
         <p className="text-lg font-semibold mb-3">지역</p>
         <RadioButton
-          options={location}
+          options={locationOptions}
           selectedOption={selectedLocation}
           onChange={handleLocationChange}
         />
