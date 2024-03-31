@@ -57,7 +57,7 @@ export default function Reservation() {
         roomId: roomItem.id,
         roomName: roomItem.roomName,
         checkIn: "2024-03-31",
-        checkOut: "2024-03-32",
+        checkOut: "2024-03-31",
         fixedMember: "2",
         maxedMember: "2",
       });

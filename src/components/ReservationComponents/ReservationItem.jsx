@@ -15,6 +15,7 @@ function ReservationItem() {
   const detailItem = data.find((item) => item.id === detailItemId);
   // 해당 ID와 일치하는 객실 정보 찾기
   const roomItem = detailItem.room.find((item) => item.id === roomItemId);
+
   return (
     <div className="flex items-center gap-4 grow">
       <img

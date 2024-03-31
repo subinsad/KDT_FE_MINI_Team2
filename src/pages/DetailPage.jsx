@@ -20,6 +20,7 @@ export default function DetailPage() {
   //해당하는 상세페이지, 숙소
   const roomItem = data.find((item) => item.id === detailItem.id);
   const roomItems = detailItem?.room || [];
+  console.log(roomItem);
 
   useEffect(() => {
     ajax();
