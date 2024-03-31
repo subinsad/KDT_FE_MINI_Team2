@@ -41,7 +41,7 @@ export default function DetailPage() {
             <MapNavi moveBtn={moveBtn} />
             <div className="flex justify-between">
                 <div>
-                    <DetailList roomItems={roomItems} />
+                    <DetailList roomItems={roomItems} detailItem={detailItem} />
                     <DetailInfo />
                 </div>
                 <div className="py-5">

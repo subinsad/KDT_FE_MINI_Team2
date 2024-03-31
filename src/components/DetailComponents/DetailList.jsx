@@ -3,13 +3,11 @@ import CheckInOut from './CheckInOut';
 import Button from '../Common/Button';
 import { Link, useParams } from 'react-router-dom';
 import useStore from '../../store/accomodation';
-export default function DetailList({ roomItems }) {
+export default function DetailList({ roomItems, detailItem }) {
     const { room_info } = roomItems;
     const { id } = useParams(); // useParams로 ID 가져오기
     const { data } = useStore(); // useStore로 전체 숙소 리스트 가져오기
 
-    // 해당 ID와 일치하는 숙소 정보 찾기
-    const detailItem = data.find((item) => item.id === id);
     return (
         <div className="w-[880px]">
             {roomItems.map((item, index) => (
@@ -31,11 +29,10 @@ export default function DetailList({ roomItems }) {
 
                     <div className="mt-20 relative">
                         <PriceBlock
-                            text={`-${item.discount}%`}
+                            text={`-${detailItem.discount}%`}
                             fixedPrice={item.price}
-                            discountRate={item.discount}
+                            discountRate={detailItem.discount}
                         />
-
                         {/* <Link
                             to={`/reservation/${id}/${detailItem.roomName}/${item.room_info}`}
                             key={room_info}>
