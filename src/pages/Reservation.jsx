@@ -7,10 +7,12 @@ import useStore from "../store/accomodation";
 import { useParams } from "react-router-dom";
 import FixedPrice from "../components/ReservationComponents/FixedPrice";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 export default function Reservation() {
   const [selectedessEntialOptions, setSelectedessEntialOptions] = useState([]);
   const [selectedOptionalOptions, setSelectedOptionalOptions] = useState([]);
   const [selectedAllOptions, setSelectedAllOptions] = useState([]);
+  const [cookies] = useCookies(["secretKey"]);
 
   const { data, ajax } = useStore();
 
@@ -38,7 +40,13 @@ export default function Reservation() {
     { label: "[필수] 개인정보 수집 및 이용", value: "privacyCollection" },
     { label: "[필수] 개인정보 제 3자 제공", value: "privacyThirdParties" },
   ];
-
+  const optionalOptions = [
+    { label: "[선택] 이벤트, 혜택 정보 수신 동의", value: "eventInfo" },
+    {
+      label: "[선택] 이벤트, 혜택 정보 전송을 위한 개인정보 수집 및 이용 동의",
+      value: "eventInfoCollection",
+    },
+  ];
   const allOptions = [{ label: "약관 전체 동의", value: "agreeToAll" }];
 
   const handleEssentialOptionChange = (options) => {
@@ -51,6 +59,7 @@ export default function Reservation() {
     setSelectedAllOptions(options);
   };
 
+  // 예약서밋핸들러
   const handleSubmitReservation = async () => {
     try {
       const response = await axios.post(
@@ -70,7 +79,7 @@ export default function Reservation() {
         }
       );
       console.log(response.data);
-      navigate("/reservationcomplete");
+      // navigate("/reservationcomplete");
       return response;
     } catch (error) {
       console.error("예약 실패:", error);

@@ -1,7 +1,7 @@
 import React from "react";
 import PriceBlock from "../PriceBlock";
 
-function ReservationItem({ roomItem, detailItem }) {
+function ReservationItem({ roomItem, detailItem, roomItemId }) {
   const roomImage = detailItem?.roomImage || "";
   const accommodationName = detailItem?.accommodationName || "";
   const address = detailItem?.address || "";
