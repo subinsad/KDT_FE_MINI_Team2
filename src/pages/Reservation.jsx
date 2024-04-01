@@ -25,8 +25,10 @@ export default function Reservation() {
     const detailItem = data.find((item) => item.id === detailItemId);
 
     //해당하는 상세페이지, 숙소
-    const roomItem = data.find((item) => item.id === roomItemId);
-    console.log(roomItem);
+    const roomItem = data.find((item) => item.id === detailItemId);
+    // 룸 배열에서 클릭한 룸의 ID와 일치하는 룸을 찾기
+    const clickedRoom = roomItem?.room.find((room) => room.id === roomItemId);
+    console.log(clickedRoom);
 
     // 새로고침이슈
     const price = detailItem?.price || '';
@@ -86,7 +88,10 @@ export default function Reservation() {
                     className="searchResult"
                     tag="h2"
                     text="예약하기"></TItle>
-                <ReservationItem roomItem={roomItem} detailItem={detailItem} />
+                <ReservationItem
+                    clickedRoom={clickedRoom}
+                    detailItem={detailItem}
+                />
                 <div className="flex flex-col gap-2 p-4 border border-solid border-gray-200 rounded">
                     <Checkbox
                         options={essentialOptions}

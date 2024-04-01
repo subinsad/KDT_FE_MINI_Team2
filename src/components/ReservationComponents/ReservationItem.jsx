@@ -3,11 +3,11 @@ import PriceBlock from '../PriceBlock';
 import useStore from '../../store/accomodation';
 import { useParams } from 'react-router-dom';
 
-function ReservationItem({ roomItem, detailItem }) {
+function ReservationItem({ clickedRoom, detailItem }) {
     const roomImage = detailItem?.roomImage || '';
     const accommodationName = detailItem?.accommodationName || '';
     const address = detailItem?.address || '';
-    const roomName = roomItem?.roomName || '';
+    const roomName = clickedRoom?.roomName || '';
     const discount = detailItem?.discount || '';
     const price = detailItem?.price || '';
 
