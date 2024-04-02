@@ -5,11 +5,25 @@ export default function Footer() {
     <footer className="py-10 border-t-2 border-gray-200 border-solid">
       <div className="max-w-mw mx-auto">
         <div className="flex">
+          <h3>Frontend Members</h3>
           <ul>
-            <li className="text-gray-500 font-bold mb-3">고객센터</li>
-            <p className="text-gray-500 text-sm mb-3">
-              오전 9시 ~ 새벽 3시 운영
-            </p>
+            <li>
+              MinJae Kim{" "}
+              <a href="https://github.com/minjaekim">
+                <img src="github-icon.png" alt="GitHub" />
+              </a>
+            </li>
+            <li>
+              JaeHyeok Lee
+              <a
+                href="https://github.com/jaehyeoklee"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src="github-icon.png" alt="GitHub" />
+              </a>
+            </li>
+
             <Button
               className="bg-gray-300 mb-4 w-30 h-11 mr-3"
               text="1555-0000"

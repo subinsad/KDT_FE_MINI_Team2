@@ -163,7 +163,7 @@ export default function Reservation() {
             }`}
             onClick={handleSubmitReservation}
             disabled={!selectedEssentialOptions.every(Boolean)}
-            text={isLoading ? <Spinner /> : "로그인"}
+            text={isLoading ? <Spinner /> : "예약하기"}
           />
         </div>
       </div>
