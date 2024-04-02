@@ -1,55 +1,128 @@
 import Button from "../components/Common/Button";
+import { Link } from "react-router-dom";
+import logo from "../img/logo.svg";
+import { FaGithub } from "react-icons/fa";
 
 export default function Footer() {
+  //눌렀을 때 메인페이지의 최상단으로 스크롤
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <footer className="py-10 border-t-2 border-gray-200 border-solid">
       <div className="max-w-mw mx-auto">
-        <div className="flex">
-          <h3>Frontend Members</h3>
-          <ul>
-            <li>
-              MinJae Kim{" "}
-              <a href="https://github.com/minjaekim">
-                <img src="github-icon.png" alt="GitHub" />
-              </a>
-            </li>
-            <li>
-              JaeHyeok Lee
-              <a
-                href="https://github.com/jaehyeoklee"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src="github-icon.png" alt="GitHub" />
-              </a>
-            </li>
-
-            <Button
-              className="bg-gray-300 mb-4 w-30 h-11 mr-3"
-              text="1555-0000"
-            ></Button>
-            <Button
-              className="bg-gray-300 mb-4 w-30 h-11"
-              text="카카오 문의"
-            ></Button>
-          </ul>
+        <div>
+          <Link
+            to="/"
+            onClick={scrollToTop}
+            className="text-3xl font-bold text-primary"
+          >
+            <img src={logo} alt="Slide 1" className="object-cover" />
+          </Link>
         </div>
 
-        <p className="text-gray-500 font-extralight text-xs mb-7">
-          (주)FASTCAMPUS
-          <br />
-          주소:서울특별시 강남구 봉은사로 479,479타워 11층 | 대표이사:
-          FASTCAMPUS | 사업자등록번호 : 000-00-00000
-          <br />
-          전자우편주소 : 000@goodchoice.kr | 통신판매번호 : 2024-서울강남-0001 |
-          관광사업자 등록번호 : 제1000-01호 | 전화번호 : 1670-0001 |
-          호스팅서비스제공자의 상호 표시: (주)FASTCAMPUS
-          <br />
-          (주)FASTCAMPUS는 통신판매중개자로써 통신판매의 당사자가 아니며, 상품
-          예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.
-        </p>
-        <div className="text-sm mt-4 text-gray-400">
-          <p>Copyright. All rights reserved.</p>
+        <div className="flex gap-16">
+          <div className="mt-5">
+            <h3 className="mt-3 text-lg font-semibold ">FE Mini Team2</h3>
+            <ul className="text-lg mt-2 text-slate-700">
+              <li className="mb-1">SignUp / SignIn</li>
+              <li className="mb-1">Mypage</li>
+              <li className="mb-1">Listpage</li>
+              <li className="mb-1">Detailpage</li>
+              <li className="mb-1">Reservation</li>
+              <li className="mb-1">filter absence items</li>
+              <li className="mb-1">Logout</li>
+            </ul>
+          </div>
+
+          <div className="mt-5">
+            <h3 className="mt-3 text-lg font-semibold ">Proud Things</h3>
+            <ul className="text-lg mt-2 text-slate-700">
+              <li className="mb-1">JSON Web Token</li>
+              <li className="mb-1">Advanced Pagination</li>
+              <li className="mb-1">Dynamic Sliders</li>
+              <li className="mb-1">Skeleton Screens</li>
+              <li className="mb-1">Loading Spinners</li>
+              <li className="mb-1">Chakra UI Modals</li>
+              <li className="mb-1">Animation Integration</li>
+            </ul>
+          </div>
+
+          <div className="mt-5">
+            <h3 className="mt-3 text-lg font-semibold ">
+              Frontend Technologies
+            </h3>
+            <ul className="text-lg mt-2 text-slate-700">
+              <li className="mb-1">React(JS)</li>
+              <li className="mb-1">Zustand</li>
+              <li className="mb-1">Tailwind CSS</li>
+            </ul>
+            <h3 className="mt-3 text-lg font-semibold ">
+              Backend Technologies
+            </h3>
+            <ul className="text-lg mt-2 text-slate-700">
+              <li className="mb-1">JAVA</li>
+              <li className="mb-1">Spring</li>
+            </ul>
+          </div>
+          <div className="mt-5">
+            <h3 className="mt-3 text-lg font-semibold ">Frontend Members</h3>
+            <ul className="text-lg mt-2 text-slate-700">
+              <li className="mb-1">
+                <a
+                  href="https://github.com/subinsad"
+                  className="flex items-center gap-1"
+                >
+                  Soobin Park
+                  <FaGithub />
+                </a>
+              </li>
+              <li className="mb-1">
+                <a
+                  href="https://github.com/JeonYooDeok"
+                  className="flex items-center gap-1"
+                >
+                  Yudeok Jeon
+                  <FaGithub />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/mj950313"
+                  className="flex items-center gap-1"
+                >
+                  Minjae Kim
+                  <FaGithub />
+                </a>
+              </li>
+            </ul>
+
+            <h3 className="mt-3 text-lg font-semibold ">Backend Members</h3>
+            <ul className="text-lg mt-2 text-slate-700">
+              <li className="mb-1">
+                <a
+                  href="https://github.com/Woohahalife"
+                  className="flex items-center gap-1"
+                >
+                  Geon Choi
+                  <FaGithub />
+                </a>
+              </li>
+              <li className="mb-1">
+                <a
+                  href="https://github.com/asd42270"
+                  className="flex items-center gap-1"
+                >
+                  Yubin Lee
+                  <FaGithub />
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </footer>

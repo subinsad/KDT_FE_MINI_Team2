@@ -14,9 +14,18 @@ import { CookiesProvider } from "react-cookie";
 import MyInfo from "./pages/MyInfo.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
 
-import './index.css';
-import Notice from './pages/Notice';
-import NoticeDetail from './pages/NoticeDetail';
+import "./index.css";
+import Notice from "./pages/Notice";
+import NoticeDetail from "./pages/NoticeDetail";
+
+import { Navigate, Outlet } from "react-router-dom";
+import { useUser } from "./store/user.js";
+
+const ProtectedRoute = () => {
+  const { loginUser } = useUser();
+
+  return loginUser ? <Outlet /> : <Navigate to="/signin" />;
+};
 
 const router = createBrowserRouter([
   {
@@ -33,9 +42,15 @@ const router = createBrowserRouter([
         path: "/reservationcomplete/:id/:roomid",
         element: <ReservationComplete />,
       },
-      { path: "/myinfo", element: <MyInfo /> },
-      { path: '/notice', element: <Notice /> },
-      { path: '/notice/:id', element: <NoticeDetail /> },
+      {
+        path: "/myinfo",
+        element: <ProtectedRoute />,
+        children: [
+          { path: "", element: <MyInfo /> }, // MyInfo 페이지를 ProtectedRoute의 자식으로 설정
+        ],
+      },
+      { path: "/notice", element: <Notice /> },
+      { path: "/notice/:id", element: <NoticeDetail /> },
     ],
   },
 ]);
