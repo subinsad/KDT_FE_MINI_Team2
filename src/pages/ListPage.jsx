@@ -5,6 +5,7 @@ import Filter from "../components/ListComponents/Filter";
 import SearchedStayList from "../components/ListComponents/SearchedStayList";
 import SearchBar from "../components/SearchBar";
 import Spinner from "../components/Common/Spinner";
+import ListSkeleton from "../components/ListComponents/ListSkeleton";
 
 export default function ListPage() {
   const navigate = useNavigate();
@@ -136,19 +137,24 @@ export default function ListPage() {
             tag="h2"
             text={`'${filters.selectedLocation}' 지역의 숙소 ${totalResults}개`}
           />
-          <SearchedStayList accomodation={filteredAccommodation} />
-          {loading && <Spinner />}
-          <div className="pagination">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index}
-                className={index + 1 === currentPage ? "active" : ""}
-                onClick={() => goToPage(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
+          {loading ? (
+            <ListSkeleton />
+          ) : (
+            <>
+              <SearchedStayList accomodation={filteredAccommodation} />
+              <div className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                    key={index}
+                    className={index + 1 === currentPage ? "active" : ""}
+                    onClick={() => goToPage(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>
