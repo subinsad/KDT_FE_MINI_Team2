@@ -14,7 +14,9 @@ import { CookiesProvider } from "react-cookie";
 import MyInfo from "./pages/MyInfo.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
 
-import "./index.css";
+import './index.css';
+import Notice from './pages/Notice';
+import NoticeDetail from './pages/NoticeDetail';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,8 @@ const router = createBrowserRouter([
         element: <ReservationComplete />,
       },
       { path: "/myinfo", element: <MyInfo /> },
+      { path: '/notice', element: <Notice /> },
+      { path: '/notice/:id', element: <NoticeDetail /> },
     ],
   },
 ]);
