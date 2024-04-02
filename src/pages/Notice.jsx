@@ -6,10 +6,9 @@ import TItle from '../components/Common/Title';
 
 function Notice() {
     const { notice, ajax } = useStore();
-    console.log(notice);
 
     const [page, setPage] = useState(1); // 페이지
-    const limit = 5; // 페이지당 최대 보여줄 아이템 수
+    const limit = 7; // 페이지당 최대 보여줄 아이템 수
     const offset = (page - 1) * limit; // 페이지네이션을 위한 offset
 
     useEffect(() => {
@@ -26,7 +25,7 @@ function Notice() {
             <p className="mb-8 text-gray-500">
                 업데이트 정보 등 다양한 소식을 알려드립니다.
             </p>
-            <ul>
+            <ul className="h-[440px]">
                 {currentNotice.map((item, index) => (
                     <ListItem
                         key={index}
