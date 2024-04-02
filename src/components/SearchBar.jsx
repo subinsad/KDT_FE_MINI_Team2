@@ -40,7 +40,7 @@ function SearchBar({ onSearch, className }) {
         startDate={startDate}
         endDate={endDate}
         minDate={new Date()} //지난날짜 비활성화
-        className="w-80 h-8 p-6 rounded bg-gray-1"
+        className="w-80 h-8 p-6 rounded bg-gray-1 hover:bg-gray-200"
       />
       <Input placeholder="인원 입력" className="w-80 bg-gray-1" />
       <Button text="검색" onClick={handleSearch} className="" />
