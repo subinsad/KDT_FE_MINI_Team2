@@ -1,11 +1,11 @@
 import React from "react";
 import PriceBlock from "../PriceBlock";
 
-function ReservationItem({ roomItem, detailItem, roomItemId }) {
+function ReservationItem({ clickedRoom, detailItem }) {
   const roomImage = detailItem?.roomImage || "";
   const accommodationName = detailItem?.accommodationName || "";
   const address = detailItem?.address || "";
-  const roomName = roomItem?.roomName || "";
+  const roomName = clickedRoom?.roomName || "";
   const discount = detailItem?.discount || "";
   const price = detailItem?.price || "";
 
