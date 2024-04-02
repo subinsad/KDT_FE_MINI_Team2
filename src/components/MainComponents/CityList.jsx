@@ -38,20 +38,22 @@ function CityList() {
   return (
     <div>
       <TItle tag="h2" text="인기 여행지" className="mb-4" />
-
-      <div className="flex justify-between">
+      <div className="flex gap-4 justify-between">
         {cities.map((city, index) => (
           <Link
             key={index}
             to={`/list/ALLTYPE/${cityLinks[index]}`}
-            className="flex flex-col gap-2"
+            className="flex flex-col w-full"
           >
-            <img
-              src={cityImg[city]}
-              alt={`${city} 이미지`}
-              className=" w-44 h-44 bg-slate-300 rounded"
-            />
-            <span className="text-sm text-gray-800 ">{city}</span>
+            <div className="rounded-xl aspect-square overflow-hidden w-full">
+              <img
+                src={cityImg[city]}
+                alt={`${city} 이미지`}
+                className="w-full h-full transition-transform duration-300 transform hover:scale-110"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <span className="text-sm text-gray-800">{city}</span>
           </Link>
         ))}
       </div>
