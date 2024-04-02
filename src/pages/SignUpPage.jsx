@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BiShow, BiHide } from "react-icons/bi";
+import Spinner from "../components/Common/Spinner";
 
 export default function SignUpPage() {
   const [values, setValues] = useState({
@@ -24,6 +25,7 @@ export default function SignUpPage() {
   const [showPswd, setShowPswd] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleShowPswd = () => {
     setShowPswd(!showPswd);
@@ -82,7 +84,7 @@ export default function SignUpPage() {
 
   const signUpHandler = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     if (!isFormValid) {
       return;
     }
@@ -105,6 +107,8 @@ export default function SignUpPage() {
           }));
         }
       }
+    } finally {
+      setIsLoading(false); // 로그인 프로세스 종료, 텍스트 복원을 위한 상태 변경
     }
   };
 
@@ -216,7 +220,7 @@ export default function SignUpPage() {
             className={`bg-gray-900 text-white mt-10 w-full ${
               !isFormValid && "opacity-50 cursor-not-allowed"
             }`}
-            text="회원가입"
+            text={isLoading ? <Spinner /> : "로그인"}
             onClick={signUpHandler}
             disabled={!isFormValid} // isFormValid가 false일 때 버튼을 비활성화
           />

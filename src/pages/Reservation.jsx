@@ -8,8 +8,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import FixedPrice from "../components/ReservationComponents/FixedPrice";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import Spinner from "../components/Common/Spinner";
 
 export default function Reservation() {
+  const [isLoading, setIsLoading] = useState(false);
   const [cookies] = useCookies(["secretKey"]);
   const navigate = useNavigate();
   const { data, ajax } = useStore();
@@ -80,6 +82,7 @@ export default function Reservation() {
   };
 
   const handleSubmitReservation = async () => {
+    setIsLoading(true);
     if (!selectedEssentialOptions.every(Boolean)) {
       alert("필수 항목을 모두 동의해주세요.");
       return;
@@ -107,6 +110,8 @@ export default function Reservation() {
     } catch (error) {
       console.error("예약 실패:", error);
       alert("예약에 실패했습니다.");
+    } finally {
+      setIsLoading(false); // 로그인 프로세스 종료, 텍스트 복원을 위한 상태 변경
     }
   };
 
@@ -158,7 +163,7 @@ export default function Reservation() {
             }`}
             onClick={handleSubmitReservation}
             disabled={!selectedEssentialOptions.every(Boolean)}
-            text="예약하기"
+            text={isLoading ? <Spinner /> : "로그인"}
           />
         </div>
       </div>
