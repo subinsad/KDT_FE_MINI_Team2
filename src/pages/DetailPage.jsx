@@ -33,20 +33,25 @@ export default function DetailPage() {
     };
 
     return (
-        <div className="max-w-mw mx-auto" ref={topRef}>
-            <DetailImage />
-            <ProductName detailItem={detailItem} />
-            <MapNavi moveBtn={moveBtn} />
-            <div className="flex justify-between">
-                <div>
-                    <DetailList roomItems={roomItems} />
-                    <DetailInfo />
+        <>
+            <div className="max-w-mw mx-auto" ref={topRef}>
+                <DetailImage />
+                <ProductName detailItem={detailItem} />
+                <MapNavi moveBtn={moveBtn} />
+                <div className="flex justify-between">
+                    <div>
+                        <DetailList
+                            roomItems={roomItems}
+                            detailItem={detailItem}
+                        />
+                        <DetailInfo />
+                    </div>
+                    <div className="py-5">
+                        <EventBox />
+                    </div>
                 </div>
-                <div className="py-5">
-                    <EventBox />
-                </div>
+                <DetailMap roomItem={roomItem} />
             </div>
-            <DetailMap roomItem={roomItem} />
-        </div>
+        </>
     );
 }

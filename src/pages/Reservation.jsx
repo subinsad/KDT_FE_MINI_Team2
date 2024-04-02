@@ -1,20 +1,50 @@
-import React, { useState } from "react";
-import TItle from "../components/Common/Title";
+import React, { useEffect, useState } from "react";
+import Title from "../components/Common/Title";
 import Checkbox from "../components/Common/CheckBox";
 import ReservationItem from "../components/ReservationComponents/ReservationItem";
 import Button from "../components/Common/Button";
+import useStore from "../store/accomodation";
+import { useNavigate, useParams } from "react-router-dom";
+import FixedPrice from "../components/ReservationComponents/FixedPrice";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 export default function Reservation() {
-  const [selectedessEntialOptions, setSelectedessEntialOptions] = useState([]);
-  const [selectedOptionalOptions, setSelectedOptionalOptions] = useState([]);
-  const [selectedAllOptions, setSelectedAllOptions] = useState([]);
+  const [cookies] = useCookies(["secretKey"]);
+  const navigate = useNavigate();
+  const { data, ajax } = useStore();
+  const { id, roomid } = useParams();
+
+  const detailItemId = parseInt(id);
+  const roomItemId = parseInt(roomid);
+
+  const detailItem = data.find((item) => item.id === detailItemId);
+  const roomItem = data.find((item) => item.id === detailItemId);
+  const clickedRoom = roomItem?.room.find((room) => room.id === roomItemId);
+
+  const price = detailItem?.price || "";
+  const discount = detailItem?.discount || "";
+
+  useEffect(() => {
+    ajax();
+  }, []);
+
+  const [selectedEssentialOptions, setSelectedEssentialOptions] = useState([
+    false,
+    false,
+    false,
+  ]);
+  const [selectedOptionalOptions, setSelectedOptionalOptions] = useState([
+    false,
+    false,
+  ]);
+  const [selectedAllOptions, setSelectedAllOptions] = useState(false);
 
   const essentialOptions = [
     { label: "[필수] 만 14세 이상 이용 동의", value: "14more" },
     { label: "[필수] 개인정보 수집 및 이용", value: "privacyCollection" },
     { label: "[필수] 개인정보 제 3자 제공", value: "privacyThirdParties" },
   ];
-
   const optionalOptions = [
     { label: "[선택] 이벤트, 혜택 정보 수신 동의", value: "eventInfo" },
     {
@@ -22,48 +52,114 @@ export default function Reservation() {
       value: "eventInfoCollection",
     },
   ];
-
   const allOptions = [{ label: "약관 전체 동의", value: "agreeToAll" }];
 
-  const handleEssentialOptionChange = (options) => {
-    setSelectedessEntialOptions(options);
+  useEffect(() => {
+    const allEssentialChecked = selectedEssentialOptions.every(Boolean);
+    const allOptionalChecked = selectedOptionalOptions.every(Boolean);
+    setSelectedAllOptions(allEssentialChecked && allOptionalChecked);
+  }, [selectedEssentialOptions, selectedOptionalOptions]);
+
+  const handleEssentialOptionChange = (index) => {
+    const updatedEssentials = [...selectedEssentialOptions];
+    updatedEssentials[index] = !updatedEssentials[index];
+    setSelectedEssentialOptions(updatedEssentials);
   };
-  const handleOptionalOptionsChange = (options) => {
-    setSelectedOptionalOptions(options);
+
+  const handleOptionalOptionsChange = (index) => {
+    const updatedOptionals = [...selectedOptionalOptions];
+    updatedOptionals[index] = !updatedOptionals[index];
+    setSelectedOptionalOptions(updatedOptionals);
   };
-  const handleAllOptionsChange = (options) => {
-    setSelectedAllOptions(options);
+
+  const handleAllOptionsChange = () => {
+    const newState = !selectedAllOptions;
+    setSelectedAllOptions(newState);
+    setSelectedEssentialOptions(Array(essentialOptions.length).fill(newState));
+    setSelectedOptionalOptions(Array(optionalOptions.length).fill(newState));
+  };
+
+  const handleSubmitReservation = async () => {
+    if (!selectedEssentialOptions.every(Boolean)) {
+      alert("필수 항목을 모두 동의해주세요.");
+      return;
+    }
+    try {
+      const response = await axios.post(
+        "/api/v1/reservation/insert",
+        {
+          roomId: roomItem.id,
+          roomName: roomItem.roomName,
+          checkIn: "2024-08-01",
+          checkOut: "2024-08-02",
+          fixedMember: 2,
+          maxedMember: 2,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.secretKey}`,
+          },
+        }
+      );
+      navigate(`/reservationcomplete/${id}/${roomid}`);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error("예약 실패:", error);
+      alert("예약에 실패했습니다.");
+    }
   };
 
   return (
     <div className="container flex gap-10 max-w-2xl mx-auto mb-32 mt-24">
       <div className="content flex flex-col gap-16 grow">
-        <TItle className="searchResult" tag="h2" text="예약하기"></TItle>
-        <ReservationItem />
+        <Title className="searchResult" tag="h2" text="예약하기" />
+        <ReservationItem clickedRoom={clickedRoom} detailItem={detailItem} />
         <div className="flex flex-col gap-2 p-4 border border-solid border-gray-200 rounded">
-          <Checkbox
-            options={essentialOptions}
-            selectedOptions={selectedessEntialOptions}
-            onChange={handleEssentialOptionChange}
-          />
+          {essentialOptions.map((option, index) => (
+            <div key={option.value} className="flex items-center">
+              <Checkbox
+                options={[option]}
+                selectedOptions={[selectedEssentialOptions[index]]}
+                onChange={() => handleEssentialOptionChange(index)}
+                checked={selectedEssentialOptions[index]} // 여기서 checked prop을 설정해야 합니다.
+              />
+            </div>
+          ))}
           <hr />
-          <Checkbox
-            options={optionalOptions}
-            selectedOptions={selectedOptionalOptions}
-            onChange={handleOptionalOptionsChange}
-          />
+          {optionalOptions.map((option, index) => (
+            <div key={option.value} className="flex items-center">
+              <Checkbox
+                options={[option]}
+                selectedOptions={[selectedOptionalOptions[index]]}
+                onChange={() => handleOptionalOptionsChange(index)}
+                checked={selectedOptionalOptions[index]} // 여기서 checked prop을 설정해야 합니다.
+              />
+            </div>
+          ))}
           <hr />
-          <Checkbox
-            options={allOptions}
-            selectedOptions={selectedAllOptions}
-            onChange={handleAllOptionsChange}
-          />
+          <div className="flex items-center">
+            <Checkbox
+              options={allOptions}
+              selectedOptions={[selectedAllOptions]}
+              onChange={handleAllOptionsChange}
+              checked={selectedAllOptions} // 여기서 checked prop을 설정해야 합니다.
+            />
+          </div>
         </div>
+
         <div>
-          <p className="text-2xl font-bold text-center mb-6">
-            총 결제 금액 : 1,000,000 원
-          </p>
-          <Button text="예약하기" className="w-full" />
+          <FixedPrice fixedPrice={price} discountRate={discount} />
+          <Button
+            className={`bg-gray-900 text-white mt-10 w-full ${
+              !selectedEssentialOptions.every(Boolean)
+                ? "opacity-50 cursor-not-allowed"
+                : ""
+            }`}
+            onClick={handleSubmitReservation}
+            disabled={!selectedEssentialOptions.every(Boolean)}
+            text="예약하기"
+          />
         </div>
       </div>
     </div>
