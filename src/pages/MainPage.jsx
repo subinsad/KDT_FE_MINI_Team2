@@ -12,7 +12,7 @@ export default function Main() {
         <Banner />
       </div>
       <div className="max-w-mw mx-auto mb-32">
-        <SearchBar className="absolute top-[24rem] z-10" />
+        <SearchBar className="absolute top-[23.5rem] z-10" />
         <div className="flex flex-col gap-32">
           <CityList />
           <StayList1 />

@@ -5,6 +5,8 @@ import { useUser } from "../store/user"; // Zustand 스토어 사용
 import { useCookies } from "react-cookie";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaUserCircle } from "react-icons/fa";
+import logo from "../img/logo.svg";
+
 export default function Gnb() {
   const navigate = useNavigate();
   const { loginUser, logout } = useUser(); // Zustand 스토어에서 상태와 함수 사용
@@ -34,7 +36,11 @@ export default function Gnb() {
           onClick={scrollToTop}
           className="text-3xl font-bold text-primary"
         >
-          FE-MINI-2
+          <img
+            src={logo}
+            alt="Slide 1"
+            className="w-full h-full object-cover"
+          />
         </Link>
         <nav>
           {isAuthenticated ? (
