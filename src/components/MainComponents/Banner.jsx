@@ -1,9 +1,12 @@
 import React from "react";
+import { Autoplay, Pagination, Scrollbar, A11y } from "swiper/modules";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 import banner1 from "../../img/banner1.png";
 import banner2 from "../../img/banner2.png";
@@ -15,6 +18,7 @@ function Banner() {
   return (
     <Swiper
       className="w-full h-[26rem] bg-slate-300 rounded"
+      modules={[Autoplay, Pagination, Scrollbar, A11y]}
       spaceBetween={50}
       slidesPerView={1}
       loop={true}
