@@ -10,7 +10,7 @@ import SignInPage from "./pages/SignInPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import Reservation from "./pages/Reservation.jsx";
 import ReservationComplete from "./pages/ReservationComplete.jsx";
-import { CookiesProvider } from "react-cookie";
+import { CookiesProvider, useCookies } from "react-cookie";
 import MyInfo from "./pages/MyInfo.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
 
@@ -19,12 +19,11 @@ import Notice from "./pages/Notice";
 import NoticeDetail from "./pages/NoticeDetail";
 
 import { Navigate, Outlet } from "react-router-dom";
-import { useUser } from "./store/user.js";
 
 const ProtectedRoute = () => {
-  const { loginUser } = useUser();
+  const [cookies] = useCookies(["secretKey"]); // 'secretKey'는 쿠키에 저장된 로그인 정보의 키입니다.
 
-  return loginUser ? <Outlet /> : <Navigate to="/signin" />;
+  return cookies.secretKey ? <Outlet /> : <Navigate to="/signin" />;
 };
 
 const router = createBrowserRouter([
