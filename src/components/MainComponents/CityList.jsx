@@ -38,12 +38,12 @@ function CityList() {
   return (
     <div>
       <TItle tag="h2" text="인기 여행지" className="mb-4" />
-      <div className="flex gap-4 justify-between">
+      <div className="flex flex-col md:flex-row gap-4 justify-between">
         {cities.map((city, index) => (
           <Link
             key={index}
             to={`/list/ALLTYPE/${cityLinks[index]}`}
-            className="flex flex-col w-full"
+            className="flex flex-col w-full h-40"
           >
             <div className="rounded-xl aspect-square overflow-hidden w-full">
               <img
