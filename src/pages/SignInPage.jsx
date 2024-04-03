@@ -14,11 +14,11 @@ export default function SignInPage() {
     password: "",
   });
   const [message, setMessage] = useState("");
-  const [cookies, setCookie] = useCookies(["secretKey"]);
-  const { setLoginUser } = useUser();
+  const [, setCookie] = useCookies(["secretKey"]);
+  const { setLoginUser, setMemberId } = useUser();
   const [isLoading, setIsLoading] = useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -28,10 +28,14 @@ export default function SignInPage() {
         "/public-api/v1/member/login",
         loginForm
       );
-      const { secretKey } = response.data.data;
+      const { secretKey, memberId } = response.data.data;
+      console.log(secretKey, memberId);
       setCookie("secretKey", secretKey, { path: "/" });
+      setCookie("memberId", memberId, { path: "/" });
       setLoginUser({ secretKey });
-      navigate("/");
+      setMemberId({ memberId });
+
+      // navigate("/");
     } catch (error) {
       setMessage("아이디 또는 비밀번호가 틀렸습니다.");
     } finally {

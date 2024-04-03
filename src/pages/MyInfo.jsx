@@ -3,11 +3,14 @@ import Title from "../components/Common/Title";
 import ReservationItem from "../components/ReservationComponents/ReservationItem";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function MyInfo() {
   const [activeTab, setActiveTab] = useState("personalInfo");
   const [cookies] = useCookies(["secretKey"]);
   const [reservations, setReservations] = useState([]);
+  const [myinfo, setMyInfo] = useState({});
+  const { memberId } = useParams();
 
   const handleTab1 = () => {
     setActiveTab("personalInfo");
@@ -16,7 +19,22 @@ export default function MyInfo() {
   const handleTab2 = () => {
     setActiveTab("reservationHistory");
   };
+  //내정보 조회
+  // 내정보 조회
+  const fetchMyInfo = async () => {
+    try {
+      const response = await axios.get(`/api/v1/member/info/${memberId}`, {
+        headers: {
+          Authorization: `Bearer ${cookies.secretKey}`,
+        },
+      });
+      setMyInfo(response.data.data);
+    } catch (err) {
+      console.error("err:", err);
+    }
+  };
 
+  //예약내역 패치
   const fetchReservations = async () => {
     try {
       const response = await axios.get("/api/v1/reservation", {
@@ -32,7 +50,8 @@ export default function MyInfo() {
   };
 
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 예약 내역을 조회
+    // 컴포넌트가 마운트될 때 조회
+    fetchMyInfo();
     fetchReservations();
   }, []);
 
@@ -59,7 +78,7 @@ export default function MyInfo() {
             } p-2`}
             onClick={handleTab2}
           >
-            예약내역{" "}
+            예약내역
           </li>
         </ul>
 
@@ -69,13 +88,13 @@ export default function MyInfo() {
               <div>
                 <p className="mb-1 font-light text-sm text-slate-600">이메일</p>
                 <p className="bg-gray-100 py-3 px-4 font-light rounded">
-                  Email@email.com
+                  {myinfo.email}
                 </p>
               </div>
               <div>
                 <p className="mb-1 font-light text-sm text-slate-600">이름</p>
                 <p className="bg-gray-100 py-3 px-4 font-light rounded">
-                  User_Name
+                  {myinfo.name}
                 </p>
               </div>
               <div>
@@ -83,7 +102,7 @@ export default function MyInfo() {
                   휴대폰 번호
                 </p>
                 <p className="bg-gray-100 py-3 px-4 font-light rounded">
-                  010-1234-5678{" "}
+                  {myinfo.phoneNumber}
                 </p>
               </div>
             </div>
@@ -92,7 +111,7 @@ export default function MyInfo() {
               {reservations.map((reservation, index) => (
                 <React.Fragment key={index}>
                   <ReservationItem
-                    clickedRoom={reservation}
+                    clickedRoom={reservation.room}
                     detailItem={reservation}
                   />
                   <hr />
