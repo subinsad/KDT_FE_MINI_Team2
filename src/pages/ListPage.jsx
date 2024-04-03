@@ -47,7 +47,7 @@ export default function ListPage() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        let url = "http://15.164.19.60:8080/public-api/v1/accommodation";
+        let url = "http://15.164.19.60:8081/public-api/v1/accommodation";
 
         // 필터 조건에 따라 URL 생성
         if (
