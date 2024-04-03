@@ -26,10 +26,12 @@ function SearchBar({ onSearch, className }) {
   };
 
   return (
-    <div className={`flex  gap-5  p-6 bg-white rounded-2xl ${className}`}>
+    <div
+      className={`flex flex-col w-full md:flex-row md:max-w-[1200px] md:gap-5 p-6 bg-white rounded-2xl  ${className}`}
+    >
       <Input
         placeholder="지역명 입력"
-        className="w-80"
+        className="md:grow"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
       />
@@ -40,9 +42,12 @@ function SearchBar({ onSearch, className }) {
         startDate={startDate}
         endDate={endDate}
         minDate={new Date()} //지난날짜 비활성화
-        className="w-80 h-8 p-6 rounded bg-gray-1 hover:bg-gray-200"
+        className="md:grow h-8 p-6 rounded bg-gray-1 hover:bg-gray-200 hidden md:block"
       />
-      <Input placeholder="인원 입력" className="w-80 bg-gray-1" />
+      <Input
+        placeholder="인원 입력"
+        className="md:grow bg-gray-1 hidden md:block"
+      />
       <Button text="검색" onClick={handleSearch} className="" />
     </div>
   );
