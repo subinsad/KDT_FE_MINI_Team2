@@ -5,6 +5,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ChakraModal from "../ChakraModal";
 import { useDisclosure } from "@chakra-ui/react";
 import { useCookies } from "react-cookie";
+import logo from "../../img/logo.svg";
+
 export default function DetailList({ roomItems, detailItem }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [cookies] = useCookies(["secretKey"]); // 'secretKey'는 로그인 토큰을 저장하는 쿠키의 이름
@@ -56,7 +58,11 @@ export default function DetailList({ roomItems, detailItem }) {
             {/* ChakraModal 컴포넌트. 로그인이 필요할 때 표시됩니다. */}
             <ChakraModal isOpen={isOpen} onClose={onClose}>
               <h1 className="text-5xl font-medium mb-10 text-primary">
-                FE-MINI-2
+                <img
+                  src={logo}
+                  alt="Slide 1"
+                  className="w-full h-full object-cover"
+                />
               </h1>
               <h2 className="text-3xl font-medium mb-1">객실 예약은</h2>
               <h2 className="text-3xl font-medium mb-8">
@@ -70,10 +76,10 @@ export default function DetailList({ roomItems, detailItem }) {
               </p>
               <div className="flex gap-3 justify-center py-12 border-slate-300 border-solid border-b-2">
                 <Link to="/signup">
-                  <Button text="회원가입" className="w-44 h-14 text-lg" />
+                  <Button text="회원가입" className="w-[193px] h-14 text-lg" />
                 </Link>
                 <Link to="/signin">
-                  <Button text="로그인" className="w-44 h-14 text-lg" />
+                  <Button text="로그인" className="w-[193px] h-14 text-lg" />
                 </Link>
               </div>
               <p
