@@ -17,7 +17,7 @@ function StayList2() {
   return (
     <div>
       <TItle tag="h2" text="특가 숙소" className="mb-4" />
-      <ul className="flex gap-4 ">
+      <ul className="flex gap-4 overflow-x-scroll touch-pan-x md:overflow-auto">
         <div className="flex gap-3 w-fit">
           {data
             ?.sort((a, b) => b.discount - a.discount)

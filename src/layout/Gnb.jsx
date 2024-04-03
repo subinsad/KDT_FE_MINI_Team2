@@ -30,7 +30,7 @@ export default function Gnb() {
   };
 
   return (
-    <header className="py-5 sticky top-0 bg-white border-b-2 border-gray-200 border-solid z-50">
+    <header className="py-5 px-4 sticky top-0 bg-white border-b-2 border-gray-200 border-solid z-50">
       <div className="max-w-mw mx-auto flex items-center justify-between">
         <Link
           to="/"
