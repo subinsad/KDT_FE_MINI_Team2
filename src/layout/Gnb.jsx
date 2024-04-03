@@ -9,14 +9,15 @@ import logo from "../img/logo.svg";
 
 export default function Gnb() {
   const navigate = useNavigate();
-  const { loginUser, logout } = useUser(); // Zustand 스토어에서 상태와 함수 사용
+  const { loginUser, memberId, logout } = useUser(); // Zustand 스토어에서 상태와 함수 사용
   const isAuthenticated = Boolean(loginUser); // 로그인 상태 확인
-  const [, , removeCookie] = useCookies(["secretKey"]); // useCookies 훅 사용
-  const [dropdown, setDropdown] = useState(false);
+  const [, , removeCookie] = useCookies(["secretKey", "memberId"]); // useCookies 훅 사용
+  const [dropdown, setDropdown] = useState(false); // 드롭다운 상태
 
   const handleLogout = () => {
     logout(); // Zustand를 통해 로그아웃 처리
-    removeCookie("secretKey", { path: "/" }); // 쿠키 삭제 시 path를 "/"로 설정
+    removeCookie("secretKey", { path: "/" }); // secretKey 쿠키 삭제
+    removeCookie("memberId", { path: "/" }); // memberId 쿠키 삭제
     navigate("/signin"); // 로그인 페이지로 리디렉션
   };
 
@@ -54,11 +55,11 @@ export default function Gnb() {
                     <FaUserCircle />
                   </>
                 }
-                onClick={() => setDropdown(!dropdown)}
+                onClick={() => setDropdown(!dropdown)} // 드롭다운 상태 업데이트
               />
               {dropdown && (
                 <div className="absolute w-36 text-center right-0 mt-4 bg-primary shadow-md rounded-md overflow-hidden z-50">
-                  <Link to="/myinfo">
+                  <Link to={`/myinfo/${memberId}`}>
                     <Button
                       text="마이페이지"
                       className="border-b-2 w-full border-solid rounded-none"
