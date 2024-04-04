@@ -7,7 +7,7 @@ import useStore from '../../store/accomodation';
 import { Link } from 'react-router-dom';
 
 import noImg from '../../img/noImg.png';
-import { getCurrentDate } from '../../data/date';
+import { getCurrentDate, getTomorrowDate } from '../../data/date';
 
 function StayList3() {
     const { data } = useStore();
@@ -16,6 +16,7 @@ function StayList3() {
 
     //날짜
     const currentDate = getCurrentDate();
+    const tomorrowDate = getTomorrowDate();
 
     return (
         <div>
@@ -24,7 +25,7 @@ function StayList3() {
                 <div className="flex gap-3 w-fit">
                     {pickItem.slice(0, 4).map((item, index) => (
                         <Link
-                            to={`/detail/${item.id}/${currentDate}/${currentDate}/2`}
+                            to={`/detail/${item.id}/${currentDate}/${tomorrowDate}/2`}
                             key={index}
                             value={item.accommodationType}
                             className="rounded-xl border-transparent border-solid border hover:border-gray-300">
