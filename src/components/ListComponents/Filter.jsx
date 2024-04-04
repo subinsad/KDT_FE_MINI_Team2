@@ -67,7 +67,7 @@ function Filter({ type, location, onApplyFilter }) {
         />
       </div>
       <hr />
-      <div>
+      {/* <div>
         <p className="text-lg font-semibold mb-3">가격</p>
         <RangeSlider
           minValue={minPrice}
@@ -78,7 +78,7 @@ function Filter({ type, location, onApplyFilter }) {
           }}
         />
       </div>
-      <hr />
+      <hr /> */}
       <Button text="적용" className="w-full" onClick={applyFilter} />
     </div>
   );

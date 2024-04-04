@@ -125,6 +125,7 @@ function SearchBar({ onSearch, className }) {
   const [startDate, setStartDate] = useState(params.startDate || todayString);
   const [endDate, setEndDate] = useState(params.endDate || tomorrowString);
   const [personal, setPersonal] = useState(params.personal || "");
+  const [page, setPage] = useState(params.page || "1");
 
   useEffect(() => {
     setLocation(params.location || "제주");
@@ -148,13 +149,13 @@ function SearchBar({ onSearch, className }) {
       navigate(
         `/list/${startDate}/${endDate}/${encodeURIComponent(trimmedLocation)}/${
           params.type
-        }/${personal}`
+        }/${personal}/${page}`
       );
     } else {
       navigate(
         `/list/${startDate}/${endDate}/${encodeURIComponent(
           trimmedLocation
-        )}/호텔/${personal}`
+        )}/호텔/${personal}/${page}`
       );
     }
   };
