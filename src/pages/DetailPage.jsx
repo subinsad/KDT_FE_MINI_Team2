@@ -55,6 +55,12 @@ export default function DetailPage() {
             topRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     };
+    const bottomRef = useRef([]);
+    const bottomBtn = () => {
+        if (bottomRef.current) {
+            bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     return (
         <>
@@ -69,7 +75,7 @@ export default function DetailPage() {
                 ) : (
                     <ProductName detailItem={detailItem} />
                 )}
-                <MapNavi moveBtn={moveBtn} />
+                <MapNavi moveBtn={moveBtn} bottomBtn={bottomBtn} />
                 <div className="flex justify-between">
                     <div>
                         <DetailList
