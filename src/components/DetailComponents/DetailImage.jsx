@@ -1,11 +1,13 @@
-export default function DetailImage({ roomItem }) {
-    const roomImg = roomItem?.accommodationImage || [];
+export default function DetailImage({ roomData, detailItem }) {
+    const roomImg = detailItem?.accommodationImage || [];
+    console.log(detailItem?.accommodationImage[0]?.imagePath);
+    console.log(detailItem);
 
     return (
         <div className="h-[530px] flex gap-2 mt-8">
             {roomImg.length > 0 && roomImg[0] && (
                 <img
-                    src={roomImg[0].imagePath}
+                    src={detailItem?.accommodationImage[0]?.imagePath}
                     alt="객실이미지"
                     className="w-[656px] h-full rounded-xl border-gray-200 border-solid border-2 p-4"
                 />

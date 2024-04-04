@@ -7,7 +7,7 @@ import { useDisclosure } from '@chakra-ui/react';
 import { useCookies } from 'react-cookie';
 import logo from '../../img/logo.svg';
 
-export default function DetailList({ roomItems, detailItem }) {
+export default function DetailList({ detailItem, roomData }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [cookies] = useCookies(['secretKey']); // 'secretKey'는 로그인 토큰을 저장하는 쿠키의 이름
     const navigate = useNavigate();
@@ -19,9 +19,12 @@ export default function DetailList({ roomItems, detailItem }) {
 
         // 해당 ID와 일치하는 숙소 정보 찾기
         const detailItem = data.find((item) => item.id === id);
-        return (
-            <div className="w-[880px]">
-                {roomItems.map((item, index) => (
+    };
+
+    return (
+        <div className="w-[880px]">
+            {roomData &&
+                roomData.map((item, index) => (
                     <div
                         className="flex justify-between py-5 border-gray-200 border-solid border-b-2"
                         key={index}>
@@ -38,11 +41,11 @@ export default function DetailList({ roomItems, detailItem }) {
                             />
                         </div>
 
-                        <div className="mt-20">
+                        <div className="mt-20 flex flex-col justify-around">
                             <PriceBlock
-                                text={`-${detailItem.discount}%`}
+                                text={`-${detailItem?.discount}%`}
                                 fixedPrice={item.price}
-                                discountRate={detailItem.discount}
+                                discountRate={detailItem?.discount}
                             />
                             <Button
                                 text="객실 예약"
@@ -95,7 +98,6 @@ export default function DetailList({ roomItems, detailItem }) {
                         </div>
                     </div>
                 ))}
-            </div>
-        );
-    };
+        </div>
+    );
 }
