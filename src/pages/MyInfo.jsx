@@ -31,7 +31,6 @@ export default function MyInfo() {
     const [isLoading, setIsLoading] = useState(false);
 
     const { memberId } = useParams();
-
     // 정규식 변수
     const passwordReg = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{8,15}$/;
     const nameReg = /^[가-힣]{2,10}$/;
@@ -105,6 +104,7 @@ export default function MyInfo() {
                 },
             });
             setReservations(response.data.data);
+            console.log(reservations);
         } catch (error) {
             console.error('error:', error);
         }
@@ -237,6 +237,8 @@ export default function MyInfo() {
                                     <ReservationItem
                                         clickedRoom={reservation.room}
                                         detailItem={reservation}
+                                        checkIn={reservation.checkIn}
+                                        checkOut={reservation.checkOut}
                                     />
                                     <hr />
                                 </React.Fragment>

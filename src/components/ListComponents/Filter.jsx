@@ -67,18 +67,18 @@ function Filter({ type, location, onApplyFilter }) {
                 />
             </div>
             <hr />
-            {/* <div>
-        <p className="text-lg font-semibold mb-3">가격</p>
-        <RangeSlider
-          minValue={minPrice}
-          maxValue={maxPrice}
-          onApplyFilter={({ minValue, maxValue }) => {
-            setMinPrice(minValue);
-            setMaxPrice(maxValue);
-          }}
-        />
-      </div>
-      <hr /> */}
+            <div>
+                <p className="text-lg font-semibold mb-3">가격</p>
+                <RangeSlider
+                    minValue={minPrice}
+                    maxValue={maxPrice}
+                    onApplyFilter={({ minValue, maxValue }) => {
+                        setMinPrice(minValue);
+                        setMaxPrice(maxValue);
+                    }}
+                />
+            </div>
+            <hr />
             <Button text="적용" className="w-full" onClick={applyFilter} />
         </div>
     );

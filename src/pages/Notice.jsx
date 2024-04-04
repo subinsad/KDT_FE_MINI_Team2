@@ -17,7 +17,6 @@ function Notice() {
 
     // 현재 페이지에 맞게 공지사항을 자릅니다.
     const currentNotice = notice.slice(offset, offset + limit);
-    console.log(currentNotice);
 
     return (
         <div className="max-w-mw mx-auto pt-12 pb-12">

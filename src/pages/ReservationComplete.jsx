@@ -6,19 +6,14 @@ import useStore from '../store/accomodation';
 import { Link, useParams } from 'react-router-dom';
 
 export default function ReservationComplete() {
-    const { data, ajax } = useStore();
+    const { data } = useStore();
     const { id, roomid } = useParams();
-
     const detailItemId = parseInt(id);
     const roomItemId = parseInt(roomid);
 
     const detailItem = data.find((item) => item.id === detailItemId);
-    const roomItem = data.find((item) => item.id === detailItemId);
-    const clickedRoom = roomItem?.room.find((room) => room.id === roomItemId);
+    const clickedRoom = detailItem?.room.find((room) => room.id === roomItemId);
 
-    useEffect(() => {
-        ajax();
-    }, []);
     return (
         <div className="container flex gap-10 max-w-2xl mx-auto mb-32 mt-24">
             <div className="content flex flex-col gap-16 grow">

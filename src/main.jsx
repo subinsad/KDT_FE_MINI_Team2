@@ -46,9 +46,12 @@ const router = createBrowserRouter([
       },
       { path: "/signin", element: <SignInPage /> },
       { path: "/signup", element: <SignUpPage /> },
-      { path: "/reservation/:id/:roomid", element: <Reservation /> },
       {
-        path: "/reservationcomplete/:id/:roomid",
+        path: "/reservation/:id/:roomid/:startDate?/:endDate?/:personal",
+        element: <Reservation />,
+      },
+      {
+        path: "/reservationcomplete/:id/:roomid/:startDate?/:endDate?/:personal",
         element: <ReservationComplete />,
       },
       {
