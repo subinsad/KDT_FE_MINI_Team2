@@ -12,7 +12,7 @@ const ChakraModal = ({ isOpen, onClose, title, children }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent className="h-[500px] text-center">
+      <ModalContent className="h-[500px]">
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody isCentered={true}>{children}</ModalBody>
