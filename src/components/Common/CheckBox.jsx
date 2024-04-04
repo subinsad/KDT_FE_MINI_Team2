@@ -1,23 +1,22 @@
 import React from "react";
 
 function Checkbox({ options, selectedOptions, onChange }) {
-  const handleOptionChange = (option) => {
-    if (selectedOptions.includes(option)) {
-      onChange(selectedOptions.filter((item) => item !== option));
-    } else {
-      onChange([...selectedOptions, option]);
-    }
+  const handleOptionChange = (value) => {
+    const updatedOptions = selectedOptions.map((option, index) =>
+      index === value ? !option : option
+    );
+    onChange(updatedOptions);
   };
 
   return (
     <div className="flex flex-col space-y-2">
-      {options.map((option) => (
+      {options.map((option, index) => (
         <div key={option.value} className="flex items-center">
           <input
             type="checkbox"
             value={option.value}
-            checked={selectedOptions.includes(option.value)}
-            onChange={() => handleOptionChange(option.value)}
+            checked={selectedOptions[index]}
+            onChange={() => handleOptionChange(index)}
             className="hidden"
             id={option.value}
           />
@@ -27,13 +26,9 @@ function Checkbox({ options, selectedOptions, onChange }) {
           >
             <div
               className={`w-5 h-5 rounded border-2 border-gray-300 flex items-center justify-center 
-              ${
-                selectedOptions.includes(option.value)
-                  ? "bg-primary"
-                  : "bg-gray-200"
-              }`}
+              ${selectedOptions[index] ? "bg-primary" : "bg-gray-200"}`}
             >
-              {selectedOptions.includes(option.value) && (
+              {selectedOptions[index] && (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-3 w-3 text-white"
@@ -50,9 +45,7 @@ function Checkbox({ options, selectedOptions, onChange }) {
             </div>
             <span
               className={`ml-2 group-hover:text-black ${
-                selectedOptions.includes(option.value)
-                  ? " text-black"
-                  : " text-gray-500"
+                selectedOptions[index] ? " text-black" : " text-gray-500"
               }`}
             >
               {option.label}

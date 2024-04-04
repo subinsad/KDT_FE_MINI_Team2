@@ -10,10 +10,21 @@ import SignInPage from "./pages/SignInPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import Reservation from "./pages/Reservation.jsx";
 import ReservationComplete from "./pages/ReservationComplete.jsx";
-import { CookiesProvider } from "react-cookie";
+import { CookiesProvider, useCookies } from "react-cookie";
 import MyInfo from "./pages/MyInfo.jsx";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import "./index.css";
+import Notice from "./pages/Notice";
+import NoticeDetail from "./pages/NoticeDetail";
+
+import { Navigate, Outlet } from "react-router-dom";
+
+const ProtectedRoute = () => {
+  const [cookies] = useCookies(["secretKey"]); // 'secretKey'는 쿠키에 저장된 로그인 정보의 키입니다.
+
+  return cookies.secretKey ? <Outlet /> : <Navigate to="/signin" />;
+};
 
 const router = createBrowserRouter([
   {
@@ -25,12 +36,20 @@ const router = createBrowserRouter([
       { path: "/list/:type?/:location?", element: <ListPage /> },
       { path: "/signin", element: <SignInPage /> },
       { path: "/signup", element: <SignUpPage /> },
+      { path: "/reservation/:id/:roomid", element: <Reservation /> },
       {
-        path: "/reservation/:accomodation_id/:accomodation_name/:room_info",
-        element: <Reservation />,
+        path: "/reservationcomplete/:id/:roomid",
+        element: <ReservationComplete />,
       },
-      { path: "/reservationcomplete", element: <ReservationComplete /> },
-      { path: "/myinfo", element: <MyInfo /> },
+      {
+        path: "/myinfo",
+        element: <ProtectedRoute />,
+        children: [
+          { path: "", element: <MyInfo /> }, // MyInfo 페이지를 ProtectedRoute의 자식으로 설정
+        ],
+      },
+      { path: "/notice", element: <Notice /> },
+      { path: "/notice/:id", element: <NoticeDetail /> },
     ],
   },
 ]);
@@ -38,7 +57,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <CookiesProvider>
-      <RouterProvider router={router} />
+      <ChakraProvider>
+        <RouterProvider router={router} />
+      </ChakraProvider>
     </CookiesProvider>
   </React.StrictMode>
 );

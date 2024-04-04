@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useUser } from "../store/user.js";
+import Spinner from "../components/Common/Spinner.jsx";
 
 export default function SignInPage() {
   const [loginForm, setLoginForm] = useState({
@@ -15,11 +16,13 @@ export default function SignInPage() {
   const [message, setMessage] = useState("");
   const [cookies, setCookie] = useCookies(["secretKey"]);
   const { setLoginUser } = useUser();
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // 로그인 프로세스 시작, 스피너 활성화
     try {
       const response = await axios.post(
         "/public-api/v1/member/login",
@@ -28,10 +31,11 @@ export default function SignInPage() {
       const { secretKey } = response.data.data;
       setCookie("secretKey", secretKey, { path: "/" });
       setLoginUser({ secretKey });
-      cookies["secretKey"];
       navigate("/");
     } catch (error) {
       setMessage("아이디 또는 비밀번호가 틀렸습니다.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -68,7 +72,7 @@ export default function SignInPage() {
           <div className="flex flex-col items-center w-full ">
             <Button
               className="bg-gray-900 text-white mt-16 mb-4 w-full"
-              text="로그인"
+              text={isLoading ? <Spinner /> : "로그인"}
             />
             <div className="flex items-center gap-2 font-light">
               <p>계정이 없으신가요?</p>

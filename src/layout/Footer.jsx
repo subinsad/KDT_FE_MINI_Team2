@@ -1,43 +1,97 @@
-import Button from "../components/Common/Button";
+import Button from '../components/Common/Button';
+import { Link } from 'react-router-dom';
+import logo from '../img/logo.svg';
+import { FaGithub } from 'react-icons/fa';
+import { FaReact } from 'react-icons/fa';
+import { SiTailwindcss } from 'react-icons/si';
+import { FaJava } from 'react-icons/fa';
+import { FaAws } from 'react-icons/fa';
 
 export default function Footer() {
-  return (
-    <footer className="py-10 border-t-2 border-gray-200 border-solid">
-      <div className="max-w-mw mx-auto">
-        <div className="flex">
-          <ul>
-            <li className="text-gray-500 font-bold mb-3">고객센터</li>
-            <p className="text-gray-500 text-sm mb-3">
-              오전 9시 ~ 새벽 3시 운영
-            </p>
-            <Button
-              className="bg-gray-300 mb-4 w-30 h-11 mr-3"
-              text="1555-0000"
-            ></Button>
-            <Button
-              className="bg-gray-300 mb-4 w-30 h-11"
-              text="카카오 문의"
-            ></Button>
-          </ul>
-        </div>
+    //눌렀을 때 메인페이지의 최상단으로 스크롤
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
 
-        <p className="text-gray-500 font-extralight text-xs mb-7">
-          (주)FASTCAMPUS
-          <br />
-          주소:서울특별시 강남구 봉은사로 479,479타워 11층 | 대표이사:
-          FASTCAMPUS | 사업자등록번호 : 000-00-00000
-          <br />
-          전자우편주소 : 000@goodchoice.kr | 통신판매번호 : 2024-서울강남-0001 |
-          관광사업자 등록번호 : 제1000-01호 | 전화번호 : 1670-0001 |
-          호스팅서비스제공자의 상호 표시: (주)FASTCAMPUS
-          <br />
-          (주)FASTCAMPUS는 통신판매중개자로써 통신판매의 당사자가 아니며, 상품
-          예약, 이용 및 환불 등과 관련한 의무와 책임은 각 판매자에게 있습니다.
-        </p>
-        <div className="text-sm mt-4 text-gray-400">
-          <p>Copyright. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
-  );
+    return (
+        <footer className="py-10 border-t-2 border-gray-200 border-solid bg-gray-200">
+            <div className="flex flex-col items-center  max-w-mw mx-auto">
+                <Link
+                    to="/"
+                    onClick={scrollToTop}
+                    className="flex flex-col items-center gap-2 mb-2 text-xl ">
+                    <img
+                        src={logo}
+                        alt="Slide 1"
+                        className="object-cover w-28 grayscale opacity-70 "
+                    />
+                    {/* <h3 className="text-sm font-bold text-primary">
+                        Mini Team2
+                    </h3> */}
+                </Link>
+                {/* <h3 className="flex gap-4 items-center mt-3 text-lg font-semibold ">
+                    <FaGithub /> GITGUB
+                </h3> */}
+                <ul className="flex items-center gap-4 text-base mt-2 text-gray-500 font-medium">
+                    <li>
+                        <a
+                            href="https://github.com/subinsad"
+                            className="flex items-center gap-1">
+                            Subin Park
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://github.com/JeonYooDeok"
+                            className="flex items-center gap-1">
+                            Yudeok Jeon
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://github.com/mj950313"
+                            className="flex items-center gap-1">
+                            Minjae Kim
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://github.com/Woohahalife"
+                            className="flex items-center gap-1">
+                            Geon Choi
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://github.com/asd42270"
+                            className="flex items-center gap-1">
+                            Yubin Lee
+                        </a>
+                    </li>
+                </ul>
+
+                <ul className="flex gap-2 mt-5">
+                    <li className="border border-gray-400 border-solid p-2 rounded-full hover:bg-white ">
+                        <FaReact />
+                    </li>
+                    <li className="border border-gray-400 border-solid p-2 rounded-full hover:bg-white ">
+                        <SiTailwindcss />
+                    </li>
+                    <li className="border border-gray-400 border-solid p-2 rounded-full hover:bg-white ">
+                        <FaJava />
+                    </li>
+                    <li className="border border-gray-400 border-solid p-2 rounded-full hover:bg-white ">
+                        <FaAws />
+                    </li>
+                </ul>
+                <div className="text-center mt-5 italic  text-xs">
+                    copylight 2024. <br />
+                    FastCampus Mini Project Team2
+                </div>
+            </div>
+        </footer>
+    );
 }

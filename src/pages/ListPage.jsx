@@ -5,6 +5,7 @@ import Filter from "../components/ListComponents/Filter";
 import SearchedStayList from "../components/ListComponents/SearchedStayList";
 import SearchBar from "../components/SearchBar";
 import Spinner from "../components/Common/Spinner";
+import ListSkeleton from "../components/ListComponents/ListSkeleton";
 
 export default function ListPage() {
   const navigate = useNavigate();
@@ -86,14 +87,14 @@ export default function ListPage() {
         setTotalPages(Math.ceil(filteredData.length / 10));
         setCurrentPage(1);
       } catch (error) {
-        console.error("데이터를 불러오는 중 오류 발생:", error);
+        console.error("Failed to fetch data:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [filters]);
+  }, [filters]); // filters 상태가 변경될 때마다 실행됨
 
   // 필터 변경 핸들러
   const handleFilterChange = (newFilters) => {
@@ -105,7 +106,8 @@ export default function ListPage() {
   // 위치 검색 핸들러
   const handleLocationSearch = (location) => {
     setFilters({ ...filters, selectedLocation: location });
-    navigate(`/list/${filters.selectedType}/${location}`);
+    handleFilterChange({ ...filters, selectedLocation: location });
+    navigate(`/list/ALLTYPE/${encodeURIComponent(location)}`);
   };
 
   // 페이지 이동 핸들러
@@ -135,19 +137,24 @@ export default function ListPage() {
             tag="h2"
             text={`'${filters.selectedLocation}' 지역의 숙소 ${totalResults}개`}
           />
-          <SearchedStayList accomodation={filteredAccommodation} />
-          {loading && <Spinner />}
-          <div className="pagination">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index}
-                className={index + 1 === currentPage ? "active" : ""}
-                onClick={() => goToPage(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
+          {loading ? (
+            <ListSkeleton />
+          ) : (
+            <>
+              <SearchedStayList accomodation={filteredAccommodation} />
+              <div className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                    key={index}
+                    className={index + 1 === currentPage ? "active" : ""}
+                    onClick={() => goToPage(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

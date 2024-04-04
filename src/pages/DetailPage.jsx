@@ -7,9 +7,12 @@ import MapNavi from '../components/DetailComponents/MapNavi';
 import ProductName from '../components/DetailComponents/ProductName';
 import { useParams } from 'react-router-dom';
 import useStore from '../store/accomodation';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import DetailImageSkeleton from '../components/DetailComponents/DetailImageSkeleton';
+import ProductNameSkelteon from '../components/DetailComponents/ProductNameSkelteon';
 
 export default function DetailPage() {
+    const [loading, setLoading] = useState(false);
     const { id } = useParams(); // useParams로 ID 가져오기
     const { data, ajax } = useStore(); // useStore로 전체 숙소 리스트 가져오기
 
@@ -19,12 +22,15 @@ export default function DetailPage() {
 
     //해당하는 상세페이지, 숙소
     const roomItem = data.find((item) => item.id === detailItem.id);
-    console.log(roomItem);
-    //해당하는 room
     const roomItems = detailItem?.room || [];
 
     useEffect(() => {
-        ajax();
+        const fetchData = async () => {
+            setLoading(true);
+            await ajax();
+            setLoading(false);
+        };
+        fetchData();
     }, []);
 
     const topRef = useRef([]);
@@ -35,20 +41,29 @@ export default function DetailPage() {
     };
 
     return (
-        <div className="max-w-mw mx-auto" ref={topRef}>
-            <DetailImage roomItem={roomItem} />
-            <ProductName detailItem={detailItem} />
-            <MapNavi moveBtn={moveBtn} />
-            <div className="flex justify-between">
-                <div>
-                    <DetailList roomItems={roomItems} detailItem={detailItem} />
-                    <DetailInfo />
+        <>
+            <div className="max-w-mw mx-auto" ref={topRef}>
+                {loading ? <DetailImageSkeleton /> : <DetailImage />}
+                {loading ? (
+                    <ProductNameSkelteon />
+                ) : (
+                    <ProductName detailItem={detailItem} />
+                )}
+                <MapNavi moveBtn={moveBtn} />
+                <div className="flex justify-between">
+                    <div>
+                        <DetailList
+                            roomItems={roomItems}
+                            detailItem={detailItem}
+                        />
+                        <DetailInfo />
+                    </div>
+                    <div className="py-5">
+                        <EventBox />
+                    </div>
                 </div>
-                <div className="py-5">
-                    <EventBox />
-                </div>
+                <DetailMap roomItem={roomItem} />
             </div>
-            <DetailMap roomItem={roomItem} />
-        </div>
+        </>
     );
 }

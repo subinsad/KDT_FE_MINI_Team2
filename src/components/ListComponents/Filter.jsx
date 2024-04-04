@@ -28,6 +28,10 @@ function Filter({ type, location, onApplyFilter }) {
     { label: "경주", value: "GYEONGJU" },
   ];
 
+  useEffect(() => {
+    setSelectedLocation(location);
+  }, [location]);
+
   // 숙소 유형 변경 핸들러
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value);

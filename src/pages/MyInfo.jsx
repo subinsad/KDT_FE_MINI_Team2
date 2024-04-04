@@ -1,9 +1,13 @@
-import React, { useState } from "react";
-import TItle from "../components/Common/Title";
+import React, { useEffect, useState } from "react";
+import Title from "../components/Common/Title";
 import ReservationItem from "../components/ReservationComponents/ReservationItem";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 export default function MyInfo() {
   const [activeTab, setActiveTab] = useState("personalInfo");
+  const [cookies] = useCookies(["secretKey"]);
+  const [reservations, setReservations] = useState([]);
 
   const handleTab1 = () => {
     setActiveTab("personalInfo");
@@ -13,10 +17,29 @@ export default function MyInfo() {
     setActiveTab("reservationHistory");
   };
 
+  const fetchReservations = async () => {
+    try {
+      const response = await axios.get("/api/v1/reservation", {
+        headers: {
+          Authorization: `Bearer ${cookies.secretKey}`,
+        },
+      });
+      setReservations(response.data.data); // 예약 내역을 상태로 설정
+      console.log(response.data.data);
+    } catch (error) {
+      console.error("error:", error);
+    }
+  };
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 예약 내역을 조회
+    fetchReservations();
+  }, []);
+
   return (
     <div className="container flex gap-10 max-w-2xl mx-auto mb-32 mt-24">
       <div className="content flex flex-col gap-6 grow">
-        <TItle className="searchResult" tag="h2" text={"마이 페이지"} />
+        <Title className="searchResult" tag="h2" text={"마이 페이지"} />
         <ul className="flex border-b-[1px] border-solid  border-gray-300 font-bold text-xl cursor-pointer">
           <li
             className={`${
@@ -66,14 +89,15 @@ export default function MyInfo() {
             </div>
           ) : (
             <div className="flex flex-col gap-4">
-              <ReservationItem />
-              <hr />
-              <ReservationItem />
-              <hr />
-              <ReservationItem />
-              <hr />
-              <ReservationItem />
-              <hr />
+              {reservations.map((reservation, index) => (
+                <React.Fragment key={index}>
+                  <ReservationItem
+                    clickedRoom={reservation}
+                    detailItem={reservation}
+                  />
+                  <hr />
+                </React.Fragment>
+              ))}
             </div>
           )}
         </div>
