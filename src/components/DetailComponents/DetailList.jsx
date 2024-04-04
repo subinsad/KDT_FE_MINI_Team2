@@ -6,19 +6,27 @@ import ChakraModal from '../ChakraModal';
 import { useDisclosure } from '@chakra-ui/react';
 import { useCookies } from 'react-cookie';
 import logo from '../../img/logo.svg';
+import { getCurrentDate } from '../../data/date';
 
 export default function DetailList({ detailItem, roomData }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [cookies] = useCookies(['secretKey']); // 'secretKey'는 로그인 토큰을 저장하는 쿠키의 이름
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { id, startDate, endDate } = useParams();
+    const params = useParams();
+    console.log(params);
 
     const handleReservationClick = (itemId) => {
         // 로그인 여부 확인
         const isLoggedIn = cookies.secretKey; // 로그인 상태 확인. 쿠키에 secretKey가 있다면 로그인 상태로 가정
 
-        // 해당 ID와 일치하는 숙소 정보 찾기
-        const detailItem = data.find((item) => item.id === id);
+        if (isLoggedIn) {
+            // 로그인 상태라면 예약 페이지로 이동
+            navigate(`/reservation/${id}/${itemId}/${startDate}/${endDate}/2`);
+        } else {
+            // 로그인 상태가 아니라면 모달을 열어 로그인 요청
+            onOpen();
+        }
     };
 
     return (

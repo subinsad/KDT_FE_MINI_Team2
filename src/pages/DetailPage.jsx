@@ -24,7 +24,7 @@ export default function DetailPage() {
             .then((response) => {
                 const responseData = response.data;
                 const roomData = responseData.data || []; // 숙소 정보 배열
-                console.log(roomData);
+
                 setRoomData(roomData); // 숙소 정보 상태 업데이트
             })
             .catch((error) => {

@@ -1,7 +1,5 @@
 export default function DetailImage({ roomData, detailItem }) {
     const roomImg = detailItem?.accommodationImage || [];
-    console.log(detailItem?.accommodationImage[0]?.imagePath);
-    console.log(detailItem);
 
     return (
         <div className="h-[530px] flex gap-2 mt-8">
