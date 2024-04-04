@@ -13,7 +13,6 @@ const useStore = create((set) => ({
             // 가져온 데이터에서 숙소 정보만 추출하여 상태에 업데이트
             const accommodations = responseData.data || []; // 숙소 정보 배열
             set({ data: accommodations });
-            console.log(accommodations);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
