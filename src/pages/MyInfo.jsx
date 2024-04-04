@@ -4,6 +4,9 @@ import ReservationItem from "../components/ReservationComponents/ReservationItem
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { FaPencilAlt } from "react-icons/fa";
+import ChakraModal from "../components/ChakraModal";
+import { useDisclosure } from "@chakra-ui/react";
 
 export default function MyInfo() {
   const [activeTab, setActiveTab] = useState("personalInfo");
@@ -11,7 +14,9 @@ export default function MyInfo() {
   const [reservations, setReservations] = useState([]);
   const [myinfo, setMyInfo] = useState({});
   const { memberId } = useParams();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
+  console.log(myinfo);
   const handleTab1 = () => {
     setActiveTab("personalInfo");
   };
@@ -19,7 +24,21 @@ export default function MyInfo() {
   const handleTab2 = () => {
     setActiveTab("reservationHistory");
   };
-  //내정보 조회
+
+  // 내정보 수정
+  // const updateMyInfo = async () => {
+  //   try {
+  //     const response = await axios.post(`/api/v1/member/update/${memberId}`,{
+  //       name: myinfo.name,
+  //       password: myinfo.email,
+  //       phoneNumber: myinfo.phone,
+  //       headers: {
+  //         Authorization: `Bearer ${cookies.secretKey}`,
+  //       },
+  //     })
+  //   }
+  // }
+
   // 내정보 조회
   const fetchMyInfo = async () => {
     try {
@@ -84,8 +103,42 @@ export default function MyInfo() {
 
         <div className="outlet">
           {activeTab === "personalInfo" ? (
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-8 relative">
               <div>
+                <button
+                  onClick={onOpen}
+                  className="text-2xl absolute right-3 top-[-8px]"
+                >
+                  <FaPencilAlt />
+                </button>
+                <ChakraModal isOpen={isOpen} onClose={onClose}>
+                  <h1 className="text-5xl font-medium mb-10">내 정보</h1>
+                  <div className="flex flex-col">
+                    <p className="mb-1 font-light text-sm text-slate-600">
+                      이메일
+                    </p>
+                    <p className="bg-gray-100 py-3 px-4 font-light rounded">
+                      {myinfo.email}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="mb-1 font-light text-sm text-slate-600">
+                      이름
+                    </p>
+                    <p className="bg-gray-100 py-3 px-4 font-light rounded">
+                      {myinfo.name}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="mb-1 font-light text-sm text-slate-600">
+                      휴대폰 번호
+                    </p>
+                    <p className="bg-gray-100 py-3 px-4 font-light rounded">
+                      {myinfo.phoneNumber}
+                    </p>
+                  </div>
+                </ChakraModal>
+
                 <p className="mb-1 font-light text-sm text-slate-600">이메일</p>
                 <p className="bg-gray-100 py-3 px-4 font-light rounded">
                   {myinfo.email}
