@@ -38,7 +38,7 @@ export default function DetailList({ detailItem, roomData }) {
                         key={index}>
                         <div className="flex gap-3 w-fit">
                             <img
-                                src="../img/Frame4.png"
+                                src={item.roomImage}
                                 alt="객실이미지"
                                 className=" w-52 h-52 bg-slate-300 rounded"
                             />
