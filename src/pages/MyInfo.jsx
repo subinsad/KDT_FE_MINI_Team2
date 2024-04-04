@@ -6,6 +6,7 @@ import Title from "../components/Common/Title";
 import ReservationItem from "../components/ReservationComponents/ReservationItem";
 import Button from "../components/Common/Button";
 import Input from "../components/Form/Input";
+import Spinner from "../components/Common/Spinner";
 
 export default function MyInfo() {
   const [activeTab, setActiveTab] = useState("personalInfo");
@@ -27,6 +28,8 @@ export default function MyInfo() {
     phoneNumber: "",
   });
   const [isFormValid, setIsFormValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { memberId } = useParams();
 
   // 정규식 변수
@@ -106,6 +109,8 @@ export default function MyInfo() {
 
   const updateMyInfo = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     if (!isFormValid) return;
 
     try {
@@ -123,6 +128,8 @@ export default function MyInfo() {
       fetchMyInfo();
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -203,7 +210,7 @@ export default function MyInfo() {
                 </span>
               )}
               <Button
-                text="수정"
+                text={isLoading ? <Spinner /> : "수정"}
                 type="submit"
                 className={`bg-gray-900 text-white mt-5 w-full ${
                   !isFormValid && "opacity-50 cursor-not-allowed"
