@@ -245,7 +245,7 @@ export default function SignUpPage() {
                         className={`bg-gray-900 text-white mt-10 w-full ${
                             !isFormValid && 'opacity-50 cursor-not-allowed'
                         }`}
-                        text={isLoading ? <Spinner /> : '로그인'}
+                        text={isLoading ? <Spinner /> : '회원가입'}
                         onClick={signUpHandler}
                         disabled={!isFormValid} // isFormValid가 false일 때 버튼을 비활성화
                     />
