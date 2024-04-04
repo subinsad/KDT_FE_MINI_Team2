@@ -1,13 +1,25 @@
 import React from "react";
 import PriceBlock from "../PriceBlock";
+import { useParams } from "react-router-dom";
 
-function ReservationItem({ clickedRoom, detailItem }) {
+function ReservationItem({ clickedRoom, detailItem, checkIn, checkOut }) {
   const roomImage = detailItem?.roomImage || "";
   const accommodationName = detailItem?.accommodationName || "";
   const address = detailItem?.address || "";
   const roomName = clickedRoom?.roomName || "";
   const discount = detailItem?.discount || "";
   const price = detailItem?.price || "";
+  const { startDate, endDate } = useParams();
+
+  // 날짜 객체 생성
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  // 내역날짜
+  const checkin = new Date(checkIn);
+  const checkout = new Date(checkOut);
+  // 박수 계산: 종료 날짜에서 시작 날짜를 빼고, 결과를 밀리초에서 일(days) 단위로 변환
+  const night = Math.round((end - start) / (1000 * 60 * 60 * 24));
+  const nights = Math.round((checkout - checkin) / (1000 * 60 * 60 * 24));
 
   return (
     <div className="flex items-center gap-4 grow">
@@ -26,9 +38,11 @@ function ReservationItem({ clickedRoom, detailItem }) {
           <p className="text-lg font-bold">{roomName}</p>
           <div className="flex grow justify-between">
             <div className="flex flex-col">
-              <span className="text-gray-500 text-sm">
-                2024.03.01(금) ~ 2024.03.02(토) | 1박
-              </span>
+              {checkIn ? (
+                <span className="text-gray-500 text-sm">{`${checkIn} ~ ${checkOut} | ${nights}박`}</span>
+              ) : (
+                <span className="text-gray-500 text-sm">{`${startDate} ~ ${endDate} | ${night}박`}</span>
+              )}
               <span className="text-gray-500 text-sm">입실 14:00</span>
               <span className="text-gray-500 text-sm">퇴실 11:00</span>
             </div>
