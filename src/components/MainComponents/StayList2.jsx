@@ -5,7 +5,7 @@ import PriceBlock from '../PriceBlock';
 
 import useStore from '../../store/accomodation';
 import { Link } from 'react-router-dom';
-import { getCurrentDate } from '../../data/date';
+import { getCurrentDate, getTomorrowDate } from '../../data/date';
 
 function StayList2() {
     const { data, ajax } = useStore();
@@ -17,6 +17,7 @@ function StayList2() {
 
     //날짜
     const currentDate = getCurrentDate();
+    const tomorrowDate = getTomorrowDate();
 
     return (
         <div>
@@ -28,7 +29,7 @@ function StayList2() {
                         .slice(0, 4)
                         .map((item, index) => (
                             <Link
-                                to={`/detail/${item.id}/${currentDate}/${currentDate}/2`}
+                                to={`/detail/${item.id}/${currentDate}/${tomorrowDate}/2`}
                                 key={index}
                                 value={item.accommodationType}
                                 className="rounded-xl border-transparent border-solid border hover:border-gray-300">
