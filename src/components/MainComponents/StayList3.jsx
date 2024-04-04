@@ -16,7 +16,7 @@ function StayList3() {
   return (
     <div>
       <TItle tag="h2" text="에디터 픽" className="mb-4" />
-      <ul className="flex gap-4 ">
+      <ul className="flex gap-4 overflow-x-scroll touch-pan-x md:overflow-auto">
         <div className="flex gap-3 w-fit">
           {pickItem.slice(0, 4).map((item, index) => (
             <Link

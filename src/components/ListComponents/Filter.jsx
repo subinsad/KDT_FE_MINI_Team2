@@ -10,22 +10,22 @@ function Filter({ type, location, onApplyFilter }) {
   const [maxPrice, setMaxPrice] = useState(500000);
 
   const typeOptions = [
-    { label: "전체", value: "ALLTYPE" },
-    { label: "모텔", value: "MOTEL" },
-    { label: "호텔", value: "HOTEL" },
-    { label: "리조트", value: "RESORT" },
-    { label: "펜션", value: "PENSION" },
-    { label: "캠핑", value: "CAMPING" },
-    { label: "게스트하우스", value: "GUESTHOUSE" },
+    // { label: "전체", value: "전체타입" },
+    { label: "모텔", value: "모텔" },
+    { label: "호텔", value: "호텔" },
+    { label: "리조트", value: "리조트" },
+    { label: "펜션", value: "펜션" },
+    { label: "캠핑", value: "캠핑" },
+    { label: "게스트하우스", value: "게스트하우스" },
   ];
   const locationOptions = [
-    { label: "전체", value: "ALLLOCATION" },
-    { label: "제주", value: "JEJU" },
-    { label: "서울", value: "SEOUL" },
-    { label: "부산", value: "BUSAN" },
-    { label: "강릉", value: "GANGNEUNG" },
-    { label: "인천", value: "INCHEON" },
-    { label: "경주", value: "GYEONGJU" },
+    // { label: "전체", value: "전체" },
+    { label: "제주", value: "제주" },
+    { label: "서울", value: "서울" },
+    { label: "부산", value: "부산" },
+    { label: "강릉", value: "강릉" },
+    { label: "인천", value: "인천" },
+    { label: "경주", value: "경주" },
   ];
 
   useEffect(() => {

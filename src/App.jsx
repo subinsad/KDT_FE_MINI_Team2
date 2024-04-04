@@ -7,18 +7,31 @@ import ScrollToTop from "./components/ScrollToTop";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 import { useUser } from "./store/user";
+import AuthInterceptor from "./components/Axios/interceptor";
+
+// import setupTestAuthInterceptor from "./components/Axios/interceptor";
+
+// setupTestAuthInterceptor();
 
 function App() {
-  const [cookies] = useCookies(["secretKey"]); // 'secretKey'는 쿠키에 저장된 로그인 정보의 키입니다.
-  const { setLoginUser } = useUser(); // zustand 저장소에서 로그인 상태를 설정하는 함수를 가져옵니다.
+  const [cookies] = useCookies(["secretKey", "memberId"]); // 'secretKey'와 'memberId'는 쿠키에 저장된 로그인 정보의 키입니다.
+
+  const { setLoginUser, setMemberId } = useUser(); // zustand 저장소에서 로그인 상태를 설정하는 함수와 멤버 아이디를 설정하는 함수를 가져옵니다.
+
+  AuthInterceptor(); //401에러(로그인유효기간끝)시 예약실패경고창 띄우고 로그인으로다이렉팅
 
   // 컴포넌트 마운트 시 쿠키에서 로그인 정보를 읽어와 zustand 상태를 업데이트합니다.
   useEffect(() => {
     const user = cookies["secretKey"];
+    const memberId = cookies["memberId"];
+
     if (user) {
       setLoginUser(user); // 쿠키에 저장된 사용자 정보로 로그인 상태를 업데이트합니다.
+      if (memberId) {
+        setMemberId(memberId);
+      }
     }
-  }, [cookies, setLoginUser]);
+  }, [cookies, setLoginUser, setMemberId]);
 
   return (
     <>

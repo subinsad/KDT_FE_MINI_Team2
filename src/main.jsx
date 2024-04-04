@@ -21,9 +21,13 @@ import NoticeDetail from "./pages/NoticeDetail";
 import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {
-  const [cookies] = useCookies(["secretKey"]); // 'secretKey'는 쿠키에 저장된 로그인 정보의 키입니다.
+  const [cookies] = useCookies(["secretKey", "memberId"]);
 
-  return cookies.secretKey ? <Outlet /> : <Navigate to="/signin" />;
+  // 쿠키에서 memberId를 가져옵니다.
+  const { memberId } = cookies;
+
+  // secretKey와 memberId가 모두 존재하는 경우에만 Outlet을 반환하여 보호된 경로로 이동합니다.
+  return cookies.secretKey && memberId ? <Outlet /> : <Navigate to="/signin" />;
 };
 
 const router = createBrowserRouter([
@@ -32,8 +36,14 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Main /> },
-      { path: "/detail/:id", element: <DetailPage /> },
-      { path: "/list/:type?/:location?", element: <ListPage /> },
+      {
+        path: "/detail/:id/:startDate?/:endDate?/:personal?",
+        element: <DetailPage />,
+      },
+      {
+        path: "/list/:startDate?/:endDate?/:location/:type/:personal?",
+        element: <ListPage />,
+      },
       { path: "/signin", element: <SignInPage /> },
       { path: "/signup", element: <SignUpPage /> },
       { path: "/reservation/:id/:roomid", element: <Reservation /> },
@@ -45,7 +55,7 @@ const router = createBrowserRouter([
         path: "/myinfo",
         element: <ProtectedRoute />,
         children: [
-          { path: "", element: <MyInfo /> }, // MyInfo 페이지를 ProtectedRoute의 자식으로 설정
+          { path: "/myinfo/:memberId", element: <MyInfo /> }, // MyInfo 페이지를 ProtectedRoute의 자식으로 설정
         ],
       },
       { path: "/notice", element: <Notice /> },
