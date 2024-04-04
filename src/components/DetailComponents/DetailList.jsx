@@ -5,6 +5,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ChakraModal from "../ChakraModal";
 import { useDisclosure } from "@chakra-ui/react";
 import { useCookies } from "react-cookie";
+import logo from "../../img/logo.svg";
+
 export default function DetailList({ roomItems, detailItem }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [cookies] = useCookies(["secretKey"]); // 'secretKey'는 로그인 토큰을 저장하는 쿠키의 이름
@@ -55,30 +57,36 @@ export default function DetailList({ roomItems, detailItem }) {
             />
             {/* ChakraModal 컴포넌트. 로그인이 필요할 때 표시됩니다. */}
             <ChakraModal isOpen={isOpen} onClose={onClose}>
-              <h1 className="text-5xl font-medium mb-10 text-primary">
-                FE-MINI-2
+              <h1 className="text-5xl font-medium mb-10 text-primary text-center">
+                <img
+                  src={logo}
+                  alt="Slide 1"
+                  className="w-full h-full object-cover"
+                />
               </h1>
-              <h2 className="text-3xl font-medium mb-1">객실 예약은</h2>
-              <h2 className="text-3xl font-medium mb-8">
+              <h2 className="text-3xl font-medium mb-1 text-center">
+                객실 예약은
+              </h2>
+              <h2 className="text-3xl font-medium mb-8 text-center">
                 <span className="font-extrabold">로그인</span>이 필요합니다.
               </h2>
-              <p className="mb-1 font-semibold text-slate-600">
+              <p className="mb-1 font-semibold text-slate-600 text-center">
                 아직 회원이 아니신가요?
               </p>
-              <p className="font-semibold text-slate-600">
+              <p className="font-semibold text-slate-600 text-center">
                 지금 가입하고 특별한 혜택을 경험하세요!
               </p>
               <div className="flex gap-3 justify-center py-12 border-slate-300 border-solid border-b-2">
                 <Link to="/signup">
-                  <Button text="회원가입" className="w-44 h-14 text-lg" />
+                  <Button text="회원가입" className="w-[193px] h-14 text-lg" />
                 </Link>
                 <Link to="/signin">
-                  <Button text="로그인" className="w-44 h-14 text-lg" />
+                  <Button text="로그인" className="w-[193px] h-14 text-lg" />
                 </Link>
               </div>
               <p
                 onClick={onClose}
-                className="font-bold text-lg p-3 text-primary cursor-pointer"
+                className="font-bold text-lg p-3 text-primary cursor-pointer text-center"
               >
                 로그인없이 둘러보기
               </p>
