@@ -12,6 +12,7 @@ export default function MyInfo() {
     const [activeTab, setActiveTab] = useState('personalInfo');
     const [cookies] = useCookies(['secretKey']);
     const [reservations, setReservations] = useState([]);
+    console.log(reservations);
     const [myInfo, setMyInfo] = useState({
         email: '',
         name: '',
