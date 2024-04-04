@@ -7,11 +7,13 @@ import Step4 from '../components/RegisterComponents/Step4';
 import Step5 from '../components/RegisterComponents/Step5';
 import Button from '../components/Common/Button';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 function Register() {
     const [currentStep, updateCurrentStep] = useState(1);
     const labelArray = ['숙소 등록', '객실등록', '완료'];
     const [isLoading, setIsLoading] = useState(false);
+    const [cookies] = useCookies(['secretKey']);
 
     const steps = [Step1, Step2, Step3, Step4, Step5];
     const CurrentStepComponent = steps[currentStep - 1];
@@ -22,32 +24,28 @@ function Register() {
 
     const handleSubmit = async (value) => {
         try {
-            const formData = new FormData();
-            formData.append('accommodationName', value.accommodationName);
-            formData.append('accommodationType', value.accommodationType);
-            formData.append('introduction', value.introduction);
-            formData.append('address', value.address);
-            formData.append('locationName', value.locationName);
-            formData.append('discountRate', parseInt(value.discountRate)); // 숫자로 변환
-
-            // 이미지를 배열로 전달
             value.accommodationImage.forEach((image, index) => {
                 formData.append(`accommodationImage[${index}]`, image);
             });
-
-            console.log(value.accommodationName);
-
             const response = await axios.post(
                 '/api/v1/accommodation/admin',
-                formData,
+                {
+                    accommodationName: value.accommodationName,
+                    accommodationType: value.accommodationType,
+                    introduction: value.introduction,
+                    address: value.address,
+                    locationName: value.locationName,
+                    discountRate: value.discountRate,
+                },
                 {
                     headers: {
-                        'Content-Type': 'multipart/form-data',
-                        Authorization:
-                            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InN0cmluZyIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzEyMTU3ODMxLCJleHAiOjE3MTIxNTk2MzF9.lhOv5wBecQixdEdmFYjYyAEE40VDTLTBFThKiMU4ODQ',
+                        Authorization: `Bearer ${cookies.secretKey}`,
                     },
                 }
             );
+
+            console.log(value.accommodationName);
+
             console.log(response);
             updateStep(currentStep + 1); // API 호출이 성공하면 다음 단계로 이동
         } catch (error) {

@@ -14,27 +14,11 @@ function Step1({ onSubmit }) {
 
     const fileInputRef = useRef(null);
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); // 기본 동작 중지
-
-        // FormData 객체 생성
-        const formData = new FormData();
-        // formData에 데이터 추가
-        formData.append('accommodationName', inputValue.accommodationName);
-        formData.append('accommodationType', inputValue.accommodationType);
-        formData.append('address', inputValue.address);
-        formData.append('locationName', inputValue.locationName);
-        formData.append('discountRate', inputValue.discountRate);
-        // 파일이 선택되었을 때만 formData에 이미지 추가
-        if (inputValue.accommodationImage) {
-            formData.append(
-                'accommodationImage',
-                inputValue.accommodationImage
-            );
-        }
-
-        // 입력 값을 상위 컴포넌트로 전달
-        onSubmit(formData);
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // onSubmit 함수를 호출하여 부모 컴포넌트로 데이터를 전달합니다.
+        onSubmit(inputValue); // inputValue를 전달합니다.
+        console.log(inputValue);
     };
 
     const handleFileInputChange = () => {
