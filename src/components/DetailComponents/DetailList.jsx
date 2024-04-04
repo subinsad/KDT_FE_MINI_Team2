@@ -7,6 +7,7 @@ import { useDisclosure } from '@chakra-ui/react';
 import { useCookies } from 'react-cookie';
 import logo from '../../img/logo.svg';
 import { getCurrentDate } from '../../data/date';
+import ReservationItem from '../ReservationComponents/ReservationItem';
 
 export default function DetailList({ detailItem, roomData }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,6 +44,8 @@ export default function DetailList({ detailItem, roomData }) {
                                 className=" w-52 h-52 bg-slate-300 rounded"
                             />
                             <CheckInOut
+                                startDate={startDate}
+                                endDate={endDate}
                                 stayTitle={item.roomInfo}
                                 checkIn="입실 14:00"
                                 checkOut="퇴실 11:00"

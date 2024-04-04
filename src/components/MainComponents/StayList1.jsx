@@ -7,7 +7,7 @@ import useStore from '../../store/accomodation';
 import { useState } from 'react';
 import Category from '../Common/Category';
 import { Link } from 'react-router-dom';
-import { getCurrentDate } from '../../data/date';
+import { getCurrentDate, getTomorrowDate } from '../../data/date';
 
 function StayList1() {
     const { data, ajax } = useStore(); // accomodation 상태와 ajax 함수 가져오기
@@ -44,6 +44,7 @@ function StayList1() {
 
     //날짜
     const currentDate = getCurrentDate();
+    const tomorrowDate = getTomorrowDate();
 
     return (
         <div className="flex flex-col gap-4">
@@ -76,7 +77,7 @@ function StayList1() {
                         .slice(0, 4)
                         .map((item, index) => (
                             <Link
-                                to={`/detail/${item.id}/${currentDate}/${currentDate}/2`}
+                                to={`/detail/${item.id}/${currentDate}/${tomorrowDate}/2`}
                                 key={index}
                                 value={item.accommodationType}
                                 className="rounded-xl border-transparent border-solid border hover:border-gray-300">

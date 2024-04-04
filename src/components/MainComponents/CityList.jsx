@@ -9,7 +9,7 @@ import city4 from '../../img/city4.png';
 import city5 from '../../img/city5.png';
 import city6 from '../../img/city6.png';
 
-import { getCurrentDate } from '../../data/date';
+import { getCurrentDate, getTomorrowDate } from '../../data/date';
 
 function CityList() {
     const cities = ['제주', '서울', '부산', '인천', '강릉', '경주'];
@@ -24,6 +24,7 @@ function CityList() {
     };
 
     const currentDate = getCurrentDate();
+    const tomorrowDate = getTomorrowDate();
 
     return (
         <div>
@@ -32,7 +33,7 @@ function CityList() {
                 {cities.map((city, index) => (
                     <Link
                         key={index}
-                        to={`/list/${currentDate}/${currentDate}/${encodeURIComponent(
+                        to={`/list/${currentDate}/${tomorrowDate}/${encodeURIComponent(
                             city
                         )}/호텔/2`}
                         className="flex flex-col w-full h-40">
