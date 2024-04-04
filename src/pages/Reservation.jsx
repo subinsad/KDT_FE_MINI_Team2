@@ -15,15 +15,12 @@ export default function Reservation() {
   const [cookies] = useCookies(["secretKey"]);
   const navigate = useNavigate();
   const { data, ajax } = useStore();
-  const { id, roomid } = useParams();
-
+  const { id, roomid, startDate, endDate } = useParams();
   const detailItemId = parseInt(id);
   const roomItemId = parseInt(roomid);
 
   const detailItem = data.find((item) => item.id === detailItemId);
-  const roomItem = data.find((item) => item.id === detailItemId);
-  const clickedRoom = roomItem?.room.find((room) => room.id === roomItemId);
-
+  const clickedRoom = detailItem?.room.find((room) => room.id === roomItemId);
   const price = detailItem?.price || "";
   const discount = detailItem?.discount || "";
 
@@ -91,10 +88,10 @@ export default function Reservation() {
       const response = await axios.post(
         "/api/v1/reservation/insert",
         {
-          roomId: roomItem.id,
-          roomName: roomItem.roomName,
-          checkIn: "2024-08-01",
-          checkOut: "2024-08-02",
+          roomId: roomid,
+          roomName: clickedRoom.roomName,
+          checkIn: startDate,
+          checkOut: endDate,
           fixedMember: 2,
           maxedMember: 2,
         },
@@ -104,7 +101,9 @@ export default function Reservation() {
           },
         }
       );
-      navigate(`/reservationcomplete/${id}/${roomid}`);
+      navigate(
+        `/reservationcomplete/${id}/${roomid}/${startDate}/${endDate}/2`
+      );
       console.log(response);
       return response;
     } catch (error) {

@@ -13,7 +13,7 @@ export default function Main() {
       </div>
       <div className="max-w-mw mx-auto mb-32">
         <SearchBar className="absolute top-[23.5rem] z-10" />
-        <div className="flex flex-col gap-32">
+        <div className="flex flex-col gap-32 mx-4 md:mx-0">
           <CityList />
           <StayList1 />
           <StayList2 />
