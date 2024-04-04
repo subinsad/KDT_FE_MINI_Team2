@@ -10,7 +10,7 @@ function Filter({ type, location, onApplyFilter }) {
   const [maxPrice, setMaxPrice] = useState(500000);
 
   const typeOptions = [
-    { label: "전체", value: "ALLTYPE" },
+    // { label: "전체", value: "전체타입" },
     { label: "모텔", value: "모텔" },
     { label: "호텔", value: "호텔" },
     { label: "리조트", value: "리조트" },
@@ -19,7 +19,7 @@ function Filter({ type, location, onApplyFilter }) {
     { label: "게스트하우스", value: "게스트하우스" },
   ];
   const locationOptions = [
-    { label: "전체", value: "ALLLOCATION" },
+    // { label: "전체", value: "전체" },
     { label: "제주", value: "제주" },
     { label: "서울", value: "서울" },
     { label: "부산", value: "부산" },

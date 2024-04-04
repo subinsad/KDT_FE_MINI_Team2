@@ -1,13 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import StayItem from "../StayItem";
 import PriceBlock from "../PriceBlock";
 
 function SearchedStayList({ accomodation }) {
+  const { startDate, endDate, personal } = useParams();
   return (
     <>
       {accomodation.map((item, index) => (
-        <Link to={`/detail/${item.id}`} key={index}>
+        <Link
+          to={`/detail/${item.id}/${startDate}/${endDate}/${personal}`}
+          key={index}
+        >
           <div className="stayItemBox flex gap-6 items-center">
             <img
               src="../img/Frame4.png"
