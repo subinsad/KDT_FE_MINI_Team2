@@ -1,6 +1,6 @@
 import PriceBlock from '../PriceBlock';
 import CheckInOut from './CheckInOut';
-import Button from '../Common/Button';
+import Button from '../Common/button';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import ChakraModal from '../ChakraModal';
 import { useDisclosure } from '@chakra-ui/react';

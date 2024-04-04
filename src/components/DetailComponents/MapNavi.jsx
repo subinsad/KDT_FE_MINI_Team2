@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../Common/Button';
 
 export default function MapNavi({ moveBtn, bottomBtn }) {
     return (
