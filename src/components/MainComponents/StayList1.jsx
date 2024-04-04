@@ -65,7 +65,7 @@ function StayList1() {
           ))}
       </div>
 
-      <ul className="flex gap-4">
+      <ul className="flex gap-4 overflow-x-scroll touch-pan-x md:overflow-auto">
         <div className="flex gap-3 w-fit">
           {itemsToDisplay
             ?.sort((a, b) => b.star - a.star)
