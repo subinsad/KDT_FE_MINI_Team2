@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         element: <DetailPage />,
       },
       {
-        path: "/list/:startDate?/:endDate?/:location/:type/:personal?",
+        path: "/list/:startDate?/:endDate?/:location/:type/:personal?/:page",
         element: <ListPage />,
       },
       { path: "/signin", element: <SignInPage /> },

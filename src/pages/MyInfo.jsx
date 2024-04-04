@@ -104,7 +104,7 @@ export default function MyInfo() {
                 },
             });
             setReservations(response.data.data);
-            console.log(reservations);
+            console.log(response.data.data);
         } catch (error) {
             console.error('error:', error);
         }

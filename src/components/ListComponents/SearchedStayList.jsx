@@ -14,7 +14,7 @@ function SearchedStayList({ accomodation }) {
         >
           <div className="stayItemBox flex gap-6 items-center">
             <img
-              src="../img/Frame4.png"
+              src={item.accommodationImage[0].imagePath}
               alt="숙소이미지"
               className="w-[480px] h-[270px] bg-slate-300 rounded"
             />
