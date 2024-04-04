@@ -15,7 +15,6 @@ export default function DetailList({ detailItem, roomData }) {
     const navigate = useNavigate();
     const { id, startDate, endDate } = useParams();
     const params = useParams();
-    console.log(params);
 
     const handleReservationClick = (itemId) => {
         // 로그인 여부 확인

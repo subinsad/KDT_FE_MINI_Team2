@@ -14,26 +14,26 @@ export default function DetailImage({ roomData, detailItem }) {
             <div className="grid grow gap-2 grid-rows-2 grid-cols-2">
                 {roomImg.length > 0 && roomImg[1] && (
                     <img
-                        src={roomImg[1].imagePath}
+                        src={roomImg[1]?.imagePath}
                         alt="객실이미지"
                         className="h-full rounded-xl border-gray-200 border-solid border-2 p-4"
                     />
                 )}
 
                 <img
-                    src="../img/Frame4.png"
+                    src={roomImg[2]?.imagePath}
                     alt="객실이미지"
                     className=" rounded-xl border-gray-200 border-solid border-2 p-4"
                 />
 
                 <img
-                    src="../img/Frame4.png"
+                    src={roomImg[3]?.imagePath}
                     alt="객실이미지"
                     className=" rounded-xl border-gray-200 border-solid border-2 p-4"
                 />
 
                 <img
-                    src="../img/Frame4.png"
+                    src={roomImg[4]?.imagePath}
                     alt="객실이미지"
                     className=" rounded-xl border-gray-200 border-solid border-2 p-4"
                 />
