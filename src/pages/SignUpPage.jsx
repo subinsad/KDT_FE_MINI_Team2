@@ -1,4 +1,4 @@
-import Button from '../components/Common/button';
+import Button from '../components/Common/Button';
 import Input from '../components/Form/Input';
 import Title from '../components/Common/Title';
 import { useEffect, useState } from 'react';

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Title from '../components/Common/Title';
 import Checkbox from '../components/Common/CheckBox';
 import ReservationItem from '../components/ReservationComponents/ReservationItem';
-import Button from '../components/Common/button';
+import Button from '../components/Common/Button';
 import useStore from '../store/accomodation';
 import { useNavigate, useParams } from 'react-router-dom';
 import FixedPrice from '../components/ReservationComponents/FixedPrice';

@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useParams } from 'react-router-dom';
 import Title from '../components/Common/Title';
 import ReservationItem from '../components/ReservationComponents/ReservationItem';
-import Button from '../components/Common/button';
+import Button from '../components/Common/Button';
 import Input from '../components/Form/Input';
 import Spinner from '../components/Common/Spinner';
 

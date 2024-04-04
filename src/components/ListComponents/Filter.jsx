@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RadioButton from '../Common/RadioButton';
-import Button from '../Common/button';
+import Button from '../Common/Button';
 import RangeSlider from '../Common/RangeSlider';
 
 function Filter({ type, location, onApplyFilter }) {

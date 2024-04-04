@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Input from './Form/Input';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Button from './Common/button';
+import Button from './Common/Button';
 
 function SearchBar({ onSearch, className }) {
     const navigate = useNavigate();

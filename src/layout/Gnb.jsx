@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../components/Common/button';
+import Button from '../components/Common/Button';
 import { useUser } from '../store/user'; // Zustand 스토어 사용
 import { useCookies } from 'react-cookie';
 import { RxHamburgerMenu } from 'react-icons/rx';

@@ -1,4 +1,4 @@
-import Button from '../components/Common/button';
+import Button from '../components/Common/Button';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo.svg';
 import { FaGithub } from 'react-icons/fa';

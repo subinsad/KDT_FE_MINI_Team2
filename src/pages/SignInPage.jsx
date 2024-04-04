@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../components/Common/button.jsx';
+import Button from '../components/Common/Button.jsx';
 import Title from '../components/Common/Title';
 import Input from '../components/Form/Input';
 import { useState } from 'react';

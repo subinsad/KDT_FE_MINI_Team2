@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Title from '../components/Common/Title';
 import ReservationItem from '../components/ReservationComponents/ReservationItem';
-import Button from '../components/Common/button';
+import Button from '../components/Common/Button';
 import useStore from '../store/accomodation';
 import { Link, useParams } from 'react-router-dom';
 
