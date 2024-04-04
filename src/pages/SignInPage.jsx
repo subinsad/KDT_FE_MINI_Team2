@@ -18,7 +18,7 @@ export default function SignInPage() {
   const { setLoginUser, setMemberId } = useUser();
   const [isLoading, setIsLoading] = useState(false);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -34,8 +34,7 @@ export default function SignInPage() {
       setCookie("memberId", memberId, { path: "/" });
       setLoginUser({ secretKey });
       setMemberId({ memberId });
-
-      // navigate("/");
+      navigate("/");
     } catch (error) {
       setMessage("아이디 또는 비밀번호가 틀렸습니다.");
     } finally {

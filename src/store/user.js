@@ -8,5 +8,5 @@ export const useUser = create((set) => ({
   setMemberId: (memberId) => set({ memberId }),
 
 
-  logout: () => set({ loginUser: null }),
+  logout: () => set({ loginUser: null, memberId: null}),
 })); 
