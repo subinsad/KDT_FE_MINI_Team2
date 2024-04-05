@@ -7,33 +7,33 @@ export default function DetailImage({ detailItem }) {
                 <img
                     src={detailItem?.accommodationImage[0]?.imagePath}
                     alt="객실이미지"
-                    className="w-[656px] h-full rounded-xl border-gray-200 border-solid border-2 p-4"
+                    className="w-[656px] h-full rounded-xl "
                 />
             )}
 
-            <div className="grid grow gap-2 grid-rows-2 grid-cols-2">
+            <div className="grid grow gap-2 grid-rows-2 grid-cols-2 w-2/5">
                 <img
                     src={roomImg[1]?.imagePath}
                     alt="객실이미지"
-                    className="h-full rounded-xl"
+                    className="h-64 w-64 rounded-xl"
                 />
 
                 <img
                     src={roomImg[2]?.imagePath}
                     alt="객실이미지"
-                    className=" rounded-xl border-gray-200 border-solid border-2 p-4"
+                    className="w-64 h-64 rounded-xl "
                 />
 
                 <img
                     src={roomImg[3]?.imagePath}
                     alt="객실이미지"
-                    className=" rounded-xl border-gray-200 border-solid border-2 p-4"
+                    className="w-64 h-64 rounded-xl "
                 />
 
                 <img
                     src={roomImg[4]?.imagePath}
                     alt="객실이미지"
-                    className=" rounded-xl border-gray-200 border-solid border-2 p-4"
+                    className="w-64 h-64 rounded-xl "
                 />
             </div>
         </div>

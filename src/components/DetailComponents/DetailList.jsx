@@ -45,7 +45,7 @@ export default function DetailList({ detailItem, roomData }) {
                             <CheckInOut
                                 startDate={startDate}
                                 endDate={endDate}
-                                stayTitle={item.roomInfo}
+                                stayTitle={item.roomName}
                                 checkIn="입실 14:00"
                                 checkOut="퇴실 11:00"
                             />
