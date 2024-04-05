@@ -16,7 +16,7 @@ function Filter({ type, location, onApplyFilter }) {
     { label: "리조트", value: "리조트" },
     { label: "펜션", value: "펜션" },
     { label: "캠핑", value: "캠핑" },
-    { label: "게스트하우스", value: "게스트하우스" },
+    { label: "게스트 하우스", value: "게스트 하우스" },
   ];
   const locationOptions = [
     // { label: "전체", value: "전체" },
