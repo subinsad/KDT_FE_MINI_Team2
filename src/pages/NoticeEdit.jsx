@@ -5,7 +5,7 @@ import Button from "../components/Common/Button";
 
 function NoticeEdit() {
   return (
-    <div className="max-w-mw mt-28 mx-auto">
+    <div className="max-w-mw mx-auto px-4 py-12">
       <div className="flex flex-col items-center gap-16 ">
         <Title tag="h2" className=" w-full" text="글 작성" />
         <form className="flex flex-col w-full">

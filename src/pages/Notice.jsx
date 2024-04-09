@@ -21,8 +21,8 @@ function Notice() {
   const currentNotice = notice.slice(offset, offset + limit);
 
   return (
-    <div className="max-w-mw mx-auto pt-12 pb-12">
-      <div className="flex justify-between items-start">
+    <div className="max-w-mw mx-auto px-4 py-12">
+      <div className="flex flex-col medium:flex-row medium:justify-between">
         <div>
           <TItle tag="h2" text="공지사항" className="mb-2" />
           <p className="mb-8 text-gray-500">
@@ -33,7 +33,7 @@ function Notice() {
           <Button text="새 글 등록" />
         </Link>
       </div>
-      <ul className="h-[440px]">
+      <ul>
         {currentNotice.map((item, index) => (
           <ListItem
             key={index}
