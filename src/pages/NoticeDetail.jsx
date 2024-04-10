@@ -21,7 +21,7 @@ function NoticeDetail() {
   };
 
   return (
-    <div className="max-w-mw mx-auto pt-12 pb-12">
+    <div className="max-w-mw mx-auto px-4 py-12">
       <GrLinkPrevious onClick={handlBack} className="cursor-pointer mb-4" />
       <div className="flex flex-col gap-1 pb-4 mb-6 border-b-2 border-solid border-gray-300">
         <b className="text-lg font-semibold"> {title}</b>
