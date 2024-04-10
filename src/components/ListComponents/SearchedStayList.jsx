@@ -17,7 +17,7 @@ function SearchedStayList({ accomodation }) {
               <img
                 src={item.accommodationImage[0].imagePath}
                 alt="숙소이미지"
-                className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                className="w-full h-full object-center object-cover -z-10 lg:w-full lg:h-full"
               />
             </div>
             <div className="w-[67%] stayDetail flex flex-col grow gap-8 items-end medium:w-[50%]">
