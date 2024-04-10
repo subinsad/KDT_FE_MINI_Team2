@@ -3,7 +3,13 @@ import RadioButton from "../Common/RadioButton";
 import Button from "../Common/Button";
 import RangeSlider from "../Common/RangeSlider";
 
-function Filter({ type, location, onApplyFilter }) {
+function Filter({
+  type,
+  location,
+  onApplyFilter,
+  hideFiltersHandler,
+  className,
+}) {
   const [selectedType, setSelectedType] = useState(type);
   const [selectedLocation, setSelectedLocation] = useState(location);
   const [minPrice, setMinPrice] = useState(0);
@@ -43,12 +49,19 @@ function Filter({ type, location, onApplyFilter }) {
   };
 
   // 필터 적용 함수
+  const applyFilterMobile = () => {
+    onApplyFilter({ selectedType, selectedLocation, minPrice, maxPrice });
+    hideFiltersHandler();
+  };
+
   const applyFilter = () => {
     onApplyFilter({ selectedType, selectedLocation, minPrice, maxPrice });
   };
 
   return (
-    <div className="filterBar flex flex-col gap-4 w-80">
+    <div
+      className={`filterBar flex flex-col gap-4 w-full h-full p-4 bg-white large:w-80 ${className}`}
+    >
       <div>
         <p className="text-lg font-semibold mb-3">유형</p>
         <RadioButton
@@ -79,7 +92,10 @@ function Filter({ type, location, onApplyFilter }) {
                 />
             </div>
             <hr /> */}
-      <Button text="적용" className="w-full" onClick={applyFilter} />
+      <Button text="적용" onClick={applyFilterMobile} className="w-full" />
+      <p onClick={hideFiltersHandler} className="text-center large:hidden">
+        닫기
+      </p>
     </div>
   );
 }
