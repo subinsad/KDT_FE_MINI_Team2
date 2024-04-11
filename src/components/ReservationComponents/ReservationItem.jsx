@@ -22,13 +22,13 @@ function ReservationItem({ clickedRoom, detailItem, checkIn, checkOut }) {
   const nights = Math.round((checkout - checkin) / (1000 * 60 * 60 * 24));
 
   return (
-    <div className="flex items-center gap-4 grow">
+    <div className="flex items-center gap-4 grow flex-col sm:flex-row">
       <img
         src={roomImage}
         alt="숙소이미지"
-        className="w-[200px] h-[200px] bg-slate-300 rounded"
+        className="w-72 h-72 sm:w-[200px] sm:h-[200px] bg-slate-300 rounded"
       />
-      <div className="flex flex-col gap-4 grow">
+      <div className="flex flex-col gap-4 grow w-72 h-72 sm:w-[200px] sm:h-[200px]">
         <div>
           <p className="text-xl font-bold">{accommodationName}</p>
           <span className="text-gray-500 text-sm">{address}</span>
@@ -36,8 +36,8 @@ function ReservationItem({ clickedRoom, detailItem, checkIn, checkOut }) {
         <hr />
         <div className="flex flex-col gap-2">
           <p className="text-lg font-bold">{roomName}</p>
-          <div className="flex grow justify-between">
-            <div className="flex flex-col">
+          <div className="flex grow justify-between flex-col sm:flex-row">
+            <div className="flex flex-col items-end sm:items-start">
               {checkIn ? (
                 <span className="text-gray-500 text-sm">{`${checkIn} ~ ${checkOut} | ${nights}박`}</span>
               ) : (
@@ -46,11 +46,13 @@ function ReservationItem({ clickedRoom, detailItem, checkIn, checkOut }) {
               <span className="text-gray-500 text-sm">입실 14:00</span>
               <span className="text-gray-500 text-sm">퇴실 11:00</span>
             </div>
-            <PriceBlock
-              text={`-${discount}%`}
-              fixedPrice={price}
-              discountRate={discount}
-            />
+            <div className="flex flex-col items-end sm:items-start">
+              <PriceBlock
+                text={`-${discount}%`}
+                fixedPrice={price}
+                discountRate={discount}
+              />
+            </div>
           </div>
         </div>
       </div>

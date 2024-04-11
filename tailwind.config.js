@@ -8,7 +8,7 @@ export default {
         //minWidth: ???
       },
       screens: {
-        samll: "360px",
+        small: "360px",
         medium: "600px",
         large: "1024px",
         xlarge: "1280px",
