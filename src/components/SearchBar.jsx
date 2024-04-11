@@ -9,12 +9,6 @@ function SearchBar({ onSearch, className }) {
   const navigate = useNavigate();
   const params = useParams();
 
-  const [location, setLocation] = useState(params.location || ""); // 지역명
-  const [startDate, setStartDate] = useState(params.startDate || todayString); // 시작날짜
-  const [endDate, setEndDate] = useState(params.endDate || tomorrowString); // 끝나는날짜
-  const [personal, setPersonal] = useState(params.personal || ""); // 인원
-  const [page, setPage] = useState(params.page || "1"); // 페이지
-
   // Date 객체를 "yyyy-mm-dd" 형식의 문자열로 변환하는 함수
   const formatDate = (date) => {
     if (!date) return null; // date가 null이면 null 반환
@@ -37,6 +31,12 @@ function SearchBar({ onSearch, className }) {
 
   // 내일 날짜를 "yyyy-mm-dd" 형식의 문자열로 변환
   const tomorrowString = formatDate(tomorrow);
+
+  const [location, setLocation] = useState(params.location || ""); // 지역명
+  const [startDate, setStartDate] = useState(params.startDate || todayString); // 시작날짜
+  const [endDate, setEndDate] = useState(params.endDate || tomorrowString); // 끝나는날짜
+  const [personal, setPersonal] = useState(params.personal || ""); // 인원
+  const [page, setPage] = useState(params.page || "1"); // 페이지
 
   useEffect(() => {
     setLocation(params.location || "제주");
