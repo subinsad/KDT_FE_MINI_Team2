@@ -7,6 +7,12 @@ export default {
                 mw: '1200px',
                 //minWidth: ???
             },
+            screens: {
+                small: '360px',
+                medium: '600px',
+                large: '1024px',
+                xlarge: '1280px',
+            },
             colors: {
                 primary: {
                     DEFAULT: '#2393D2',

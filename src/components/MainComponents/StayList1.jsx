@@ -49,8 +49,7 @@ function StayList1() {
     return (
         <div className="flex flex-col gap-4">
             <TItle tag="h2" text="인기 숙소" />
-
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap  ">
                 <Category
                     text="전체"
                     value="all"
@@ -66,6 +65,7 @@ function StayList1() {
                             value={accommodationType}
                             onClick={() => handleBtn(accommodationType)}
                             isActive={isActive === accommodationType}
+                            className="md:flex-row"
                         />
                     ))}
             </div>

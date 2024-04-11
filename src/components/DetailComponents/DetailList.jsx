@@ -34,9 +34,12 @@ export default function DetailList({ detailItem, roomData }) {
             {roomData &&
                 roomData.map((item, index) => (
                     <div
-                        className="flex justify-between py-5 border-gray-200 border-solid border-b-2"
+                        className="flex justify-between py-5 border-gray-200 border-solid border-b-2
+                        small:flex-col "
                         key={index}>
-                        <div className="flex gap-3 w-fit">
+                        <div
+                            className="flex gap-3 w-fit
+                        small:flex-col">
                             <img
                                 src={item.roomImage}
                                 alt="객실이미지"
