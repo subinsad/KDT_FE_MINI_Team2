@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReservationItem from "../components/ReservationComponents/ReservationItem";
 import CartPrice from "../components/CartComponent/CartPrice";
 import { IoClose } from "react-icons/io5";
+import CartEmpty from "../components/CartComponent/CartEmpty";
 
 export default function Cart() {
   const [isChecked, setIsChecked] = useState(true);
@@ -11,6 +12,7 @@ export default function Cart() {
   };
   return (
     <div className="max-w-mw mx-auto p-8">
+      <CartEmpty />
       <h2 className="text-center text-2xl p-8 font-bold">내 장바구니</h2>
 
       <div className="border-solid border-b-2 border-gray-300 py-8 flex relative">
