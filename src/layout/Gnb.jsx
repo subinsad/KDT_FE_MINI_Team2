@@ -44,6 +44,7 @@ export default function Gnb() {
                 </Link>
                 <nav className="flex items-center gap-6 font-semibold">
                     <Link to="/notice"> 공지사항 </Link>
+                    <Link to="/admin"> 관리자페이지 </Link>
                     {isAuthenticated ? (
                         <div className="relative">
                             <Button

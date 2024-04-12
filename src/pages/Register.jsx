@@ -1,32 +1,31 @@
-import React, { useState } from 'react';
-import Process from '../components/RegisterComponents/Process';
-import Step1 from '../components/RegisterComponents/Step1';
-import Step2 from '../components/RegisterComponents/Step2';
-import Step3 from '../components/RegisterComponents/Step3';
-import Step4 from '../components/RegisterComponents/Step4';
-import Step5 from '../components/RegisterComponents/Step5';
-import Button from '../components/Common/Button';
-import axios from 'axios';
+import React, { useState, useRef } from 'react';
 import { useCookies } from 'react-cookie';
 
+import Input from '../components/Form/Input';
+import Button from '../components/Common/Button';
+import axios from 'axios';
+import BackBtn from '../components/Common/BackBtn';
+
 function Register() {
-    const [currentStep, updateCurrentStep] = useState(1);
-    const labelArray = ['숙소 등록', '객실등록', '완료'];
-    const [isLoading, setIsLoading] = useState(false);
     const [cookies] = useCookies(['secretKey']);
+    const [inputValue, setInputValue] = useState({
+        accommodationName: '',
+        accommodationType: '',
+        address: '',
+        locationName: '',
+        discountRate: '',
+        introduction: '',
+        accommodationImage: [], // 파일을 선택하기 전에는 null로 초기화
+    });
 
-    const steps = [Step1, Step2, Step3, Step4, Step5];
-    const CurrentStepComponent = steps[currentStep - 1];
+    const fileInputRef = useRef(null);
 
-    function updateStep(step) {
-        updateCurrentStep(step);
-    }
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const value = inputValue;
 
-    const handleSubmit = async (value) => {
         try {
-            value.accommodationImage.forEach((image, index) => {
-                formData.append(`accommodationImage[${index}]`, image);
-            });
+            console.log('first');
             const response = await axios.post(
                 '/api/v1/accommodation/admin',
                 {
@@ -36,49 +35,186 @@ function Register() {
                     address: value.address,
                     locationName: value.locationName,
                     discountRate: value.discountRate,
+                    accommodationImage:
+                        value.accommodationImage.length > 0
+                            ? [value.accommodationImage[0]]
+                            : [], // 파일 데이터 직접 추가
                 },
+
                 {
                     headers: {
                         Authorization: `Bearer ${cookies.secretKey}`,
                     },
                 }
             );
+            console.log(Authorization);
 
-            console.log(value.accommodationName);
+            console.log('Response:', response); // 응답 출력
+            console.log('accommodationName:', value.accommodationName);
 
-            console.log(response);
             updateStep(currentStep + 1); // API 호출이 성공하면 다음 단계로 이동
         } catch (error) {
-            console.error(error);
+            console.error('에러 발생:', error); // 에러 메시지를 콘솔에 출력
+        }
+    };
+
+    const handleFileInputChange = () => {
+        const file = fileInputRef.current.files[0];
+        if (file) {
+            const formData = new FormData();
+            formData.append('accommodationImage', file);
+            setInputValue({
+                ...inputValue,
+                accommodationImage: [URL.createObjectURL(file)], // 파일 링크 생성 및 배열에 추가
+            });
+        } else {
+            console.error('선택된 파일이 없습니다.');
         }
     };
 
     return (
-        <div className="flex flex-col items-center gap-8 max-w-mw mx-auto pt-16 pb-16">
-            <Process
-                labelArray={labelArray}
-                updateStep={updateStep}
-                currentStep={currentStep}
-            />
-            <CurrentStepComponent onSubmit={handleSubmit} />
+        <form
+            className="max-w-mw mx-auto w-2/4 flex flex-col gap-4 pt-16 pb-16"
+            onSubmit={handleSubmit}
+            encType="multipart/form-data">
+            <div>
+                <h3 className="pb-2 font-bold text-lg">숙소등록하기</h3>
+                <p> 등록할 숙소정보를 입력해주세요 </p>
+            </div>
 
-            <div className="flex gap-12">
-                <button
-                    text="이전"
-                    className="font-bold py-3 px-4 rounded bg-gray-300 text-gray-700"
-                    onClick={() => updateStep(currentStep - 1)}
-                    disabled={currentStep === 1}>
-                    이전
-                </button>
-                <Button
-                    text="다음"
-                    onClick={() => updateStep(currentStep + 1)}
-                    disabled={currentStep === 5}
-                    onSubmit={handleSubmit}>
-                    다음
+            <div className="flex gap-3">
+                <div className="w-9/12">
+                    <Input
+                        className="w-full"
+                        value={inputValue.accommodationName}
+                        onChange={(e) => {
+                            setInputValue({
+                                ...inputValue,
+                                accommodationName: e.target.value,
+                            });
+                        }}
+                        type="text"
+                        text="숙소이름"
+                        placeholder="숙소이름 입력"
+                    />
+                </div>
+
+                <div className="w-3/12">
+                    <p className="mb-1 font-light text-sm text-slate-600">
+                        숙소유형 선택
+                    </p>
+                    <select
+                        className="bg-gray-100 py-3 px-4 font-light rounded hover:bg-gray-200 w-full "
+                        name="accommodationType"
+                        value={inputValue.accommodationType}
+                        onChange={(e) => {
+                            setInputValue({
+                                ...inputValue,
+                                accommodationType: e.target.value,
+                            });
+                        }}>
+                        <option value="호텔">호텔</option>
+                        <option value="모텔">모텔</option>
+                        <option value="펜션">펜션</option>
+                        <option value="캠핑">캠핑</option>
+                        <option value="리조트">리조트</option>
+                        <option value="게스트하우스">게스트하우스</option>
+                    </select>
+                </div>
+            </div>
+            <div className="flex gap-3">
+                <div className="w-9/12">
+                    <Input
+                        className="w-full"
+                        value={inputValue.address}
+                        onChange={(e) => {
+                            setInputValue({
+                                ...inputValue,
+                                address: e.target.value,
+                            });
+                        }}
+                        type="text"
+                        text="주소"
+                        placeholder="주소 입력"
+                    />
+                </div>
+
+                <div className="w-3/12">
+                    <p className="mb-1 font-light text-sm text-slate-600">
+                        지역 선택
+                    </p>
+                    <select
+                        className="bg-gray-100 py-3 px-4 font-light rounded hover:bg-gray-200 w-full "
+                        name="accommodationType"
+                        value={inputValue.locationName}
+                        onChange={(e) => {
+                            setInputValue({
+                                ...inputValue,
+                                locationName: e.target.value,
+                            });
+                        }}>
+                        <option value="제주">제주</option>
+                        <option value="서울">서울</option>
+                        <option value="부산">부산</option>
+                        <option value="인천">인천</option>
+                        <option value="강릉">강릉</option>
+                        <option value="경주">경주</option>
+                    </select>
+                </div>
+            </div>
+
+            <div className="flex gap-3">
+                <div className="w-9/12">
+                    <input
+                        ref={fileInputRef}
+                        type="file"
+                        text="사진"
+                        placeholder="사진 등록"
+                        onChange={handleFileInputChange}
+                    />
+                </div>
+
+                <div className="w-3/12">
+                    <Input
+                        className="w-full"
+                        value={inputValue.discountRate}
+                        onChange={(e) => {
+                            setInputValue({
+                                ...inputValue,
+                                discountRate: e.target.value,
+                            });
+                        }}
+                        type="text"
+                        text="할인율"
+                        placeholder="할인율 입력"
+                    />
+                </div>
+            </div>
+            <div className="flex gap-3">
+                <div className="w-full">
+                    <Input
+                        className="w-full"
+                        value={inputValue.introduction}
+                        onChange={(e) => {
+                            setInputValue({
+                                ...inputValue,
+                                introduction: e.target.value,
+                            });
+                        }}
+                        type="text"
+                        text="소개"
+                        placeholder="소개 입력"
+                    />
+                </div>
+            </div>
+
+            <div className="flex gap-12 justify-center">
+                <BackBtn />
+                <Button text="확인" type="submit" onSubmit={handleSubmit}>
+                    확인
                 </Button>
             </div>
-        </div>
+        </form>
     );
 }
 

@@ -20,6 +20,7 @@ import NoticeDetail from './pages/NoticeDetail';
 
 import { Navigate, Outlet } from 'react-router-dom';
 import Register from './pages/Register';
+import AdminPage from './pages/AdminPage';
 
 const ProtectedRoute = () => {
     const [cookies] = useCookies(['secretKey', 'memberId']);
@@ -69,6 +70,8 @@ const router = createBrowserRouter([
             { path: '/notice', element: <Notice /> },
             { path: '/notice/:id', element: <NoticeDetail /> },
             { path: '/register', element: <Register /> },
+            { path: '/admin', element: <AdminPage /> },
+            { path: '/admin/:id', element: <AdminPage /> },
         ],
     },
 ]);

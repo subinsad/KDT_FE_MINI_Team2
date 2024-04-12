@@ -29,7 +29,6 @@ function Notice() {
                     <ListItem
                         key={index}
                         title={item.title}
-                        text={item.text}
                         date={item.date}
                         link={`/notice/${item.id}`}
                     />
