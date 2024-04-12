@@ -51,7 +51,7 @@ function AdminPage() {
                     <div className="flex flex-col w-2/4">
                         <TitleBtn
                             TitleText="룸 조회"
-                            LinkTo="/register"
+                            LinkTo="/roomregister"
                             text="+ 룸등록"
                             className="mb-6"
                         />
