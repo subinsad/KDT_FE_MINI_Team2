@@ -8,6 +8,7 @@ import BackBtn from '../components/Common/BackBtn';
 
 function RoomRegister() {
     const [cookies] = useCookies(['secretKey']);
+    const [selectedFileName, setSelectedFileName] = useState('');
     const [inputValue, setInputValue] = useState({
         accommodationId: '',
         roomName: '',
@@ -54,6 +55,7 @@ function RoomRegister() {
     const handleFileInputChange = () => {
         const file = fileInputRef.current.files[0];
         if (file) {
+            setSelectedFileName(file.name); // 선택된 파일의 이름을 상태에 저장합니다.
             const formData = new FormData();
             formData.append('roomImage', file); // 여기서 'roomImage'로 변경
             setInputValue({
@@ -61,6 +63,7 @@ function RoomRegister() {
                 roomImage: URL.createObjectURL(file), // 배열이 아니라 객체로 업데이트
             });
         } else {
+            setSelectedFileName(''); // 파일이 선택되지 않았을 때는 상태를 초기화합니다.
             console.error('선택된 파일이 없습니다.');
         }
     };
@@ -150,14 +153,33 @@ function RoomRegister() {
             </div>
 
             <div className="flex gap-3">
-                <div className="w-9/12">
-                    <input
-                        ref={fileInputRef}
-                        type="file"
-                        text="사진"
-                        placeholder="사진 등록"
-                        onChange={handleFileInputChange}
-                    />
+                <div className="w-9/12 flex flex-col">
+                    <p className="mb-1 font-light text-sm text-slate-600">
+                        사진선택
+                    </p>
+                    {/* <label className="inline-block px-5 py-2 text-slate-500 bg-gray-100 cursor-pointer h-10">
+                        <input type="" />
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            // style={{ display: 'none' }} // 파일 입력 필드를 숨깁니다.
+                            onChange={handleFileInputChange}
+                            className="bg-gray-100"
+                        />
+
+                        <span className="ml-2">{selectedFileName}</span>
+                    </label> */}
+
+                    <div class="filebox">
+                        <input
+                            lassName="inline-block px-5 py-2 text-slate-500 bg-gray-100 cursor-pointer h-10"
+                            type="file"
+                        />
+                        <label for="file" className="bg-gray-300 p-2 rounded">
+                            파일찾기
+                            <input type="file" style={{ display: 'none' }} />
+                        </label>
+                    </div>
                 </div>
 
                 <div className="w-3/12">
