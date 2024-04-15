@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 
 function Register() {
     const [cookies] = useCookies(['secretKey']);
+    const [selectedFileName, setSelectedFileName] = useState('');
     const navigate = useNavigate();
     const [inputValue, setInputValue] = useState({
         accommodationName: '',
@@ -166,14 +167,27 @@ function Register() {
             </div>
 
             <div className="flex gap-3">
-                <div className="w-9/12">
-                    <input
-                        ref={fileInputRef}
-                        type="file"
-                        text="사진"
-                        placeholder="사진 등록"
-                        onChange={handleFileInputChange}
-                    />
+                <div className="w-9/12 flex flex-col">
+                    <p className="mb-1 font-light text-sm text-slate-600">
+                        사진선택
+                    </p>
+                    <label className="flex items-center px-5 py-2 text-slate-500 bg-gray-100 cursor-pointer h-10">
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            style={{ display: 'none' }} // 파일 입력 필드를 숨깁니다.
+                            onChange={handleFileInputChange}
+                            className="bg-gray-100"
+                        />
+
+                        <span className="ml-2">
+                            {selectedFileName ? (
+                                <>{selectedFileName}</>
+                            ) : (
+                                <>선택된 파일이 없습니다.</>
+                            )}
+                        </span>
+                    </label>
                 </div>
 
                 <div className="w-3/12">
