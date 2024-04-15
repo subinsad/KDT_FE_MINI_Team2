@@ -72,7 +72,7 @@ function RoomRegister() {
 
     return (
         <form
-            className="max-w-mw mx-auto w-2/4 flex flex-col gap-4 pt-16 pb-16"
+            className="meidum:max-w-mw mx-auto meidum:w-2/4 flex flex-col medium:gap-4 gap-3 pt-16 pb-16 w-10/12"
             onSubmit={handleSubmit}
             encType="multipart/form-data">
             <div>
