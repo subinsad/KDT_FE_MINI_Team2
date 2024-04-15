@@ -7,41 +7,38 @@ import axios from 'axios';
 import BackBtn from '../components/Common/BackBtn';
 import { useNavigate } from 'react-router';
 
-function Register() {
+function RoomRegister() {
     const [cookies] = useCookies(['secretKey']);
-    const [selectedFileName, setSelectedFileName] = useState('');
     const navigate = useNavigate();
+    const [selectedFileName, setSelectedFileName] = useState('');
     const [inputValue, setInputValue] = useState({
-        accommodationName: '',
-        accommodationType: '',
-        address: '',
-        locationName: '',
-        discountRate: '',
-        introduction: '',
-        accommodationImage: [], // 파일을 선택하기 전에는 null로 초기화
+        accommodationId: '',
+        roomName: '',
+        roomInfo: '',
+        fixedNumber: '',
+        maxedNumber: '',
+        price: '',
+        roomImage: '', // 파일을 선택하기 전에는 null로 초기화
     });
 
     const fileInputRef = useRef(null);
 
     const handleSubmit = async (event) => {
+        console.log('hh');
         event.preventDefault();
         const value = inputValue;
 
         try {
-            console.log('first');
             const response = await axios.post(
-                '/api/v1/accommodation/admin',
+                `/api/v1/accommodation/${value.accommodationId}/room`,
                 {
-                    accommodationName: value.accommodationName,
-                    accommodationType: value.accommodationType,
-                    introduction: value.introduction,
-                    address: value.address,
-                    locationName: value.locationName,
-                    discountRate: value.discountRate,
-                    accommodationImage:
-                        value.accommodationImage.length > 0
-                            ? [value.accommodationImage[0]]
-                            : [], // 파일 데이터 직접 추가
+                    accommodationId: value.accommodationId,
+                    roomName: value.roomName,
+                    roomInfo: value.roomInfo,
+                    fixedNumber: value.fixedNumber,
+                    maxedNumber: value.maxedNumber,
+                    price: value.price,
+                    roomImage: value.roomImage, // 파일 데이터 직접 추가
                 },
 
                 {
@@ -50,12 +47,8 @@ function Register() {
                     },
                 }
             );
-            console.log(Authorization);
-
-            console.log('Response:', response); // 응답 출력
-            console.log('accommodationName:', value.accommodationName);
-
             navigate(-1);
+            console.log('Response:', response); // 응답 출력
         } catch (error) {
             console.error('에러 발생:', error); // 에러 메시지를 콘솔에 출력
         }
@@ -64,13 +57,15 @@ function Register() {
     const handleFileInputChange = () => {
         const file = fileInputRef.current.files[0];
         if (file) {
+            setSelectedFileName(file.name); // 선택된 파일의 이름을 상태에 저장합니다.
             const formData = new FormData();
-            formData.append('accommodationImage', file);
+            formData.append('roomImage', file); // 여기서 'roomImage'로 변경
             setInputValue({
                 ...inputValue,
-                accommodationImage: [URL.createObjectURL(file)], // 파일 링크 생성 및 배열에 추가
+                roomImage: URL.createObjectURL(file), // 배열이 아니라 객체로 업데이트
             });
         } else {
+            setSelectedFileName(''); // 파일이 선택되지 않았을 때는 상태를 초기화합니다.
             console.error('선택된 파일이 없습니다.');
         }
     };
@@ -81,87 +76,80 @@ function Register() {
             onSubmit={handleSubmit}
             encType="multipart/form-data">
             <div>
-                <h3 className="pb-2 font-bold text-lg">숙소등록하기</h3>
-                <p> 등록할 숙소정보를 입력해주세요 </p>
+                <h3 className="pb-2 font-bold text-lg">Room 등록하기</h3>
+                <p> 등록할 룸정보를 입력해주세요 </p>
             </div>
 
             <div className="flex gap-3">
                 <div className="w-9/12">
                     <Input
                         className="w-full"
-                        value={inputValue.accommodationName}
+                        value={inputValue.roomName}
                         onChange={(e) => {
                             setInputValue({
                                 ...inputValue,
-                                accommodationName: e.target.value,
+                                roomName: e.target.value,
                             });
                         }}
                         type="text"
-                        text="숙소이름"
-                        placeholder="숙소이름 입력"
+                        text="룸 이름"
+                        placeholder="룸이름 입력"
                     />
                 </div>
 
                 <div className="w-3/12">
-                    <p className="mb-1 font-light text-sm text-slate-600">
-                        숙소유형 선택
-                    </p>
-                    <select
-                        className="bg-gray-100 py-3 px-4 font-light rounded hover:bg-gray-200 w-full "
-                        name="accommodationType"
-                        value={inputValue.accommodationType}
+                    <Input
+                        className="w-full"
+                        value={inputValue.accommodationId}
                         onChange={(e) => {
                             setInputValue({
                                 ...inputValue,
-                                accommodationType: e.target.value,
+                                accommodationId: e.target.value,
                             });
-                        }}>
-                        <option value="호텔">호텔</option>
-                        <option value="모텔">모텔</option>
-                        <option value="펜션">펜션</option>
-                        <option value="캠핑">캠핑</option>
-                        <option value="리조트">리조트</option>
-                        <option value="게스트하우스">게스트하우스</option>
-                    </select>
+                        }}
+                        type="text"
+                        text="숙소 Id "
+                        placeholder="숙소 Id 입력"
+                    />
                 </div>
             </div>
             <div className="flex gap-3">
                 <div className="w-9/12">
                     <Input
                         className="w-full"
-                        value={inputValue.address}
+                        value={inputValue.roomInfo}
                         onChange={(e) => {
                             setInputValue({
                                 ...inputValue,
-                                address: e.target.value,
+                                roomInfo: e.target.value,
                             });
                         }}
                         type="text"
-                        text="주소"
-                        placeholder="주소 입력"
+                        text="숙소 이용 정보"
+                        placeholder="숙소 이용 정보 입력"
                     />
                 </div>
 
                 <div className="w-3/12">
                     <p className="mb-1 font-light text-sm text-slate-600">
-                        지역 선택
+                        기본 인원
                     </p>
                     <select
                         className="bg-gray-100 py-3 px-4 font-light rounded hover:bg-gray-200 w-full "
                         name="accommodationType"
-                        value={inputValue.locationName}
+                        value={inputValue.fixedNumber}
                         onChange={(e) => {
                             setInputValue({
                                 ...inputValue,
-                                locationName: e.target.value,
+                                fixedNumber: e.target.value,
                             });
                         }}>
-                        <option value="제주">제주</option>
-                        <option value="서울">서울</option>
-                        <option value="부산">부산</option>
-                        <option value="인천">인천</option>
-                        <option value="강릉">강릉</option>
-                        <option value="경주">경주</option>
+                        <option value="1">1명</option>
+                        <option value="2">2명</option>
+                        <option value="3">3명</option>
+                        <option value="4">4명</option>
+                        <option value="5">5명</option>
+                        <option value="6">6명</option>
                     </select>
                 </div>
             </div>
@@ -191,35 +179,42 @@ function Register() {
                 </div>
 
                 <div className="w-3/12">
-                    <Input
-                        className="w-full"
-                        value={inputValue.discountRate}
+                    <p className="mb-1 font-light text-sm text-slate-600">
+                        최대 인원
+                    </p>
+                    <select
+                        className="bg-gray-100 py-3 px-4 font-light rounded hover:bg-gray-200 w-full "
+                        name="accommodationType"
+                        value={inputValue.maxedNumber}
                         onChange={(e) => {
                             setInputValue({
                                 ...inputValue,
-                                discountRate: e.target.value,
+                                maxedNumber: e.target.value,
                             });
-                        }}
-                        type="text"
-                        text="할인율"
-                        placeholder="할인율 입력"
-                    />
+                        }}>
+                        <option value="1">1명</option>
+                        <option value="2">2명</option>
+                        <option value="3">3명</option>
+                        <option value="4">4명</option>
+                        <option value="5">5명</option>
+                        <option value="6">6명</option>
+                    </select>
                 </div>
             </div>
             <div className="flex gap-3">
                 <div className="w-full">
                     <Input
                         className="w-full"
-                        value={inputValue.introduction}
+                        value={inputValue.price}
                         onChange={(e) => {
                             setInputValue({
                                 ...inputValue,
-                                introduction: e.target.value,
+                                price: e.target.value,
                             });
                         }}
                         type="text"
-                        text="소개"
-                        placeholder="소개 입력"
+                        text="가격"
+                        placeholder="가격 입력"
                     />
                 </div>
             </div>
@@ -234,4 +229,4 @@ function Register() {
     );
 }
 
-export default Register;
+export default RoomRegister;
