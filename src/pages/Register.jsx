@@ -5,9 +5,11 @@ import Input from '../components/Form/Input';
 import Button from '../components/Common/Button';
 import axios from 'axios';
 import BackBtn from '../components/Common/BackBtn';
+import { useNavigate } from 'react-router';
 
 function Register() {
     const [cookies] = useCookies(['secretKey']);
+    const navigate = useNavigate();
     const [inputValue, setInputValue] = useState({
         accommodationName: '',
         accommodationType: '',
@@ -52,7 +54,7 @@ function Register() {
             console.log('Response:', response); // 응답 출력
             console.log('accommodationName:', value.accommodationName);
 
-            updateStep(currentStep + 1); // API 호출이 성공하면 다음 단계로 이동
+            navigate(-1);
         } catch (error) {
             console.error('에러 발생:', error); // 에러 메시지를 콘솔에 출력
         }

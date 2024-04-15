@@ -5,9 +5,11 @@ import Input from '../components/Form/Input';
 import Button from '../components/Common/Button';
 import axios from 'axios';
 import BackBtn from '../components/Common/BackBtn';
+import { useNavigate } from 'react-router';
 
 function RoomRegister() {
     const [cookies] = useCookies(['secretKey']);
+    const navigate = useNavigate();
     const [selectedFileName, setSelectedFileName] = useState('');
     const [inputValue, setInputValue] = useState({
         accommodationId: '',
@@ -45,7 +47,7 @@ function RoomRegister() {
                     },
                 }
             );
-
+            navigate(-1);
             console.log('Response:', response); // 응답 출력
         } catch (error) {
             console.error('에러 발생:', error); // 에러 메시지를 콘솔에 출력
@@ -157,29 +159,23 @@ function RoomRegister() {
                     <p className="mb-1 font-light text-sm text-slate-600">
                         사진선택
                     </p>
-                    {/* <label className="inline-block px-5 py-2 text-slate-500 bg-gray-100 cursor-pointer h-10">
-                        <input type="" />
+                    <label className="flex items-center px-5 py-2 text-slate-500 bg-gray-100 cursor-pointer h-10">
                         <input
                             ref={fileInputRef}
                             type="file"
-                            // style={{ display: 'none' }} // 파일 입력 필드를 숨깁니다.
+                            style={{ display: 'none' }} // 파일 입력 필드를 숨깁니다.
                             onChange={handleFileInputChange}
                             className="bg-gray-100"
                         />
 
-                        <span className="ml-2">{selectedFileName}</span>
-                    </label> */}
-
-                    <div class="filebox">
-                        <input
-                            lassName="inline-block px-5 py-2 text-slate-500 bg-gray-100 cursor-pointer h-10"
-                            type="file"
-                        />
-                        <label for="file" className="bg-gray-300 p-2 rounded">
-                            파일찾기
-                            <input type="file" style={{ display: 'none' }} />
-                        </label>
-                    </div>
+                        <span className="ml-2">
+                            {selectedFileName ? (
+                                <>{selectedFileName}</>
+                            ) : (
+                                <>선택된 파일이 없습니다.</>
+                            )}
+                        </span>
+                    </label>
                 </div>
 
                 <div className="w-3/12">
