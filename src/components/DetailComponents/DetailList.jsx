@@ -30,28 +30,46 @@ export default function DetailList({ detailItem, roomData }) {
     };
 
     return (
-        <div className="w-[880px]">
+        <div className="medium:w-[880px]">
             {roomData &&
                 roomData.map((item, index) => (
                     <div
-                        className="flex justify-between py-5 border-gray-200 border-solid border-b-2"
+                        className="medium:flex justify-between py-5 border-gray-200 border-solid border-b-2 w-full"
                         key={index}>
-                        <div className="flex gap-3 w-fit">
+                        <div className="medium:flex gap-3 medium:w-fit w-full">
                             <img
                                 src={item.roomImage}
                                 alt="객실이미지"
-                                className=" w-52 h-52 bg-slate-300 rounded"
+                                className=" medium:w-52 h-52 bg-slate-300 rounded"
                             />
-                            <CheckInOut
-                                startDate={startDate}
-                                endDate={endDate}
-                                stayTitle={item.roomName}
-                                checkIn="입실 14:00"
-                                checkOut="퇴실 11:00"
-                            />
+
+                            <div className="flex gap-4 justify-between ">
+                                <CheckInOut
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    stayTitle={item.roomName}
+                                    checkIn="입실 14:00"
+                                    checkOut="퇴실 11:00"
+                                />
+                                <div className="medium:hidden flex flex-col justify-end ">
+                                    <PriceBlock
+                                        text={`-${detailItem?.discount}%`}
+                                        fixedPrice={item.price}
+                                        discountRate={detailItem?.discount}
+                                        className="flex justify-end medium:hidden"
+                                    />
+                                    <Button
+                                        className=""
+                                        text="객실 예약"
+                                        onClick={() =>
+                                            handleReservationClick(item.id)
+                                        }
+                                    />
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="mt-20 flex flex-col justify-around">
+                        <div className="mt-20 medium:flex flex-col justify-around hidden">
                             <PriceBlock
                                 text={`-${detailItem?.discount}%`}
                                 fixedPrice={item.price}
