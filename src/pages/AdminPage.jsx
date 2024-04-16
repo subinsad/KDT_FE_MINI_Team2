@@ -14,8 +14,8 @@ function AdminPage() {
     return (
         <>
             <div className="max-w-mw mx-auto pt-12 pb-12">
-                <div className="flex gap-12 h-[440px] ">
-                    <div className="flex flex-col w-2/4">
+                <div className="medium:flex medium:flex-row medium:gap-12 medium:h-[440px] flex flex-col h-auto p-6 gap-12">
+                    <div className="medium:flex medium:flex-col medium:w-2/4 medium:p-4 w-full ">
                         <TitleBtn
                             TitleText="숙소 등록"
                             LinkTo="/register"
@@ -48,7 +48,7 @@ function AdminPage() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col w-2/4">
+                    <div className="medium:flex medium:flex-col medium:w-2/4 medium:p-4 w-full">
                         <TitleBtn
                             TitleText="룸 조회"
                             LinkTo="/roomregister"

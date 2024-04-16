@@ -23,7 +23,7 @@ export default function MobileEventBox() {
         <div className=" mb-4 flex flex-col ">
             <div className="w-full mb-4">
                 <Swiper
-                    className="w-full h-[9rem] bg-slate-300 rounded"
+                    className="w-full h-full bg-slate-300 rounded"
                     modules={[Autoplay, Pagination, Scrollbar, A11y]}
                     spaceBetween={50}
                     slidesPerView={1}

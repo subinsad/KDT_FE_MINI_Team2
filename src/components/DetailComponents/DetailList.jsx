@@ -56,7 +56,7 @@ export default function DetailList({ detailItem, roomData }) {
                                         text={`-${detailItem?.discount}%`}
                                         fixedPrice={item.price}
                                         discountRate={detailItem?.discount}
-                                        className="flex justify-end medium:hidden"
+                                        className="flex justify-end medium:hidden text-xs"
                                     />
                                     <Button
                                         className=""

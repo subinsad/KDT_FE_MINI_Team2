@@ -19,7 +19,7 @@ export default function PriceBlock({
                 <Badge text={text} className="bg-red-100 text-red-600">
                     {text}
                 </Badge>
-                <del className="text-sm text-gray-600">
+                <del className="medium:text-sm text-gray-600">
                     {formattedFixedPrice}원
                 </del>
             </div>
