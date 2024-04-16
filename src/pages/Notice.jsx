@@ -7,18 +7,28 @@ import Button from "../components/Common/Button";
 import { Link } from "react-router-dom";
 
 function Notice() {
-  const { notice, ajax } = useStore();
-
   const [page, setPage] = useState(1); // 페이지
-  const limit = 7; // 페이지당 최대 보여줄 아이템 수
-  const offset = (page - 1) * limit; // 페이지네이션을 위한 offset
+  const [notice, setNotice] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      // const response = await fetch("http://localhost:3000/notice");
+      const response = await fetch(
+        "http://15.164.19.60:8081/public-api/v1/board"
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await response.json();
+      setNotice(data.data);
+    } catch (error) {
+      console.error("Error fetching notice:", error);
+    }
+  };
 
   useEffect(() => {
-    ajax();
+    fetchData();
   }, []);
-
-  // 현재 페이지에 맞게 공지사항을 자릅니다.
-  const currentNotice = notice.slice(offset, offset + limit);
 
   return (
     <div className="max-w-mw mx-auto px-4 py-12">
@@ -34,7 +44,7 @@ function Notice() {
         </Link>
       </div>
       <ul>
-        {currentNotice.map((item, index) => (
+        {notice.map((item, index) => (
           <ListItem
             key={index}
             title={item.title}
@@ -44,12 +54,6 @@ function Notice() {
           />
         ))}
       </ul>
-      <Pagination
-        limit={limit}
-        page={page}
-        totalPosts={notice.length}
-        setPage={setPage}
-      />
     </div>
   );
 }
