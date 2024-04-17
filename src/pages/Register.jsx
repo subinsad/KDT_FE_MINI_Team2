@@ -85,8 +85,8 @@ function Register() {
                 <p> 등록할 숙소정보를 입력해주세요 </p>
             </div>
 
-            <div className="meidum:flex gap-3">
-                <div className="meidum:w-9/12 mb-4">
+            <div className="meidum:flex medium:flex-row gap-3 flex flex-col">
+                <div className="w-full mb-4">
                     <Input
                         className="w-full"
                         value={inputValue.accommodationName}
@@ -102,7 +102,7 @@ function Register() {
                     />
                 </div>
 
-                <div className="meidum:w-3/12">
+                <div className="w-full ">
                     <p className="mb-1 font-light text-sm text-slate-600">
                         숙소유형 선택
                     </p>
@@ -125,8 +125,8 @@ function Register() {
                     </select>
                 </div>
             </div>
-            <div className="meidum:flex gap-3">
-                <div className="meidum:w-9/12 w-full mb-4">
+            <div className="meidum:flex medium:flex-row gap-3 flex flex-col">
+                <div className=" w-full mb-4">
                     <Input
                         className="w-full"
                         value={inputValue.address}
@@ -142,7 +142,7 @@ function Register() {
                     />
                 </div>
 
-                <div className="meidum:w-3/12 ">
+                <div className="w-full">
                     <p className="mb-1 font-light text-sm text-slate-600">
                         지역 선택
                     </p>
@@ -166,8 +166,8 @@ function Register() {
                 </div>
             </div>
 
-            <div className="meidum:flex meidum:gap-3">
-                <div className="meidum:w-9/12 flex flex-col mb-4">
+            <div className="meidum:flex medium:flex-row gap-3 flex flex-col">
+                <div className="w-full flex flex-col mb-4">
                     <p className="mb-1 font-light text-sm text-slate-600">
                         사진선택
                     </p>
@@ -190,7 +190,7 @@ function Register() {
                     </label>
                 </div>
 
-                <div className="meidum:w-3/12">
+                <div className="w-full">
                     <Input
                         className="w-full"
                         value={inputValue.discountRate}
