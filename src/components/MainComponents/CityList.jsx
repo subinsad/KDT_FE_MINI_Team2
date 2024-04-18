@@ -33,9 +33,7 @@ function CityList() {
         {cities.map((city, index) => (
           <Link
             key={index}
-            to={`/list/${currentDate}/${tomorrowDate}/${encodeURIComponent(
-              city
-            )}/호텔/2/1`}
+            to={`/list?type=호텔&location=${city}&checkIn=${currentDate}&checkOut=${tomorrowDate}&personal=2&page=1`}
             className="flex flex-col w-full h-40"
           >
             <div className="rounded-xl aspect-square overflow-hidden w-full">
