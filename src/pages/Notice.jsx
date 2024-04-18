@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import ListItem from "../components/NoticeComponents/ListItem";
-import useStore from "../store/notice";
-import Pagination from "../components/Pagination";
 import TItle from "../components/Common/Title";
 import Button from "../components/Common/Button";
 import { Link } from "react-router-dom";
 
 function Notice() {
-  const [page, setPage] = useState(1); // 페이지
   const [notice, setNotice] = useState([]);
 
+  // 공지사항 불러오기
   const fetchData = async () => {
     try {
-      // const response = await fetch("http://localhost:3000/notice");
       const response = await fetch(
         "http://15.164.19.60:8081/public-api/v1/board"
       );
@@ -29,6 +26,7 @@ function Notice() {
   useEffect(() => {
     fetchData();
   }, []);
+  // 공지사항 불러오기
 
   return (
     <div className="max-w-mw mx-auto px-4 py-12">
@@ -49,7 +47,7 @@ function Notice() {
             key={index}
             title={item.title}
             text={item.text}
-            date={item.date}
+            date={item.updateDate}
             link={`/notice/${item.id}`}
           />
         ))}
