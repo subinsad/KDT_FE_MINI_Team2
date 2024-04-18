@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Input from "./Form/Input";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from "./Common/Button";
+import { getCurrentDate, getTomorrowDate } from "../data/date";
 
 function SearchBar({ onSearch, className }) {
   const navigate = useNavigate();
-  const params = useParams();
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
 
-  // Date 객체를 "yyyy-mm-dd" 형식의 문자열로 변환하는 함수
+  // 오늘과 내일 날짜 계산
+  const today = getCurrentDate();
+  const tomorrow = getTomorrowDate();
+
   const formatDate = (date) => {
     if (!date) return null; // date가 null이면 null 반환
     const year = date.getFullYear();
@@ -18,75 +23,57 @@ function SearchBar({ onSearch, className }) {
     return `${year}-${month}-${day}`;
   };
 
-  // 오늘 날짜
-  const today = new Date();
+  const [location, setLocation] = useState(queryParams.get("location") || "");
+  const [startDate, setStartDate] = useState(queryParams.get("checkIn"));
+  const [endDate, setEndDate] = useState(queryParams.get("checkOut"));
+  const [personal, setPersonal] = useState(queryParams.get("personal") || "");
+  const [page, setPage] = useState(queryParams.get("page") || "1");
 
-  // 오늘 날짜를 "yyyy-mm-dd" 형식의 문자열로 변환
-  const todayString = formatDate(today);
-
-  // 내일 날짜
-  const tomorrow = new Date(today);
-
-  tomorrow.setDate(today.getDate() + 1);
-
-  // 내일 날짜를 "yyyy-mm-dd" 형식의 문자열로 변환
-  const tomorrowString = formatDate(tomorrow);
-
-  const [location, setLocation] = useState(params.location || ""); // 지역명
-  const [startDate, setStartDate] = useState(params.startDate || todayString); // 시작날짜
-  const [endDate, setEndDate] = useState(params.endDate || tomorrowString); // 끝나는날짜
-  const [personal, setPersonal] = useState(params.personal || ""); // 인원
-  const [page, setPage] = useState(params.page || "1"); // 페이지
-
+  // 컴포넌트가 마운트되면 각 파라미터의 값을 변경
   useEffect(() => {
-    setLocation(params.location || "제주");
-    setStartDate(params.startDate || todayString);
-    setEndDate(params.endDate || tomorrowString);
-    setPersonal(params.personal || "2");
-  }, [params]);
+    setLocation(queryParams.get("location") || "제주");
+    setStartDate(queryParams.get("checkIn") || today);
+    setEndDate(queryParams.get("checkOut") || tomorrow);
+    setPersonal(queryParams.get("personal") || 2);
+  }, [search]);
+  // 컴포넌트가 마운트되면 각 파라미터의 값을 변경
 
+  // 검색 기능
   const handleSearch = () => {
-    const trimmedLocation = location.trim(); // 공백 제거
+    const trimmedLocation = location.trim();
     if (!trimmedLocation) {
-      alert("지역명을 입력해주세요."); // 지역명이 비어있을 경우 얼럿 표시
+      alert("지역명을 입력해주세요.");
       return;
     }
+    // 부모컴포넌트인 list가 있을 땐 onSearch실행 아닐땐 else조건 실행
     if (onSearch) {
-      onSearch(trimmedLocation); // 부모 컴포넌트로 지역명 전달
-    }
-    if (params.type) {
-      navigate(
-        `/list/${startDate}/${endDate}/${encodeURIComponent(trimmedLocation)}/${
-          params.type
-        }/${personal}/${page}`
-      );
+      onSearch(trimmedLocation);
     } else {
       navigate(
-        `/list/${startDate}/${endDate}/${encodeURIComponent(
+        `/list?type=호텔&location=${encodeURIComponent(
           trimmedLocation
-        )}/호텔/${personal}/${page}`
-      ); // 검색 후 페이지 이동
+        )}&checkIn=${startDate}&checkOut=${endDate}&personal=${personal}&page=${page}`
+      );
     }
   };
+  // 검색 기능
 
-  // start date 변경 시
   const handleStartDateChange = (date) => {
     const formattedDate = formatDate(date); // Date 객체를 문자열로 변환
     setStartDate(formattedDate);
   };
 
-  // end date 변경 시
   const handleEndDateChange = (date) => {
     const formattedDate = formatDate(date); // Date 객체를 문자열로 변환
     setEndDate(formattedDate);
   };
 
-  const handlePersonalChange = (e) => {
-    setPersonal(e.target.value);
-  };
-
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
+  };
+
+  const handlePersonalChange = (e) => {
+    setPersonal(e.target.value);
   };
 
   return (
@@ -102,7 +89,7 @@ function SearchBar({ onSearch, className }) {
       />
       <DatePicker
         selectsRange={true}
-        selected={new Date(startDate)}
+        selected={startDate}
         onChange={(dates) => {
           handleStartDateChange(dates[0]);
           handleEndDateChange(dates[1]);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import Title from "../components/Common/Title";
 import Filter from "../components/ListComponents/Filter";
 import SearchedStayList from "../components/ListComponents/SearchedStayList";
@@ -9,7 +9,15 @@ import Pagination from "../components/Pagination";
 
 export default function ListPage() {
   const navigate = useNavigate();
-  const { type, location, startDate, endDate, personal, page } = useParams();
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  const type = queryParams.get("type");
+  const location = queryParams.get("location");
+  const startDate = queryParams.get("checkIn");
+  const endDate = queryParams.get("checkOut");
+  const personal = queryParams.get("personal");
+  const page = queryParams.get("page") || "1";
+
   const [filters, setFilters] = useState({
     selectedType: type,
     selectedLocation: location,
@@ -92,26 +100,30 @@ export default function ListPage() {
     const { selectedType, selectedLocation } = newFilters;
     setCurrentPage(1);
     navigate(
-      `/list/${startDate}/${endDate}/${selectedLocation}/${selectedType}/${personal}/1` // 수정된 부분: 필터 변경 시 첫 번째 페이지로 이동
-    );
-  };
-
-  const handleLocationSearch = (location) => {
-    setFilters({ ...filters, selectedLocation: location });
-    setCurrentPage(1);
-    navigate(
-      `/list/${startDate}/${endDate}/${location}/${type}/${personal}/1` // 수정된 부분: 검색 시 첫 번째 페이지로 이동
+      `/list?type=${selectedType}&location=${selectedLocation}&checkIn=${startDate}&checkOut=${endDate}&personal=${personal}&page=1`,
+      { replace: true } // 이전 기록을 대체하여 히스토리에 쌓이지 않도록 함
     );
   };
   // 필터 변경 기능
 
+  // 검색바 기능
+  const handleLocationSearch = (location) => {
+    setFilters({ ...filters, selectedLocation: location });
+    setCurrentPage(1);
+    navigate(
+      `/list?type=${type}&location=${location}&checkIn=${startDate}&checkOut=${endDate}&personal=${personal}&page=1`,
+      { replace: true } // 이전 기록을 대체하여 히스토리에 쌓이지 않도록 함
+    );
+  };
+  // 검색바 기능
+
   // 필터 노출 토글 기능
   const showFiltersHandler = () => {
-    setShowFilters(true); // 필터 컴포넌트의 가시성 토글
+    setShowFilters(true);
   };
 
   const hideFiltersHandler = () => {
-    setShowFilters(false); // 필터 컴포넌트의 가시성 토글
+    setShowFilters(false);
   };
   // 필터 노출 토글 기능
 
@@ -124,8 +136,9 @@ export default function ListPage() {
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
     navigate(
-      `/list/${startDate}/${endDate}/${location}/${type}/${personal}/${pageNumber}`
-    ); // 수정된 부분: 페이지 이동 시 URL 업데이트
+      `/list?type=${type}&location=${location}&checkIn=${startDate}&checkOut=${endDate}&personal=${personal}&page=${pageNumber}`,
+      { replace: true }
+    );
   };
   // 페이지네이션 기능
 
@@ -161,7 +174,7 @@ export default function ListPage() {
             <Title
               className="searchResult"
               tag="h2"
-              text={`'${filters.selectedLocation}' 지역의 ${filters.selectedType} ${totalResults}개`}
+              text={`'${location}' 지역의 ${type} ${totalResults}개`}
             />
             <div onClick={showFiltersHandler} className="cursor-pointer">
               <svg
@@ -193,7 +206,7 @@ export default function ListPage() {
               <Pagination
                 totalPosts={totalResults}
                 limit={4}
-                page={parseInt(currentPage)} // 수정된 부분: currentPage를 숫자로 변환하여 전달
+                page={parseInt(currentPage)}
                 setPage={goToPage}
               />
             </>
