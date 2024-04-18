@@ -5,14 +5,16 @@ import Input from '../components/Form/Input';
 import Button from '../components/Common/Button';
 import axios from 'axios';
 import BackBtn from '../components/Common/BackBtn';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 function RoomRegister() {
     const [cookies] = useCookies(['secretKey']);
     const navigate = useNavigate();
     const [selectedFileName, setSelectedFileName] = useState('');
+    const { id } = useParams();
+    console.log(id);
     const [inputValue, setInputValue] = useState({
-        accommodationId: '',
+        accommodationId: id,
         roomName: '',
         roomInfo: '',
         fixedNumber: '',
@@ -99,14 +101,9 @@ function RoomRegister() {
 
                 <div className="w-3/12">
                     <Input
-                        className="w-full"
+                        className="w-full cursor-not-allowed opacity-50 bg-gray-200"
                         value={inputValue.accommodationId}
-                        onChange={(e) => {
-                            setInputValue({
-                                ...inputValue,
-                                accommodationId: e.target.value,
-                            });
-                        }}
+                        readOnly // 사용자가 변경할 수 없도록 함
                         type="text"
                         text="숙소 Id "
                         placeholder="숙소 Id 입력"

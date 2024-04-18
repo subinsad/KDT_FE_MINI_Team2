@@ -6,9 +6,11 @@ import Button from '../components/Common/Button';
 import axios from 'axios';
 import BackBtn from '../components/Common/BackBtn';
 import { useNavigate } from 'react-router';
+import ImgInput from '../components/Common/ImgInput';
 
 function Register() {
     const [cookies] = useCookies(['secretKey']);
+
     const [selectedFileName, setSelectedFileName] = useState('');
     const navigate = useNavigate();
     const [inputValue, setInputValue] = useState({
@@ -18,7 +20,7 @@ function Register() {
         locationName: '',
         discountRate: '',
         introduction: '',
-        accommodationImage: [], // 파일을 선택하기 전에는 null로 초기화
+        accommodationImage: null, // 파일을 선택하기 전에는 null로 초기화
     });
 
     const fileInputRef = useRef(null);
@@ -28,48 +30,50 @@ function Register() {
         const value = inputValue;
 
         try {
-            console.log('first');
+            const formData = new FormData();
+
+            const jsonData = {
+                accommodationName: value.accommodationName,
+                accommodationType: value.accommodationType,
+                address: value.address,
+                locationName: value.locationName,
+                discountRate: value.discountRate,
+                introduction: value.introduction,
+            };
+
+            const blob = new Blob([JSON.stringify(jsonData)], {
+                type: 'application/json',
+            });
+            formData.append('request', blob);
+            formData.append('image', fileInputRef.current.files[0]);
+
             const response = await axios.post(
                 '/api/v1/accommodation/admin',
-                {
-                    accommodationName: value.accommodationName,
-                    accommodationType: value.accommodationType,
-                    introduction: value.introduction,
-                    address: value.address,
-                    locationName: value.locationName,
-                    discountRate: value.discountRate,
-                    accommodationImage:
-                        value.accommodationImage.length > 0
-                            ? [value.accommodationImage[0]]
-                            : [], // 파일 데이터 직접 추가
-                },
-
+                formData,
                 {
                     headers: {
                         Authorization: `Bearer ${cookies.secretKey}`,
+                        'Content-Type': 'multipart/form-data', // Content-Type 설정
                     },
                 }
             );
-            console.log(Authorization);
 
-            console.log('Response:', response); // 응답 출력
-            console.log('accommodationName:', value.accommodationName);
+            console.log('Response:', response.data); // 응답 출력
 
             navigate(-1);
         } catch (error) {
             console.error('에러 발생:', error); // 에러 메시지를 콘솔에 출력
         }
     };
-
+    console.log('Authorization:', `Bearer ${cookies.secretKey}`);
     const handleFileInputChange = () => {
         const file = fileInputRef.current.files[0];
         if (file) {
-            const formData = new FormData();
-            formData.append('accommodationImage', file);
             setInputValue({
                 ...inputValue,
-                accommodationImage: [URL.createObjectURL(file)], // 파일 링크 생성 및 배열에 추가
+                accommodationImage: file,
             });
+            setSelectedFileName(file.name);
         } else {
             console.error('선택된 파일이 없습니다.');
         }

@@ -75,7 +75,7 @@ const router = createBrowserRouter([
             { path: '/register', element: <Register /> },
             { path: '/edit', element: <NoticeEdit /> },
             { path: '/cart', element: <Cart /> },
-            { path: '/roomregister', element: <RoomRegister /> },
+            { path: 'admin/roomregister/:id', element: <RoomRegister /> },
             { path: '/admin', element: <AdminPage /> },
         ],
     },
