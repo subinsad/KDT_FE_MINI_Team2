@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { FaUserCircle } from 'react-icons/fa';
 import logo from '../img/logo.svg';
+import CartStatus from '../components/CartComponent/CartStatus';
 
 export default function Gnb() {
     const navigate = useNavigate();
@@ -42,35 +43,43 @@ export default function Gnb() {
                         className="w-full h-full object-cover"
                     />
                 </Link>
-                <nav className="flex items-center gap-6 font-semibold">
+                <nav className="flex items-center gap-8 font-semibold">
                     <Link to="/notice"> 공지사항 </Link>
+
+                    <Link to="/admin"> 관리자페이지 </Link>
                     {isAuthenticated ? (
-                        <div className="relative">
-                            <Button
-                                className="flex gap-3 rounded-md"
-                                text={
-                                    <>
-                                        <RxHamburgerMenu />
-                                        <FaUserCircle />
-                                    </>
-                                }
-                                onClick={() => setDropdown(!dropdown)} // 드롭다운 상태 업데이트
-                            />
-                            {dropdown && (
-                                <div className="absolute w-36 text-center right-0 mt-4 bg-primary shadow-md rounded-md overflow-hidden z-50">
-                                    <Link to={`/myinfo/${memberId}`}>
+                        <div className="flex items-center gap-8">
+                            <Link to="/cart" className="text-3xl">
+                                <CartStatus />
+                            </Link>
+
+                            <div className="relative">
+                                <Button
+                                    className="flex gap-3 rounded-md"
+                                    text={
+                                        <>
+                                            <RxHamburgerMenu />
+                                            <FaUserCircle />
+                                        </>
+                                    }
+                                    onClick={() => setDropdown(!dropdown)} // 드롭다운 상태 업데이트
+                                />
+                                {dropdown && (
+                                    <div className="absolute w-36 text-center right-0 mt-4 bg-primary shadow-md rounded-md overflow-hidden z-50">
+                                        <Link to={`/myinfo/${memberId}`}>
+                                            <Button
+                                                text="마이페이지"
+                                                className="border-b-2 w-full border-solid rounded-none"
+                                            />
+                                        </Link>
                                         <Button
-                                            text="마이페이지"
-                                            className="border-b-2 w-full border-solid rounded-none"
+                                            onClick={handleLogout}
+                                            text="로그아웃"
+                                            className="w-full border-solid rounded-none"
                                         />
-                                    </Link>
-                                    <Button
-                                        onClick={handleLogout}
-                                        text="로그아웃"
-                                        className="w-full border-solid rounded-none"
-                                    />
-                                </div>
-                            )}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     ) : (
                         <Link to="/signin">

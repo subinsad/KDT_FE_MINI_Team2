@@ -2,7 +2,7 @@ export default function DetailImage({ detailItem }) {
     const roomImg = detailItem?.accommodationImage || [];
 
     return (
-        <div className="h-[530px] flex gap-2 mt-8">
+        <div className="medium:h-[530px] medium:flex gap-2 mt-8">
             {roomImg.length > 0 && roomImg[0] && (
                 <img
                     src={detailItem?.accommodationImage[0]?.imagePath}
@@ -11,7 +11,7 @@ export default function DetailImage({ detailItem }) {
                 />
             )}
 
-            <div className="grid grow gap-2 grid-rows-2 grid-cols-2 w-2/5">
+            <div className="medium:grid medium:grow medium:gap-2 medium:grid-rows-2 medium:grid-cols-2 medium:w-2/5 hidden ">
                 <img
                     src={roomImg[1]?.imagePath}
                     alt="객실이미지"

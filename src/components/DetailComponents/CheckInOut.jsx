@@ -8,8 +8,8 @@ export default function CheckInOut({
     endDate,
 }) {
     return (
-        <div className="flex flex-col">
-            <div className="flex flex-col w-72 my-7">
+        <div className="flex flex-col ">
+            <div className="flex flex-col medium:w-72 my-7 ">
                 <span className="text-lg font-semibold"> {stayTitle}</span>
             </div>
             <span className="text-gray-500 text-sm">

@@ -14,7 +14,7 @@ export default function EventBox() {
                 <li>2만원 이상, 2천원 할인 (오후 4시, 일 1,700명)</li>
             </div>
 
-            <div className="pt-3 leading-5 text-sm">
+            <div className="pt-3 leading-5 text-sm ">
                 <h3 className="pb-2 font-bold text-lg">카카오페이</h3>
                 <li>3만원 이상, 10% 최대 1만원 할인(오전 10시, 일 400명)</li>
                 <li>2만원 이상, 2천원 할인 (오후 4시, 일 1,700명)</li>
