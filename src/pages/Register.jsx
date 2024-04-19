@@ -6,10 +6,11 @@ import Button from '../components/Common/Button';
 import axios from 'axios';
 import BackBtn from '../components/Common/BackBtn';
 import { useNavigate } from 'react-router';
-import ImgInput from '../components/Common/ImgInput';
+import Spinner from '../components/Common/Spinner';
 
 function Register() {
     const [cookies] = useCookies(['secretKey']);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [selectedFileName, setSelectedFileName] = useState('');
     const navigate = useNavigate();
@@ -30,6 +31,7 @@ function Register() {
         const value = inputValue;
 
         try {
+            setIsLoading(true);
             const formData = new FormData();
 
             const jsonData = {
@@ -45,7 +47,15 @@ function Register() {
                 type: 'application/json',
             });
             formData.append('request', blob);
-            formData.append('image', fileInputRef.current.files[0]);
+            if (
+                value.accommodationImage &&
+                value.accommodationImage.length > 0
+            ) {
+                value.accommodationImage.forEach((image) => {
+                    formData.append('image', image);
+                });
+            }
+            // formData.append('image', fileInputRef.current.files);
 
             const response = await axios.post(
                 '/api/v1/accommodation/admin',
@@ -63,17 +73,30 @@ function Register() {
             navigate(-1);
         } catch (error) {
             console.error('에러 발생:', error); // 에러 메시지를 콘솔에 출력
+        } finally {
+            setIsLoading(false);
         }
     };
     console.log('Authorization:', `Bearer ${cookies.secretKey}`);
+
     const handleFileInputChange = () => {
-        const file = fileInputRef.current.files[0];
-        if (file) {
+        const fileInput = fileInputRef.current;
+        if (fileInput && fileInput.files && fileInput.files.length > 0) {
+            const files = Array.from(fileInput.files); // 파일 목록을 배열로 변환
+            const accommodationImages = [];
+            // 선택된 모든 파일을 처리
+            files.forEach((file, idx) => {
+                accommodationImages.push(file); // 파일 추가
+                // 여기서 각 파일을 처리할 수 있습니다.
+                // 예를 들어, 각 파일의 이름을 출력하는 등의 작업을 수행할 수 있습니다.
+                console.log(`File ${idx + 1}: ${file.name}`);
+            });
+            // 상태 업데이트
             setInputValue({
                 ...inputValue,
-                accommodationImage: file,
+                accommodationImage: accommodationImages, // 모든 파일을 저장할 수 있도록 변경
             });
-            setSelectedFileName(file.name);
+            setSelectedFileName(files.map((file) => file.name)); // 선택된 모든 파일의 이름을 배열로 저장
         } else {
             console.error('선택된 파일이 없습니다.');
         }
@@ -173,7 +196,7 @@ function Register() {
             <div className="meidum:flex medium:flex-row gap-3 flex flex-col">
                 <div className="w-full flex flex-col mb-4">
                     <p className="mb-1 font-light text-sm text-slate-600">
-                        사진선택
+                        사진 등록
                     </p>
                     <label className="flex items-center px-5 py-2 text-slate-500 bg-gray-100 cursor-pointer h-10">
                         <input
@@ -182,13 +205,14 @@ function Register() {
                             style={{ display: 'none' }} // 파일 입력 필드를 숨깁니다.
                             onChange={handleFileInputChange}
                             className="bg-gray-100"
+                            multiple //다중파일선택
                         />
 
                         <span className="ml-2">
                             {selectedFileName ? (
-                                <>{selectedFileName}</>
+                                <>{selectedFileName.join(', ')}</>
                             ) : (
-                                <>선택된 파일이 없습니다.</>
+                                <>사진파일 5장을 선택해주세요.</>
                             )}
                         </span>
                     </label>
@@ -230,7 +254,10 @@ function Register() {
 
             <div className="flex gap-12 justify-center">
                 <BackBtn />
-                <Button text="확인" type="submit" onSubmit={handleSubmit}>
+                <Button
+                    text={isLoading ? <Spinner /> : '확인'}
+                    type="submit"
+                    onSubmit={handleSubmit}>
                     확인
                 </Button>
             </div>

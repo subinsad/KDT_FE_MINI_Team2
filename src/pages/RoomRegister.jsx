@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router';
 
 function RoomRegister() {
     const [cookies] = useCookies(['secretKey']);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const [selectedFileName, setSelectedFileName] = useState('');
     const { id } = useParams();
@@ -26,29 +27,39 @@ function RoomRegister() {
     const fileInputRef = useRef(null);
 
     const handleSubmit = async (event) => {
-        console.log('hh');
         event.preventDefault();
         const value = inputValue;
 
         try {
+            setIsLoading(true);
+            const formData = new FormData();
+
+            const jsonData = {
+                accommodationId: value.accommodationId,
+                roomName: value.roomName,
+                roomInfo: value.roomInfo,
+                fixedNumber: value.fixedNumber,
+                maxedNumber: value.maxedNumber,
+                price: value.price,
+            };
+
+            const blob = new Blob([JSON.stringify(jsonData)], {
+                type: 'application/json',
+            });
+            formData.append('request', blob);
+            formData.append('image', fileInputRef.current.files[0]);
+
             const response = await axios.post(
                 `/api/v1/accommodation/${value.accommodationId}/room`,
-                {
-                    accommodationId: value.accommodationId,
-                    roomName: value.roomName,
-                    roomInfo: value.roomInfo,
-                    fixedNumber: value.fixedNumber,
-                    maxedNumber: value.maxedNumber,
-                    price: value.price,
-                    roomImage: value.roomImage, // 파일 데이터 직접 추가
-                },
-
+                formData,
                 {
                     headers: {
                         Authorization: `Bearer ${cookies.secretKey}`,
+                        'Content-Type': 'multipart/form-data', // Content-Type 설정
                     },
                 }
             );
+
             navigate(-1);
             console.log('Response:', response); // 응답 출력
         } catch (error) {
@@ -59,15 +70,12 @@ function RoomRegister() {
     const handleFileInputChange = () => {
         const file = fileInputRef.current.files[0];
         if (file) {
-            setSelectedFileName(file.name); // 선택된 파일의 이름을 상태에 저장합니다.
-            const formData = new FormData();
-            formData.append('roomImage', file); // 여기서 'roomImage'로 변경
             setInputValue({
                 ...inputValue,
-                roomImage: URL.createObjectURL(file), // 배열이 아니라 객체로 업데이트
+                roomImage: file,
             });
+            setSelectedFileName(file.name);
         } else {
-            setSelectedFileName(''); // 파일이 선택되지 않았을 때는 상태를 초기화합니다.
             console.error('선택된 파일이 없습니다.');
         }
     };
