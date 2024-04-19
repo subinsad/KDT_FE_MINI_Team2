@@ -24,6 +24,7 @@ import NoticeEdit from "./pages/NoticeEdit.jsx";
 import Cart from "./pages/Cart.jsx";
 import AdminPage from "./pages/AdminPage";
 import RoomRegister from "./pages/RoomRegister";
+import CartComplete from "./components/CartComponent/CartComplete.jsx";
 
 const ProtectedRoute = () => {
   const [cookies] = useCookies(["secretKey", "memberId"]);
@@ -71,6 +72,7 @@ const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/edit/:id?", element: <NoticeEdit /> },
       { path: "/cart", element: <Cart /> },
+      { path: "/cartcomplete", element: <CartComplete /> },
       { path: "/roomregister", element: <RoomRegister /> },
       { path: "/admin", element: <AdminPage /> },
     ],

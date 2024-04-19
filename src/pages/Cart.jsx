@@ -128,7 +128,10 @@ export default function Cart() {
               />
             </div>
           ))}
-          <CartPrice carts={carts} cookies={cookies} />
+          <CartPrice
+            carts={carts.filter((cart) => checkedItems.includes(cart.id))}
+            cookies={cookies}
+          />
         </>
       )}
     </div>
