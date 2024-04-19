@@ -3,8 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import StayItem from "../StayItem";
 import PriceBlock from "../PriceBlock";
 
-function SearchedStayList({ accomodation }) {
-  const { startDate, endDate, personal } = useParams();
+function SearchedStayList({ accomodation, startDate, endDate, personal }) {
   return (
     <>
       {accomodation.map((item, index) => (

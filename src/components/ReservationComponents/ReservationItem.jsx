@@ -3,7 +3,11 @@ import PriceBlock from "../PriceBlock";
 import { useParams } from "react-router-dom";
 
 function ReservationItem({ clickedRoom, detailItem, checkIn, checkOut }) {
-  const roomImage = clickedRoom?.roomImage || "";
+  const roomImage =
+    clickedRoom?.roomImage ||
+    clickedRoom?.basketImage ||
+    clickedRoom?.room?.roomImage ||
+    "";
   const accommodationName = detailItem?.accommodationName || "";
   const address = detailItem?.address || "";
   const roomName = clickedRoom?.roomName || "";
