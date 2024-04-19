@@ -47,7 +47,7 @@ export default function DetailList({ detailItem, roomData }) {
             },
           }
         );
-        console.log(response);
+        console.log(response.data);
 
         if (response.status === 200) {
           // 성공적으로 장바구니에 아이템을 추가한 후, 장바구니 아이템 수를 업데이트

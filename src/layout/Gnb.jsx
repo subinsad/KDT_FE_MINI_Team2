@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Common/Button";
 import { useUser } from "../store/user"; // Zustand 스토어 사용
@@ -18,6 +18,25 @@ export default function Gnb() {
   const [cookies] = useCookies(["secretKey"]);
   const cartCount = useCartStore((state) => state.cartCount);
   const fetchCartCount = useCartStore((state) => state.fetchCartCount);
+
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    // 외부 클릭 감지 함수
+    function handleOutsideClick(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdown(false);
+      }
+    }
+
+    // 이벤트 리스너 등록
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [dropdown]); // dropdown 상태에 따라 effect 실행
 
   useEffect(() => {
     if (cookies.secretKey) {
@@ -60,11 +79,11 @@ export default function Gnb() {
           <Link to="/admin"> 관리자페이지 </Link>
           {isAuthenticated ? (
             <div className="flex items-center gap-8">
-              <Link to="/cart" className="text-2xl">
+              <Link to="/cart">
                 <CartStatus cartCount={cartCount} />
               </Link>
 
-              <div className="relative">
+              <div className="relative" ref={dropdownRef}>
                 <Button
                   className="flex gap-3 rounded-md"
                   text={
