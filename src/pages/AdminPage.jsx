@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 
 import RoomItem from '../components/RegisterComponents/RoomItem';
 import TitleBtn from '../components/RegisterComponents/TitleBtn';
+import TItle from '../components/Common/Title';
+import { FaSearch } from 'react-icons/fa';
 
 function AdminPage() {
     const [selectedRoomId, setSelectedRoomId] = useState(null);
@@ -49,12 +51,7 @@ function AdminPage() {
                     </div>
 
                     <div className="medium:flex medium:flex-col medium:w-2/4 medium:p-4 w-full">
-                        <TitleBtn
-                            TitleText="룸 조회"
-                            LinkTo="/roomregister"
-                            text="+ 룸등록"
-                            className="mb-6"
-                        />
+                        <TItle tag="h2" text="룸 조회" className="mb-8" />
                         <div className="flex justify-between flex-col p-8 border-2 border-solid border-gray-300 rounded-xl">
                             {selectedRoomId ? (
                                 <>
@@ -74,7 +71,12 @@ function AdminPage() {
                                     />
                                 </>
                             ) : (
-                                <div> 숙소를 클릭해주세요 </div>
+                                <div className="flex flex-col gap-4 items-center ">
+                                    <FaSearch className="text-7xl text-gray-300 mb-4" />
+                                    <p className="font-bold text-gray-500">
+                                        숙소를 클릭해 룸을 조회해주세요
+                                    </p>
+                                </div>
                             )}
                         </div>
                     </div>

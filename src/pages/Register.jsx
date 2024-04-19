@@ -6,9 +6,12 @@ import Button from '../components/Common/Button';
 import axios from 'axios';
 import BackBtn from '../components/Common/BackBtn';
 import { useNavigate } from 'react-router';
+import Spinner from '../components/Common/Spinner';
 
 function Register() {
     const [cookies] = useCookies(['secretKey']);
+    const [isLoading, setIsLoading] = useState(false);
+
     const [selectedFileName, setSelectedFileName] = useState('');
     const navigate = useNavigate();
     const [inputValue, setInputValue] = useState({
@@ -18,7 +21,7 @@ function Register() {
         locationName: '',
         discountRate: '',
         introduction: '',
-        accommodationImage: [], // 파일을 선택하기 전에는 null로 초기화
+        accommodationImage: null, // 파일을 선택하기 전에는 null로 초기화
     });
 
     const fileInputRef = useRef(null);
@@ -28,48 +31,72 @@ function Register() {
         const value = inputValue;
 
         try {
-            console.log('first');
+            setIsLoading(true);
+            const formData = new FormData();
+
+            const jsonData = {
+                accommodationName: value.accommodationName,
+                accommodationType: value.accommodationType,
+                address: value.address,
+                locationName: value.locationName,
+                discountRate: value.discountRate,
+                introduction: value.introduction,
+            };
+
+            const blob = new Blob([JSON.stringify(jsonData)], {
+                type: 'application/json',
+            });
+            formData.append('request', blob);
+            if (
+                value.accommodationImage &&
+                value.accommodationImage.length > 0
+            ) {
+                value.accommodationImage.forEach((image) => {
+                    formData.append('image', image);
+                });
+            }
+            // formData.append('image', fileInputRef.current.files);
+
             const response = await axios.post(
                 '/api/v1/accommodation/admin',
-                {
-                    accommodationName: value.accommodationName,
-                    accommodationType: value.accommodationType,
-                    introduction: value.introduction,
-                    address: value.address,
-                    locationName: value.locationName,
-                    discountRate: value.discountRate,
-                    accommodationImage:
-                        value.accommodationImage.length > 0
-                            ? [value.accommodationImage[0]]
-                            : [], // 파일 데이터 직접 추가
-                },
-
+                formData,
                 {
                     headers: {
                         Authorization: `Bearer ${cookies.secretKey}`,
+                        'Content-Type': 'multipart/form-data', // Content-Type 설정
                     },
                 }
             );
-            console.log(Authorization);
 
-            console.log('Response:', response); // 응답 출력
-            console.log('accommodationName:', value.accommodationName);
+            console.log('Response:', response.data); // 응답 출력
 
             navigate(-1);
         } catch (error) {
             console.error('에러 발생:', error); // 에러 메시지를 콘솔에 출력
+        } finally {
+            setIsLoading(false);
         }
     };
+    console.log('Authorization:', `Bearer ${cookies.secretKey}`);
 
     const handleFileInputChange = () => {
-        const file = fileInputRef.current.files[0];
-        if (file) {
-            const formData = new FormData();
-            formData.append('accommodationImage', file);
+        const fileInput = fileInputRef.current;
+        if (fileInput && fileInput.files && fileInput.files.length > 0) {
+            const files = Array.from(fileInput.files); // 파일 목록을 배열로 변환
+            const accommodationImages = [];
+            // 선택된 모든 파일을 처리
+            files.forEach((file, idx) => {
+                accommodationImages.push(file); // 파일 추가
+                // 여기서 각 파일을 처리할 수 있습니다.
+                // 예를 들어, 각 파일의 이름을 출력하는 등의 작업을 수행할 수 있습니다.
+                console.log(`File ${idx + 1}: ${file.name}`);
+            });
+            // 상태 업데이트
             setInputValue({
                 ...inputValue,
-                accommodationImage: [URL.createObjectURL(file)], // 파일 링크 생성 및 배열에 추가
+                accommodationImage: accommodationImages, // 모든 파일을 저장할 수 있도록 변경
             });
+            setSelectedFileName(files.map((file) => file.name)); // 선택된 모든 파일의 이름을 배열로 저장
         } else {
             console.error('선택된 파일이 없습니다.');
         }
@@ -85,8 +112,8 @@ function Register() {
                 <p> 등록할 숙소정보를 입력해주세요 </p>
             </div>
 
-            <div className="meidum:flex gap-3">
-                <div className="meidum:w-9/12 mb-4">
+            <div className="meidum:flex medium:flex-row gap-3 flex flex-col">
+                <div className="w-full mb-4">
                     <Input
                         className="w-full"
                         value={inputValue.accommodationName}
@@ -102,7 +129,7 @@ function Register() {
                     />
                 </div>
 
-                <div className="meidum:w-3/12">
+                <div className="w-full ">
                     <p className="mb-1 font-light text-sm text-slate-600">
                         숙소유형 선택
                     </p>
@@ -125,8 +152,8 @@ function Register() {
                     </select>
                 </div>
             </div>
-            <div className="meidum:flex gap-3">
-                <div className="meidum:w-9/12 w-full mb-4">
+            <div className="meidum:flex medium:flex-row gap-3 flex flex-col">
+                <div className=" w-full mb-4">
                     <Input
                         className="w-full"
                         value={inputValue.address}
@@ -142,7 +169,7 @@ function Register() {
                     />
                 </div>
 
-                <div className="meidum:w-3/12 ">
+                <div className="w-full">
                     <p className="mb-1 font-light text-sm text-slate-600">
                         지역 선택
                     </p>
@@ -166,10 +193,10 @@ function Register() {
                 </div>
             </div>
 
-            <div className="meidum:flex meidum:gap-3">
-                <div className="meidum:w-9/12 flex flex-col mb-4">
+            <div className="meidum:flex medium:flex-row gap-3 flex flex-col">
+                <div className="w-full flex flex-col mb-4">
                     <p className="mb-1 font-light text-sm text-slate-600">
-                        사진선택
+                        사진 등록
                     </p>
                     <label className="flex items-center px-5 py-2 text-slate-500 bg-gray-100 cursor-pointer h-10">
                         <input
@@ -178,19 +205,20 @@ function Register() {
                             style={{ display: 'none' }} // 파일 입력 필드를 숨깁니다.
                             onChange={handleFileInputChange}
                             className="bg-gray-100"
+                            multiple //다중파일선택
                         />
 
                         <span className="ml-2">
                             {selectedFileName ? (
-                                <>{selectedFileName}</>
+                                <>{selectedFileName.join(', ')}</>
                             ) : (
-                                <>선택된 파일이 없습니다.</>
+                                <>사진파일 5장을 선택해주세요.</>
                             )}
                         </span>
                     </label>
                 </div>
 
-                <div className="meidum:w-3/12">
+                <div className="w-full">
                     <Input
                         className="w-full"
                         value={inputValue.discountRate}
@@ -226,7 +254,10 @@ function Register() {
 
             <div className="flex gap-12 justify-center">
                 <BackBtn />
-                <Button text="확인" type="submit" onSubmit={handleSubmit}>
+                <Button
+                    text={isLoading ? <Spinner /> : '확인'}
+                    type="submit"
+                    onSubmit={handleSubmit}>
                     확인
                 </Button>
             </div>
