@@ -7,6 +7,8 @@ import TitleBtn from '../components/RegisterComponents/TitleBtn';
 import TItle from '../components/Common/Title';
 import { FaSearch } from 'react-icons/fa';
 import axios from 'axios';
+import Pagination from '../components/Pagination';
+import Spinner from '../components/Common/Spinner';
 
 function AdminPage() {
     const [selectedRoomId, setSelectedRoomId] = useState(null);
@@ -15,16 +17,22 @@ function AdminPage() {
         setSelectedRoomId(roomId);
     };
     const [accommodations, setAccommodations] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 설정
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetchAccommodation();
-    }, []);
+    }, [currentPage]);
 
     const fetchAccommodation = async () => {
         try {
+            setIsLoading(true);
             const response = await axios.get('/api/v1/accommodation/member', {
                 headers: {
                     Authorization: `Bearer ${cookies.secretKey}`,
+                },
+                params: {
+                    page: currentPage,
                 },
             });
 
@@ -36,34 +44,77 @@ function AdminPage() {
             console.log(response);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    //페이지네이션
+
+    const handlePrevious = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1); // 이전 페이지로 이동
+        }
+    };
+    const handleNext = async () => {
+        try {
+            const response = await axios.get(
+                `/v1/accommodation/member?page=${currentPage}`,
+                {
+                    params: {
+                        page: currentPage + 1, // 다음 페이지 번호 설정
+                    },
+                }
+            );
+            console.log(response);
+            setCurrentPage(currentPage + 1); // 페이지 번호 업데이트
+        } catch (e) {
+            console.log(e);
         }
     };
 
     return (
         <>
             <div className="max-w-mw mx-auto pt-12 pb-12">
-                <div className="medium:flex medium:flex-row medium:gap-12 medium:h-[440px] flex flex-col h-auto p-6 gap-12">
-                    <div className="medium:flex medium:flex-col medium:w-2/4 medium:p-4 w-full ">
+                <div className="medium:flex medium:flex-row medium:gap-12  h-full  flex flex-col p-6 gap-12">
+                    <div className="medium:flex medium:flex-col medium:w-2/4 medium:p-4 w-full medium:h-full ">
                         <TitleBtn
                             TitleText="숙소 등록"
                             LinkTo="/register"
                             text="+ 숙소등록"
                             className="mb-6"
                         />
-                        <div className="flex justify-between flex-col p-8 border-2 border-solid border-gray-300 rounded-xl">
-                            {accommodations.map((item, index) => (
-                                <RoomItem
-                                    key={index}
-                                    id={item.id}
-                                    title={item.accommodationName}
-                                    text={item.id}
-                                    room={item.room.index}
-                                    type={item.accommodationType}
-                                    btn="true"
-                                    istrue={selectedRoomId === item.id}
-                                    onClick={() => handleRoomClick(item.id)}
-                                />
-                            ))}
+                        <div className="flex justify-between flex-col medium:h-[450px] p-8 border-2 border-solid border-gray-300 rounded-xl">
+                            {isLoading ? (
+                                <>
+                                    <Spinner /> <p>gg</p>
+                                </>
+                            ) : (
+                                <>
+                                    {accommodations.map((item, index) => (
+                                        <RoomItem
+                                            key={index}
+                                            id={item.id}
+                                            title={item.accommodationName}
+                                            text={item.id}
+                                            room={item.room.index}
+                                            type={item.accommodationType}
+                                            btn="true"
+                                            istrue={selectedRoomId === item.id}
+                                            onClick={() =>
+                                                handleRoomClick(item.id)
+                                            }
+                                        />
+                                    ))}
+                                    <Pagination
+                                        onClick={handleNext}
+                                        handleNext={handleNext}
+                                        currentPage={currentPage}
+                                        setCurrentPage={setCurrentPage}
+                                        handlePrevious={handlePrevious}
+                                    />
+                                </>
+                            )}
                         </div>
                     </div>
 
