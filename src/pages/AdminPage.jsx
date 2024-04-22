@@ -1,6 +1,7 @@
 // AdminPage.jsx
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { ScaleLoader } from 'react-spinners';
 
 import RoomItem from '../components/RegisterComponents/RoomItem';
 import TitleBtn from '../components/RegisterComponents/TitleBtn';
@@ -37,9 +38,10 @@ function AdminPage() {
             });
 
             const responseData = response.data;
+            console.log(responseData.data.result);
 
             // 가져온 데이터에서 숙소 정보만 추출하여 상태에 업데이트
-            const accommodationsData = responseData.data || []; // 숙소 정보 배열
+            const accommodationsData = responseData.data.result || []; // 숙소 정보 배열
             setAccommodations(accommodationsData);
             console.log(response);
         } catch (error) {
@@ -50,7 +52,6 @@ function AdminPage() {
     };
 
     //페이지네이션
-
     const handlePrevious = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1); // 이전 페이지로 이동
@@ -84,11 +85,12 @@ function AdminPage() {
                             text="+ 숙소등록"
                             className="mb-6"
                         />
-                        <div className="flex justify-between flex-col medium:h-[450px] p-8 border-2 border-solid border-gray-300 rounded-xl">
+                        <div className="flex justify-between flex-col medium:h-[515px] p-8 border-2 border-solid border-gray-300 rounded-xl">
                             {isLoading ? (
-                                <>
-                                    <Spinner /> <p>gg</p>
-                                </>
+                                <ScaleLoader
+                                    color="#2393D2"
+                                    className="flex items-center justify-center "
+                                />
                             ) : (
                                 <>
                                     {accommodations.map((item, index) => (
@@ -104,8 +106,13 @@ function AdminPage() {
                                             onClick={() =>
                                                 handleRoomClick(item.id)
                                             }
+                                            setAccommodations={
+                                                setAccommodations
+                                            }
+                                            cookies={cookies}
                                         />
                                     ))}
+
                                     <Pagination
                                         onClick={handleNext}
                                         handleNext={handleNext}
