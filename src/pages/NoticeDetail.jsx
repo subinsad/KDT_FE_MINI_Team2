@@ -22,7 +22,9 @@ function NoticeDetail() {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
-      const selectedItem = data.data.find((item) => item.id === parseInt(id));
+      const selectedItem = data.data.boards.find(
+        (item) => item.id === parseInt(id)
+      );
       setNoticeItem(selectedItem);
     } catch (error) {
       console.error("Error fetching notice:", error);
