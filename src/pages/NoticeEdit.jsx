@@ -37,7 +37,9 @@ function NoticeEdit() {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        const selectedItem = data.data.find((item) => item.id === parseInt(id));
+        const selectedItem = data.data.boards.find(
+          (item) => item.id === parseInt(id)
+        );
         setTitle(selectedItem.title);
         setContent(selectedItem.content);
         setDate(selectedItem.updateDate); // 기존 날짜 데이터 설정
