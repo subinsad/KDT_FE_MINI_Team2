@@ -4,7 +4,7 @@ import TItle from "../components/Common/Title";
 import Button from "../components/Common/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import NoticeSkeleton from "../components/NoticeComponents/NoticeSkeleton";
-import Pagination from "../components/Pagination";
+import NumberPagination from "../components/NumberPagination";
 
 function Notice() {
   const navigate = useNavigate();
@@ -14,7 +14,6 @@ function Notice() {
   const [notice, setNotice] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(page);
-  const [totalPages, setTotalPages] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
 
   // 공지사항 불러오기
@@ -45,11 +44,6 @@ function Notice() {
   // 공지사항 불러오기
 
   // 페이지네이션 기능
-  useEffect(() => {
-    const totalPages = Math.ceil(totalResults / 5);
-    setTotalPages(totalPages);
-  }, [totalResults]);
-
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
     navigate(`/notice?page=${pageNumber}&size=5`, { replace: true });
@@ -91,7 +85,7 @@ function Notice() {
           )}
         </>
       )}
-      <Pagination
+      <NumberPagination
         totalPosts={totalResults}
         limit={5}
         page={parseInt(currentPage)}
