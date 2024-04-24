@@ -1,7 +1,7 @@
-// AdminPage.jsx
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { ScaleLoader } from 'react-spinners';
+import useStore from '../store/accomodation';
 
 import RoomItem from '../components/RegisterComponents/RoomItem';
 import TitleBtn from '../components/RegisterComponents/TitleBtn';
@@ -9,21 +9,30 @@ import TItle from '../components/Common/Title';
 import { FaSearch } from 'react-icons/fa';
 import axios from 'axios';
 import Pagination from '../components/Pagination';
-import Spinner from '../components/Common/Spinner';
+import AccommodationItem from '../components/RegisterComponents/AccommodationItem';
 
 function AdminPage() {
     const [selectedRoomId, setSelectedRoomId] = useState(null);
+    const [selectedRoom, setSelectedRoom] = useState([]); // 선택된 방 정보를 배열로 변경
+
     const [cookies] = useCookies(['secretKey']);
-    const handleRoomClick = (roomId) => {
-        setSelectedRoomId(roomId);
-    };
+    const { data, ajax } = useStore(); // useStore로 전체 숙소 리스트 가져오기
     const [accommodations, setAccommodations] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 설정
+    const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 상태 설정
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetchAccommodation();
     }, [currentPage]);
+
+    //숙소전체데이터
+    useEffect(() => {
+        ajax();
+    }, []);
+
+    useEffect(() => {
+        setSelectedRoom(data.filter((item) => item.id === selectedRoomId));
+    }, [selectedRoomId, data]);
 
     const fetchAccommodation = async () => {
         try {
@@ -51,9 +60,14 @@ function AdminPage() {
         }
     };
 
+    const handleRoomClick = (roomId) => {
+        // 클릭 시 선택된 방 ID를 설정
+        setSelectedRoomId(roomId);
+    };
+
     //페이지네이션
     const handlePrevious = () => {
-        if (currentPage > 1) {
+        if (currentPage > 0) {
             setCurrentPage(currentPage - 1); // 이전 페이지로 이동
         }
     };
@@ -93,25 +107,29 @@ function AdminPage() {
                                 />
                             ) : (
                                 <>
-                                    {accommodations.map((item, index) => (
-                                        <RoomItem
-                                            key={index}
-                                            id={item.id}
-                                            title={item.accommodationName}
-                                            text={item.id}
-                                            room={item.room.index}
-                                            type={item.accommodationType}
-                                            btn="true"
-                                            istrue={selectedRoomId === item.id}
-                                            onClick={() =>
-                                                handleRoomClick(item.id)
-                                            }
-                                            setAccommodations={
-                                                setAccommodations
-                                            }
-                                            cookies={cookies}
-                                        />
-                                    ))}
+                                    <div>
+                                        {accommodations.map((item, index) => (
+                                            <AccommodationItem
+                                                key={index}
+                                                id={item.id}
+                                                title={item.accommodationName}
+                                                text={item.id}
+                                                room={item.room.index}
+                                                type={item.accommodationType}
+                                                btn="true"
+                                                istrue={
+                                                    selectedRoomId === item.id
+                                                }
+                                                onClick={() =>
+                                                    handleRoomClick(item.id)
+                                                }
+                                                setAccommodations={
+                                                    setAccommodations
+                                                }
+                                                cookies={cookies}
+                                            />
+                                        ))}
+                                    </div>
 
                                     <Pagination
                                         onClick={handleNext}
@@ -128,23 +146,22 @@ function AdminPage() {
                     <div className="medium:flex medium:flex-col medium:w-2/4 medium:p-4 w-full">
                         <TItle tag="h2" text="룸 조회" className="mb-8" />
                         <div className="flex justify-between flex-col p-8 border-2 border-solid border-gray-300 rounded-xl">
-                            {selectedRoomId ? (
-                                <>
-                                    <RoomItem
-                                        key={selectedRoomId} // 선택된 방의 ID를 key로 사용
-                                        title="스위트룸"
-                                        text="1"
-                                        room="3"
-                                        type="호텔"
-                                    />
-                                    <RoomItem
-                                        key={`${selectedRoomId}-detail`} // 선택된 방의 ID와 "-detail"을 더한 값을 key로 사용
-                                        title="서울호텔"
-                                        text="1"
-                                        room="3"
-                                        type="호텔"
-                                    />
-                                </>
+                            {selectedRoom.length > 0 ? (
+                                selectedRoom.map((roomItem, index) => (
+                                    <div key={index}>
+                                        {roomItem.room.map((item, index) => (
+                                            <RoomItem
+                                                key={index} // 선택된 방의 ID를 key로 사용
+                                                title={item.roomName}
+                                                text={item.roomInfo}
+                                                fixedMember={item.fixedMember}
+                                                maxedMember={item.maxedMember}
+                                                id={item.id}
+                                                roomImage={item.roomImage}
+                                            />
+                                        ))}
+                                    </div>
+                                ))
                             ) : (
                                 <div className="flex flex-col gap-4 items-center ">
                                     <FaSearch className="text-7xl text-gray-300 mb-4" />
