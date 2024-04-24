@@ -47,12 +47,13 @@ function AdminPage() {
             });
 
             const responseData = response.data;
-            console.log(responseData.data.result);
-
             // 가져온 데이터에서 숙소 정보만 추출하여 상태에 업데이트
             const accommodationsData = responseData.data.result || []; // 숙소 정보 배열
             setAccommodations(accommodationsData);
-            console.log(response);
+
+            if (accommodationsData.length === 0) {
+                setCurrentPage(0);
+            }
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
@@ -60,9 +61,13 @@ function AdminPage() {
         }
     };
 
-    const handleRoomClick = (roomId) => {
+    const handleRoomClick = async (roomId) => {
         // 클릭 시 선택된 방 ID를 설정
         setSelectedRoomId(roomId);
+
+        // 선택된 방 ID를 기반으로 숙소 정보를 다시 가져옴
+        await ajax();
+        fetchAccommodation();
     };
 
     //페이지네이션
@@ -114,7 +119,7 @@ function AdminPage() {
                                                 id={item.id}
                                                 title={item.accommodationName}
                                                 text={item.id}
-                                                room={item.room.index}
+                                                room={item.room.length}
                                                 type={item.accommodationType}
                                                 btn="true"
                                                 istrue={
@@ -145,7 +150,7 @@ function AdminPage() {
 
                     <div className="medium:flex medium:flex-col medium:w-2/4 medium:p-4 w-full">
                         <TItle tag="h2" text="룸 조회" className="mb-8" />
-                        <div className="flex justify-between flex-col p-8 border-2 border-solid border-gray-300 rounded-xl">
+                        <div className="flex h-[515px] justify-between flex-col p-8 border-2 border-solid border-gray-300 rounded-xl overflow-y-auto">
                             {selectedRoom.length > 0 ? (
                                 selectedRoom.map((roomItem, index) => (
                                     <div key={index}>
@@ -163,7 +168,7 @@ function AdminPage() {
                                     </div>
                                 ))
                             ) : (
-                                <div className="flex flex-col gap-4 items-center ">
+                                <div className="flex flex-col gap-4 items-center h-full justify-center ">
                                     <FaSearch className="text-7xl text-gray-300 mb-4" />
                                     <p className="font-bold text-gray-500">
                                         숙소를 클릭해 룸을 조회해주세요

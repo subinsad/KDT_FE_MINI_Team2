@@ -41,7 +41,7 @@ function RoomItem({
 
     return isDeleted ? null : (
         <ul>
-            <li className="flex gap-12 justify-center items-end pt-4 pb-4 ">
+            <li className="flex gap-6  items-center pt-4 pb-4 ">
                 {roomImage && roomImage.length > 0 ? (
                     <img
                         src={roomImage}
@@ -53,34 +53,22 @@ function RoomItem({
                         이미지가 <br /> 없습니다
                     </p>
                 )}
-                <div>
+                <div className="flex flex-col gap-3">
                     <p className="text-xl font-bold"> {title} </p>
                     <div className="flex items-center gap-8 w-full">
-                        {/* <p className="text-gray-500"> roomInfo : {text} </p> */}
+                        <p className="text-gray-500">
+                            설명 :
+                            {text.length > 7
+                                ? `${text.substring(0, 7)}...`
+                                : text}
+                        </p>
+
                         <p className="text-gray-500">
                             기본인원 : {fixedMember}
                         </p>
                         <p className="text-gray-500">최대인원 :{maxedMember}</p>
-                        <button
-                            text="삭제"
-                            className="p-2 px-3 bg-red-100 rounded text-red-500 text-sm font-bold"
-                            onClick={deleteBtn}>
-                            {' '}
-                            삭제
-                        </button>
                     </div>
                 </div>
-
-                {btn && (
-                    <>
-                        <Link
-                            className="p-2 bg-gray-500 rounded text-white text-sm font-bold"
-                            to={`roomregister/${id}`}>
-                            {' '}
-                            + 룸 등록{' '}
-                        </Link>
-                    </>
-                )}
             </li>
         </ul>
     );

@@ -47,7 +47,7 @@ function AccommodationItem({
                     <div className="flex items-center gap-4">
                         <p className="text-gray-500"> id : {text} </p>
                         <p className="text-gray-500"> 숙소유형 : {type} </p>
-                        <p className="text-gray-500"> 등록된 갯수 : {room} </p>
+                        <p className="text-gray-500">등록된 룸 갯수 : {room}</p>
                         <button
                             text="삭제"
                             className="p-2 px-3 bg-red-100 rounded text-red-500 text-sm font-bold"
