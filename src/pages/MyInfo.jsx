@@ -7,6 +7,7 @@ import ReservationItem from "../components/ReservationComponents/ReservationItem
 import Button from "../components/Common/Button";
 import Input from "../components/Form/Input";
 import Spinner from "../components/Common/Spinner";
+import Pagenation from "../components/Pagination";
 
 export default function MyInfo() {
   const [activeTab, setActiveTab] = useState("personalInfo");
@@ -29,6 +30,7 @@ export default function MyInfo() {
   });
   const [isFormValid, setIsFormValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 설정
 
   const { memberId } = useParams();
   // 정규식 변수
@@ -100,10 +102,58 @@ export default function MyInfo() {
           Authorization: `Bearer ${cookies.secretKey}`,
         },
       });
-      setReservations(response.data.data);
-      console.log(response.data.data);
+      setReservations(response.data.data.result);
+      console.log(response.data.data.result);
     } catch (error) {
       console.error("error:", error);
+    }
+  };
+
+  //페이지네이션
+  const handlePrevious = async () => {
+    if (currentPage > 1) {
+      const prevPage = currentPage - 1; // 이전 페이지 번호 계산
+      try {
+        const response = await axios.get(`/api/v1/reservation`, {
+          params: {
+            page: prevPage,
+          },
+          headers: {
+            Authorization: `Bearer ${cookies.secretKey}`,
+          },
+        });
+        if (response.data.data.result.length > 0) {
+          setReservations(response.data.data.result); // 이전 페이지의 예약 데이터로 업데이트
+          setCurrentPage(prevPage); // 페이지 번호 업데이트
+        } else {
+          // 이전 페이지에 데이터가 없는 경우 추가 처리
+          console.log("No data available for the previous page.");
+        }
+      } catch (error) {
+        console.error("Error fetching the previous page:", error);
+      }
+    }
+  };
+
+  const handleNext = async () => {
+    try {
+      const response = await axios.get(`/api/v1/reservation`, {
+        params: {
+          page: currentPage + 1,
+        },
+        headers: {
+          Authorization: `Bearer ${cookies.secretKey}`,
+        },
+      });
+      if (response.data.data.result.length > 0) {
+        setReservations(response.data.data.result); // 새 페이지의 예약 데이터로 업데이트
+        setCurrentPage(currentPage + 1); // 페이지 번호 업데이트
+      } else {
+        // 추가 데이터가 없으면 현재 페이지 유지
+        console.log("No more data available.");
+      }
+    } catch (e) {
+      console.error("Error fetching next page:", e);
     }
   };
 
@@ -221,17 +271,25 @@ export default function MyInfo() {
           ) : (
             <div className="flex flex-col gap-4">
               {reservations.length > 0 ? (
-                reservations.map((reservation, index) => (
-                  <React.Fragment key={index}>
-                    <ReservationItem
-                      clickedRoom={reservation.room}
-                      detailItem={reservation}
-                      checkIn={reservation.checkIn}
-                      checkOut={reservation.checkOut}
-                    />
-                    <hr />
-                  </React.Fragment>
-                ))
+                <>
+                  {reservations.map((reservation, index) => (
+                    <React.Fragment key={index}>
+                      <ReservationItem
+                        clickedRoom={reservation.room}
+                        detailItem={reservation}
+                        checkIn={reservation.checkIn}
+                        checkOut={reservation.checkOut}
+                      />
+                      <hr />
+                    </React.Fragment>
+                  ))}
+                  <Pagenation
+                    handleNext={handleNext}
+                    handlePrevious={handlePrevious}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                  />
+                </>
               ) : (
                 <div className="text-center py-10">
                   <p className="text-xl font-semibold">
