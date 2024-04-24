@@ -5,7 +5,7 @@ import Filter from "../components/ListComponents/Filter";
 import SearchedStayList from "../components/ListComponents/SearchedStayList";
 import SearchBar from "../components/SearchBar";
 import ListSkeleton from "../components/ListComponents/ListSkeleton";
-import Pagination from "../components/Pagination";
+import NumberPagination from "../components/NumberPagination";
 
 export default function ListPage() {
   const navigate = useNavigate();
@@ -27,7 +27,6 @@ export default function ListPage() {
   const [filteredAccommodation, setFilteredAccommodation] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(page);
-  const [totalPages, setTotalPages] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
   const [showSearchBar, setShowSearchBar] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
@@ -128,11 +127,6 @@ export default function ListPage() {
   // 필터 노출 토글 기능
 
   // 페이지네이션 기능
-  useEffect(() => {
-    const totalPages = Math.ceil(totalResults / 4);
-    setTotalPages(totalPages);
-  }, [totalResults]);
-
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
     navigate(
@@ -203,7 +197,7 @@ export default function ListPage() {
                 endDate={endDate}
                 personal={personal}
               />
-              <Pagination
+              <NumberPagination
                 totalPosts={totalResults}
                 limit={4}
                 page={parseInt(currentPage)}
