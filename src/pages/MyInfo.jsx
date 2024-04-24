@@ -7,7 +7,7 @@ import ReservationItem from "../components/ReservationComponents/ReservationItem
 import Button from "../components/Common/Button";
 import Input from "../components/Form/Input";
 import Spinner from "../components/Common/Spinner";
-import Pagenation from "../components/Pagination";
+import NumberPagination from "../components/NumberPagination";
 
 export default function MyInfo() {
   const [activeTab, setActiveTab] = useState("personalInfo");
@@ -31,6 +31,14 @@ export default function MyInfo() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 설정
+  const [totalResults, setTotalResults] = useState(0);
+
+  const goToPage = (pageNumber) => {
+    const maxPages = Math.ceil(totalResults / 4);
+    if (pageNumber > 0 && pageNumber <= maxPages) {
+      setCurrentPage(pageNumber);
+    }
+  };
 
   const { memberId } = useParams();
   // 정규식 변수
@@ -95,65 +103,35 @@ export default function MyInfo() {
     }
   };
 
+  useEffect(() => {
+    fetchReservations();
+  }, [currentPage]); // currentPage가 변경될 때마다 fetchReservations 호출
+
   const fetchReservations = async () => {
     try {
+      setIsLoading(true); // 데이터를 가져오는 동안 로딩 상태 활성화
       const response = await axios.get("/api/v1/reservation", {
-        headers: {
-          Authorization: `Bearer ${cookies.secretKey}`,
-        },
-      });
-      setReservations(response.data.data.result);
-      console.log(response.data.data.result);
-    } catch (error) {
-      console.error("error:", error);
-    }
-  };
-
-  //페이지네이션
-  const handlePrevious = async () => {
-    if (currentPage > 1) {
-      const prevPage = currentPage - 1; // 이전 페이지 번호 계산
-      try {
-        const response = await axios.get(`/api/v1/reservation`, {
-          params: {
-            page: prevPage,
-          },
-          headers: {
-            Authorization: `Bearer ${cookies.secretKey}`,
-          },
-        });
-        if (response.data.data.result.length > 0) {
-          setReservations(response.data.data.result); // 이전 페이지의 예약 데이터로 업데이트
-          setCurrentPage(prevPage); // 페이지 번호 업데이트
-        } else {
-          // 이전 페이지에 데이터가 없는 경우 추가 처리
-          console.log("No data available for the previous page.");
-        }
-      } catch (error) {
-        console.error("Error fetching the previous page:", error);
-      }
-    }
-  };
-
-  const handleNext = async () => {
-    try {
-      const response = await axios.get(`/api/v1/reservation`, {
         params: {
-          page: currentPage + 1,
+          page: currentPage - 1, // 페이지가 1부터 시작한다고 가정
+          limit: 4,
         },
         headers: {
           Authorization: `Bearer ${cookies.secretKey}`,
         },
       });
       if (response.data.data.result.length > 0) {
-        setReservations(response.data.data.result); // 새 페이지의 예약 데이터로 업데이트
-        setCurrentPage(currentPage + 1); // 페이지 번호 업데이트
+        setReservations(response.data.data.result);
+        setTotalResults(response.data.data.totalCount);
       } else {
-        // 추가 데이터가 없으면 현재 페이지 유지
-        console.log("No more data available.");
+        setReservations([]);
+        setTotalResults(0);
       }
-    } catch (e) {
-      console.error("Error fetching next page:", e);
+    } catch (error) {
+      console.error("error:", error);
+      setReservations([]);
+      setTotalResults(0);
+    } finally {
+      setIsLoading(false); // 로딩 상태 비활성화
     }
   };
 
@@ -283,11 +261,11 @@ export default function MyInfo() {
                       <hr />
                     </React.Fragment>
                   ))}
-                  <Pagenation
-                    handleNext={handleNext}
-                    handlePrevious={handlePrevious}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
+                  <NumberPagination
+                    totalPosts={totalResults}
+                    limit={4}
+                    page={parseInt(currentPage)}
+                    setPage={goToPage}
                   />
                 </>
               ) : (
