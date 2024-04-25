@@ -135,9 +135,9 @@ import { GrClose } from "react-icons/gr";
 
 export default function Gnb() {
   const navigate = useNavigate();
-  const { loginUser, memberId, logout } = useUser(); // Zustand 스토어에서 상태와 함수 사용
+  const { loginUser, memberId, setRole, logout } = useUser(); // Zustand 스토어에서 상태와 함수 사용
   const isAuthenticated = Boolean(loginUser); // 로그인 상태 확인
-  const [, , removeCookie] = useCookies(["secretKey", "memberId"]); // useCookies 훅 사용
+  const [, , removeCookie] = useCookies(["secretKey", "memberId", "role"]); // useCookies 훅 사용
   const [dropdown, setDropdown] = useState(false); // 드롭다운 상태
   const [cookies] = useCookies(["secretKey"]);
   const cartCount = useCartStore((state) => state.cartCount);
@@ -145,6 +145,15 @@ export default function Gnb() {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    // 쿠키에서 role을 읽고 Zustand 스토어에 설정
+    if (cookies.role) {
+      setRole(cookies.role);
+    }
+  }, [cookies.role, setRole]);
+
+  const isAdmin = cookies.role === "ADMIN";
 
   useEffect(() => {
     // 외부 클릭 감지 함수
@@ -173,6 +182,7 @@ export default function Gnb() {
     logout(); // Zustand를 통해 로그아웃 처리
     removeCookie("secretKey", { path: "/" }); // secretKey 쿠키 삭제
     removeCookie("memberId", { path: "/" }); // memberId 쿠키 삭제
+    removeCookie("role", { path: "/" }); // role 쿠키 삭제
     navigate("/signin"); // 로그인 페이지로 리디렉션
   };
 
@@ -209,8 +219,8 @@ export default function Gnb() {
           </Link>
           <nav className="flex items-center gap-8 font-semibold">
             <Link to="/notice"> 공지사항 </Link>
+            {isAdmin && <Link to="/admin">관리자페이지</Link>}
 
-            <Link to="/admin"> 관리자페이지 </Link>
             {isAuthenticated ? (
               <div className="flex items-center gap-8">
                 <Link to="/cart">
@@ -300,7 +310,7 @@ export default function Gnb() {
             {isAuthenticated ? (
               <>
                 <Link to="/notice"> 공지사항 </Link>
-                <Link to="/admin"> 관리자페이지 </Link>
+                {isAdmin && <Link to="/admin">관리자페이지</Link>}
                 <Link to={`/myinfo/${memberId}`}> 마이페이지 </Link>
                 <Button
                   onClick={handleLogout}
