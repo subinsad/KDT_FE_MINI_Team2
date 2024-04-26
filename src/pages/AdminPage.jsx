@@ -53,11 +53,6 @@ function AdminPage() {
             const accommodationsData = responseData.data.result || []; // 숙소 정보 배열
             setAccommodations(accommodationsData);
             setTotalResults(responseData.data.totalCount);
-            console.log(response);
-
-            // if (accommodationsData.length === 0) {
-            //     setCurrentPage(0);
-            // }
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {

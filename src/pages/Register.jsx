@@ -89,7 +89,7 @@ function Register() {
                 accommodationImages.push(file); // 파일 추가
                 // 여기서 각 파일을 처리할 수 있습니다.
                 // 예를 들어, 각 파일의 이름을 출력하는 등의 작업을 수행할 수 있습니다.
-                console.log(`File ${idx + 1}: ${file.name}`);
+                // console.log(`File ${idx + 1}: ${file.name}`);
             });
             // 상태 업데이트
             setInputValue({

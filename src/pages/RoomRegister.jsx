@@ -13,7 +13,6 @@ function RoomRegister() {
     const navigate = useNavigate();
     const [selectedFileName, setSelectedFileName] = useState('');
     const { id } = useParams();
-    console.log(id);
     const [inputValue, setInputValue] = useState({
         accommodationId: id,
         roomName: '',

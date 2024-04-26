@@ -18,7 +18,6 @@ function RoomItem({
     const [isDeleted, setIsDeleted] = useState(false);
     // 삭제
     const deleteBtn = async () => {
-        console.log(id);
         try {
             const response = await axios.delete(
                 `/api/v1/accommodation/${id}/delete`,
