@@ -1,100 +1,99 @@
 # **💒 숙박 / 예약 서비스 만들기**
+패스트캠퍼스에서 미니프로젝트로 진행한 숙박예약 서비스입니다.
 
-## 배포사이트
+## 프로젝트 소개
 
+💁 배포사이트 
+https://kdt-fe-mini-team2-2vcnp4qa9-subinsads-projects.vercel.app/
 
+🖥️ 관리자계정 ID/PW : test@naver.com / 1q2w3e4r!
 
-테스트용 ID/PW : test@naver.com / a1234567!
+   
+🗓️ 프로젝트 기간 : 3/18 ~ 4/5
 
-## 프로젝트 기간
+✨사용기술 :
+React.js / JavaScript / tailwind css / zustand
 
-3/18 ~ 4/5
+👩‍💻 팀원소개
 
-## 사용 기술
-
-<p align="left"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="50" height="50"/> </a> <a href="https://sass-lang.com" target="_blank" rel="noreferrer">  <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="50" height="50"/> </a> <a><img src="https://github.com/subinsad/KDT_FE_MINI_Team2/assets/138507900/01ef85b6-0a12-44e5-9d4a-efdcb29ce9b4" alt="zustand" width="50" height="50"/></a> </p> 
+| 박수빈  |  전유덕   |  김민재   |
+| :------------: | :------------: |:------------: | 
+| [ParkSuBin ](https://github.com/subinsad)  |  [전유덕](깃허브링크)  |  [김민재](깃허브링크)  |  
+|  <img width="150" src="https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/26134b36-e51d-457d-abae-99d56037d44b"/> |  <img width ="300" src="" >  | <img width="150" src=""> |
+| 스타일가이드, 메인페이지, 상세페이지, 관리자페이지  |  유덕님 작성 | 민재님작성  |
 
 
 ## 기능
 
-### 1. 로그인 / 로그아웃
+### 1. 로그인 / 로그아웃 / 회원가입
 
-- 로그인 기능 <br />
 
-- cookie에 JWT토큰 저장 <br />
- 
-- 유효성 검증 <br />
-
-- cookie에 JWT토큰 삭제
-
-  
-### 2. 회원가입
-
-- 비밀번호 보기/숨기기 기능 <br /> 
-
-- 정규식을 이용헌 유효성 검증 / 로그인 disabled <br />
-
+- 로그인 기능 , 유효성 검증 
+- cookie에 JWT토큰 저장/삭제
+- 비밀번호 보기/숨기기 기능 
+- 정규식을 이용헌 유효성 검증 / 로그인 disabled 
 - 가입된 이메일 검증
+  
+ <img width="80%" src="https://github.com/subinsad/KDT_FE_MINI_Team2/assets/92204014/2fb9fc2c-60ab-48ca-83e2-176c8ffb98ef"/> 
 
 
 ### 3. 메인페이지
 
-- 날짜별(검색) 숙소 조회 <br />
+- 날짜별(검색) 숙소 조회, 지역별 숙소 조회, 카테고리별 숙소 조회
+  
+ <img width="80%" src="https://github.com/subinsad/KDT_FE_MINI_Team2/assets/92204014/07d8f669-ff91-4647-9dac-76d29eddf422"/> 
 
-- 지역별 숙소 조회 <br />
 
-- 카테고리별 숙소 조회 <br />
 
 
 ### 4. 리스트페이지
 
-- 날짜별(검색) 숙소 조회 <br />
+- 날짜별(검색) 숙소 조회 / 카테고리별 리스트 조회 / 지역별 리스트 조회 <br />
 
-- 카테고리별 리스트 조회 <br />
-  
-- 지역별 리스트 조회 <br />
+ <img width="80%" src="https://github.com/subinsad/KDT_FE_MINI_Team2/assets/92204014/61839561-2196-4c2a-8b98-25af7003e1b7"/> 
+
+
 
 
 ### 5. 상세페이지
 
-- 카카오맵을 이용한 숙소 위치 구현 <br />
+- 카카오맵을 이용한 숙소 위치 구현 / 로그인한 회원 객실 예약기능
 
-- 로그인한 회원 객실 예약기능 <br />
+  
+ <img width="80%" src="https://github.com/subinsad/KDT_FE_MINI_Team2/assets/92204014/6b34f496-0d77-4690-81f1-e6f88a5d92db"/> 
+
+
 
 
 ### 6. 결제페이지 / 결제확인페이지
 
-- 약관에 대한 유효성 검증 <br />
+- 약관에 대한 유효성 검증 / 결제 기능 (실제 결제 로직 및 절차 없이 상품을 바로 주문) / 예약 완료 확인 <br />
 
-- 결제 기능 (실제 결제 로직 및 절차 없이 상품을 바로 주문) <br />
 
-- 예약 완료 확인 <br />
+ <img width="80%" src="https://github.com/subinsad/KDT_FE_MINI_Team2/assets/92204014/44321195-a773-4792-81f9-20a65f5c32c4"/> 
 
 
 ### 7. 마이페이지
 
-- 예약내역 조회 <br />
+- 예약내역 조회 / 마이정보 조회/수정 기능 <br />
 
-- 마이정보 조회/수정 기능 <br />
 
+ <img width="80%" src="https://github.com/subinsad/KDT_FE_MINI_Team2/assets/92204014/df963a19-c3d9-448f-8f23-aaffd1b16fca"/> 
+ 
 
 ### 8. 공지사항 페이지
 
-- 공지사항 <br />
+- 공지사항 CRUD
+
+  
+ <img width="80%" src="https://github.com/subinsad/KDT_FE_MINI_Team2/assets/92204014/20f51cdb-68d9-4d47-95a2-dcad35b9a0fe"/> 
+ 
+
 
 ---
 
-## 팀원 및 역할
 
-- **박수빈**
-
-
-
-- **전유덕**
-
-
-
-- **김민재**
-
-
-
+## KDT 기간 개선 사항
+- 장바구니기능
+- 관리자계정으로 숙소 / 룸(글,사진) 등록 및 삭제
+- 공지사항CRUD
