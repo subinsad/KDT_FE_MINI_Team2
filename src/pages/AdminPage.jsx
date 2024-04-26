@@ -19,7 +19,7 @@ function AdminPage() {
     const [cookies] = useCookies(['secretKey']);
     const { data, ajax } = useStore(); // useStore로 전체 숙소 리스트 가져오기
     const [accommodations, setAccommodations] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0); // 현재 페이지 상태 설정
+    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 설정
     const [totalResults, setTotalResults] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 

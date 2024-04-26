@@ -5,7 +5,7 @@ function NumberPagination({ totalPosts, limit, page, setPage }) {
     const numPages = Math.ceil(totalPosts / limit); // 페이지계산
 
     const handlePrevious = () => {
-        if (page > 1) {
+        if (page > 0) {
             setPage(page - 1);
         }
     };
