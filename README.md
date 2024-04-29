@@ -19,7 +19,7 @@ React.js / JavaScript / tailwind css / zustand
 | 박수빈  |  전유덕   |  김민재   |
 | :------------: | :------------: |:------------: | 
 | [ParkSuBin ](https://github.com/subinsad)  |  [JeonYooDeok](https://github.com/JeonYooDeok)  |  [김민재](https://github.com/mj950313) |  
-|  <img width="150" src="https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/26134b36-e51d-457d-abae-99d56037d44b"/> |  <img width ="150" src="https://github.com/subinsad/KDT_FE_MINI_Team2/assets/60500298/1aa8b8a4-bd2f-44f4-ac6f-7af190e50eb8" >  | <img width="150" src="https://github-production-user-asset-6210df.s3.amazonaws.com/138507900/326344251-07c319b3-8d1f-416a-8c31-25c176b2080a.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240429%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240429T062353Z&X-Amz-Expires=300&X-Amz-Signature=02319a778c0c19d119a31f5fe19855a2d154e507d0ab4bf2287a9b17ad08ed35&X-Amz-SignedHeaders=host&actor_id=138507900&key_id=0&repo_id=773648023
+|  <img width="150" src="https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/26134b36-e51d-457d-abae-99d56037d44b"/> |  <img width ="150" src="https://github.com/subinsad/KDT_FE_MINI_Team2/assets/60500298/1aa8b8a4-bd2f-44f4-ac6f-7af190e50eb8" >  | <img width="150" src="
 "> |
 | 스타일가이드, 메인페이지, 상세페이지, 관리자페이지  |  스타일가이드, 검색리스트페이지, 공지사항페이지 | 스타일가이드, 결제페이지, 마이페이지, 장바구니, 로그인/로그아웃/회원가입  |
 
