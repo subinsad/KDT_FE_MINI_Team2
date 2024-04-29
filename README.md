@@ -16,11 +16,11 @@ React.js / JavaScript / tailwind css / zustand
 
 👩‍💻 팀원소개
 
-| 박수빈  |  전유덕   |  김민재   |
+| 박수빈  |  전유덕   |  김민재   |
 | :------------: | :------------: |:------------: | 
-| [ParkSuBin ](https://github.com/subinsad)  |  [전유덕](깃허브링크)  |  [김민재](깃허브링크)  |  
-|  <img width="150" src="https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/26134b36-e51d-457d-abae-99d56037d44b"/> |  <img width ="300" src="" >  | <img width="150" src=""> |
-| 스타일가이드, 메인페이지, 상세페이지, 관리자페이지  |  유덕님 작성 | 민재님작성  |
+| [ParkSuBin ](https://github.com/subinsad)  |  [JeonYooDeok](https://github.com/JeonYooDeok)  |  [김민재](깃허브링크)  |  
+|  <img width="150" src="https://github.com/subinsad/KDT7_FE_Toy1_team4/assets/92204014/26134b36-e51d-457d-abae-99d56037d44b"/> |  <img width ="150" src="https://github.com/subinsad/KDT_FE_MINI_Team2/assets/60500298/1aa8b8a4-bd2f-44f4-ac6f-7af190e50eb8" >  | <img width="150" src=""> |
+| 스타일가이드, 메인페이지, 상세페이지, 관리자페이지  |  스타일가이드, 검색리스트페이지, 공지사항페이지 | 민재님작성  |
 
 
 ## 기능
